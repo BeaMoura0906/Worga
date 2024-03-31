@@ -11,3 +11,11 @@
     width: 10rem; 
     height: auto;
 }
+
+.bg-dark-beige {
+    background-color: #C7C3BA;
+}
+
+.bg-light-beige {
+    background-color: #EBE7E1;
+}

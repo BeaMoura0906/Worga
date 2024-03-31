@@ -7,7 +7,7 @@ namespace Worga\src\Controller;
 class IndexController extends Controller
 {
     // Properties for the Manager instance
-    private $Manager;
+    private $manager;
 
     /**
      * Constructor method to initialize properties and call the parent constructor
@@ -17,7 +17,7 @@ class IndexController extends Controller
     public function __construct(array $params=[])
     {
         // Create an instance of Manager
-        // $this->cardManager = new Manager();
+        // $this->manager = new Manager();
 
         // Call the parent constructor with parameters
         parent::__construct($params);
@@ -28,9 +28,6 @@ class IndexController extends Controller
      */
     public function defaultAction()
     {
-        $data = [
-            'title' => 'Accueil',
-        ];
-        $this->render( 'index', $data);
+        $this->render( 'index', []);
     }
 }

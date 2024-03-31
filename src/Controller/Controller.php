@@ -13,7 +13,6 @@ abstract class Controller
     protected $pathView = 'View';
     protected $controller;
     protected $pathRoot;
-    protected $url;
     protected $action;
     protected $vars = [];
     protected $isFetched = false;
@@ -29,14 +28,12 @@ abstract class Controller
         $this->setParams( $params );
         $this->pathView = dirname(__DIR__) . DIRECTORY_SEPARATOR . $this->pathView;
         $this->pathRoot = str_replace( $_SERVER['QUERY_STRING'], '', $_SERVER['REDIRECT_URL'] );
-        $this->url = "https://e-biz-card.bsc-construirerenover.com/";
 
         // Set up Twig environment for rendering views
         $loader = new FilesystemLoader( $this->pathView );
         // Only on dev mode
         $this->twig = new Environment( $loader, ['debug' => false]);
         $this->twig->addGlobal( 'pathRoot', $this->pathRoot );
-        $this->twig->addGlobal( 'url', $this->url );
         $this->twig->addGlobal( 'session', $_SESSION );
         $this->twig->addExtension(new DebugExtension());
         
@@ -82,6 +79,23 @@ abstract class Controller
             }
         }
         $this->isFetched = $params['isFetched'];
+    }
+
+    /**
+     * Nonfunctionnal method
+     * Have to be correct
+     * 
+     * Redirects to the specified route with optional data.
+     *
+     * @param string $route The route to redirect to
+     * @param array $data An optional array of data to pass
+     */
+    protected function redirectToRoute(string $route, array $data=[])
+    {
+        // Encode data and redirect to the specified route
+        $dataSerialize = base64_encode( serialize( $data ) );
+        header( 'http:// ' . $this->pathRoot . '/'. $route . '/redirect/' );
+        urlencode( $dataSerialize );
     }
 
     /**

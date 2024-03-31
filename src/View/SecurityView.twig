@@ -1,0 +1,38 @@
+{% extends "Base.twig" %}
+
+{% block main %}
+    <!-- Login Form Container -->
+    <div class="container-fluid text-center mt-5">
+        <div class="row justify-content-center">
+            <!-- Login Form Card -->
+            <div class="col-8 col-md-6 bg-dark-beige ">
+                <div class="h2 mt-5 mb-5 text-center">Se connecter</div>
+
+                <!-- Login Form -->
+                <form name="accesform" method="post" action="{{ pathRoot }}security/verifyLogin">
+                    <!-- Username Input -->
+                    <div class="mb-4 row justify-content-center">
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="login" placeholder="Identifiant" name="login" required>
+                        </div>
+                    </div>
+
+                    <!-- Password Input -->
+                    <div class="mb-4 row justify-content-center">
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control" id="inputPassword" placeholder="Mot de passe" name="password" required>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="mb-5 row justify-content-center">
+                        <div class="col-sm-4">
+                            <button type="submit" class="btn btn-outline-dark mb-3">Suivant</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
