@@ -1,0 +1,93 @@
+{% extends "Base.twig" %}
+
+{% block main %}
+    <!-- Main Content Container -->
+    <div class="container">
+        <!-- Title Section -->
+        <div class="row text-center">
+            <div class="col-12 mt-5 mb-3">
+                <h2>Panneau d'administration</h2>
+            </div>
+        </div>
+
+        <!-- Check if listUsers is defined -->
+        {% if listUsers is defined %}
+            <!-- Users Table Section -->
+            <div class="row">
+                <div class="col-12">
+                    <h4>Liste des utilisateurs</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <table
+                            class="table"
+                            id="table"
+                            data-toggle="table"
+                            data-height="460"
+                            data-url="{{ pathRoot  ~ 'user/listUsers' }}"
+                            data-ajax="ajaxRequest"
+                            data-search="true"
+                            data-searchable="true"
+                            data-side-pagination="server"
+                            data-sortable="true"
+                            data-pagination="true"
+                            data-page-size="10">
+                        <thead>
+                        <tr>
+                            <th data-field="id" 
+                                data-searchable="false"
+                                data-sortable="true"
+                            >ID</th>
+                            <th data-field="login" 
+                                data-searchable="true"
+                                data-sortable="true"
+                            >Login</th>
+                            <th data-field="isActive" data-searchable="false" data-formatter="activeFormatter">Activer</th>
+                            <th data-field="profil" 
+                                data-searchable="false" 
+                                data-formatter="profilFormatter"
+                            ></th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+            <script>
+
+                // your custom ajax request here
+                function ajaxRequest(params) 
+                {
+                    const url = $('#table').data('url')
+
+                    $.get(url + '/?' + $.param(params.data))
+                        .then(function (res) {
+                            params.success( JSON.parse(res) )
+                        })
+                        .fail(function (xhr, status, error) {
+                            params.error(xhr.responseText)
+                        })
+                }
+
+                function profilFormatter(value, row) 
+                {
+                    return '<a class="btn btn-sm btn-primary" href="{{ pathRoot ~ 'users/updateprofil/id/' }}' + row.id + '">Completer le profil</a>'
+                }
+
+
+                function activeFormatter(value, row)
+                {
+                    const isChecked = value == 1 ? 'checked' : ''
+                    const isActif = value == false ? 0 : 1
+                    return ['<div class="form-check form-switch">',
+                            '<input class="form-check-input active-line" data-isactive="' + isActif + '" data-url="{{ pathRoot ~ 'users/setuserBS/id/' }}' + row.id + '/isactif/" type="checkbox" role="switch" id="flexSwitchCheckChecked" ' + isChecked + '>',
+                            '</div>'].join('')
+                }
+
+            </script>
+
+        {% endif %}
+
+    </div>
+{% endblock %}

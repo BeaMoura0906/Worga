@@ -72,6 +72,9 @@ abstract class Controller
                     $i += 2;
                 }
             }
+            if( !empty( $params['redirect'] ) ) {
+                $params['request'] = unserialize( base64_decode( $params['redirect'] ) );
+            }
         }
         if( !empty( $params['request'] ) ){
             foreach( $params['request'] as $k=>$v ){
@@ -82,20 +85,17 @@ abstract class Controller
     }
 
     /**
-     * Nonfunctionnal method
-     * Have to be correct
-     * 
-     * Redirects to the specified route with optional data.
+     * Redirects to the specified root with optional data.
      *
-     * @param string $route The route to redirect to
+     * @param string $root The route to redirect to
      * @param array $data An optional array of data to pass
      */
-    protected function redirectToRoute(string $route, array $data=[])
+    protected function redirectToRoot( string $root, array $data=[] )
     {
-        // Encode data and redirect to the specified route
         $dataSerialize = base64_encode( serialize( $data ) );
-        header( 'http:// ' . $this->pathRoot . '/'. $route . '/redirect/' );
-        urlencode( $dataSerialize );
+		$_SESSION['redirect'] = $dataSerialize;
+        header( 'Location: http://' . $this->pathRoot . $root );
+		return true;
     }
 
     /**

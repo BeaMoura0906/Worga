@@ -35,6 +35,59 @@ class UserManager extends Manager
     }
 
     /**
+     * Count all users.
+     * 
+     * @return int Number of users.
+     */
+    public function countAll(): int
+    {
+        $sql = "SELECT count(*) FROM users";
+        $response = $this->dbManager->db->query( $sql );
+        $nbUsers = $response->fetch();
+        return $nbUsers[0];
+    }
+
+
+    /**
+     * Get all users.
+     * 
+     * @param array $params Parameters for the query.
+     * @return array|null List of User objects or null if an error occurs.
+     */
+    public function getAllUsersWithParams ( array $params ): ?array
+    {
+        $order = !empty( $params['order'] ) ? $params['order'] : 'ASC';
+        $sort = !empty( $params['sort'] ) ? $params['sort'] : 'id';
+        $strLike = false;
+        if( !empty( $params['search'] ) && !empty( $params['searchable'] ) ) {
+            foreach( $params['searchable'] as $searchItem ) {
+                $search = $params['search'];
+                $strLike .= $searchItem . " LIKE '%$search%' OR ";
+            }
+            $strLike = trim( $strLike, ' OR ' );
+        }
+        $sql = "SELECT * FROM users";
+        if( $strLike ) {
+            $sql .= " WHERE $strLike";
+        }
+        $sql .= " ORDER BY $sort $order";
+
+        $req = $this->dbManager->db->prepare( $sql );
+		if( $req->execute()){
+            $listUserData = $req->fetchAll( \PDO::FETCH_ASSOC );
+
+            foreach( $listUserData as $userData){
+                $user = new User($userData);
+                $listUsers[] = $user;                
+            }
+            
+            return $listUsers;
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * Get a user by their login.
      *
      * @param string $login User login.

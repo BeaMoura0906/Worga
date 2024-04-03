@@ -21,42 +21,43 @@ if( $data !== null ){
     $requestParams = $data;
     $isFetched = true;
 } else {
-    // If JSON data is not available, use POST data
-    $requestParams = $_POST;
+    $requestParams = $_REQUEST;
 }
 
-// Retrieve the query string from the server
-$queryString = rtrim($_SERVER['QUERY_STRING'], '/');
+$queryString = rtrim( $_SERVER['QUERY_STRING'], '/' );
 
-// Initialize parameters
+
+$nbRequest = 0;
+if( !empty( $queryString ) ) {
+    $tabRequest = explode( '/', $queryString );
+    $nbRequest = count( $tabRequest );
+}
+// Split params in two field : action & vars
 $params = [
-    'action' => '',
-    'vars'  => '',
-    'request' => $requestParams,
-    'isFetched' => $isFetched
+    'action'    =>'', 
+    'vars'      =>'',
+    'request'   => $requestParams,
+    'isFetched' => $isFetched,
+    'redirect'  => ''
 ];
 
-// Process the query string
-$tabRequest = [];
-$controllerName = 'Index';
-
-// Check if the query string is not empty
-if ( !empty( $queryString )) {
-    // Split the query string into an array
-    $tabRequest = explode('/', $queryString);
-
-    // Get the number of elements in the array
-    $nbRequest = count( $tabRequest );
-
-    // Get the controller name from the beginning of the array
+if( $nbRequest >=1 && !empty( $tabRequest[0] ) ) {
+	// Retrieve controller name
     $controllerName = ucfirst( array_shift( $tabRequest ) );
+    if( isset( $tabRequest[0] ) ) {
+		// Retrieve action
+        $params['action'] = array_shift( $tabRequest );
+    }
+    // Retrieve redirect
+    if( isset( $_SESSION['redirect'] ) ) {
+        $params['redirect'] = $_SESSION['redirect'];
+		unset( $_SESSION['redirect'] );
+    }
+	// Retrieve vars
+    $params['vars'] = $tabRequest;
+} else {
+    $controllerName = 'Index';
 }
-
-// Get the action from the array
-$params['action'] = array_shift($tabRequest);
-
-// Get the variables from the array
-$params['vars'] = isset($tabRequest[0]) ? $tabRequest : '';
 
 // Define the application name
 $appName = 'Worga';
