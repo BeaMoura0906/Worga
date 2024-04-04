@@ -1,0 +1,127 @@
+{% if selectedUser is not null %}
+<div class="col-12 p-2">
+    <h5 class="mb-3">Modifier <strong>{{ selectedUser.getLogin }}</strong></h5>
+    <!-- Update User Form -->
+    <form class="row g-3" action="{{ pathRoot }}user/updateUserValid/userId/{{ selectedUser.getId }}" method="post">
+        
+        <!-- User Login -->
+        <div class="col-md-{{ selectedUser.getRole == 'admin' ? '12' : '6' }} mb-3">
+            <label for="loginId" class="col-form-label">Login</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="loginId" name="login" value="{{ selectedUser.getLogin }}" required>
+            </div>
+        </div>
+
+        <!-- User Role -->
+        {% if selectedUser.getRole != 'admin' %}
+            <div class="col-md-4 mb-3">
+                <label for="roleId" class="col-form-label">Rôle</label>
+                <div class="input-group">
+                    <select class="form-select" id="roleId" name="role" required>
+                        {% for role in roles %}
+                            <option value="{{ selectedUser.getRoleInFrench }}" {% if selectedUser.getRoleInFrench == role %} selected {% endif %}>
+                                {{ role }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        {% endif %}
+
+        <!-- User Password -->
+        <div class="col-md-6 mb-3">
+            <label for="passwordId" class="col-form-label">Mot de passe</label>
+            <div class="input-group">
+                <input type="password" class="form-control" id="passwordId" name="password" autocomplete="new-password" required>
+            </div>
+            <small class="form-text text-muted">
+                Doit contenir au moins 8 caractères dont au moins 1 lettre, 1 chiffre et 1 caractère spécial (!@#$%^&*(),.?":{}|<>)
+            </small>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="col-md-6 mb-3">
+            <label for="passwordConfirmId" class="col-form-label">Confirmation mot de passe</label>
+            <div class="input-group">
+                <input type="password" class="form-control" id="passwordConfirmId" name="passwordConfirm" autocomplete="new-password" required>
+            </div>
+        </div>
+
+        <!-- User Activation switch -->
+        <div class="col-md-6 mb-3">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="isActiveId" name="isActive" {% if selectedUser.getIsActive == 1 %} checked {% endif %}>
+                <label class="form-check-label" for="isActiveId">Activer</label>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="col-12 text-end">
+            <button class="btn btn-primary" type="submit">Modifier</button>
+        </div>
+    </form>
+</div>
+{% else %}
+<div class="col-12 p-2">
+    <h5 class="mb-3">Ajouter un utilisateur</h5>
+    <!-- Create User Form -->
+    <form class="row g-3" action="{{ pathRoot }}user/createUserValid" method="post">
+
+        <!-- User Login -->
+        <div class="col-md-6 mb-3">
+            <label for="loginId" class="col-form-label">Login</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="loginId" name="login" value="" required>
+            </div>
+        </div>
+
+        <!-- User Role -->
+        <div class="col-md-4 mb-3">
+            <label for="rightId" class="col-form-label">Rôle</label>
+            <div class="input-group">
+                <select class="form-select" id="roleId" name="role" required>
+                    {% for role in roles %}
+                        <option value="{{ role }}">
+                            {{ role }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <!-- User Password -->
+        <div class="col-md-6 mb-3">
+            <label for="passwordId" class="col-form-label">Mot de passe</label>
+            <div class="input-group">
+                <input type="password" class="form-control" id="passwordId" name="password" autocomplete="new-password" required>
+            </div>
+            <!-- Password requirements -->
+            <small class="form-text text-muted">
+                Doit contenir au moins 8 caractères dont au moins 1 lettre, 1 chiffre et 1 caractère spécial (!@#$%^&*(),.?":{}|<>)
+            </small>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="col-md-6 mb-3">
+            <label for="passwordConfirmId" class="col-form-label">Confirmation mot de passe</label>
+            <div class="input-group">
+                <input type="password" class="form-control" id="passwordConfirmId" name="passwordConfirm" autocomplete="new-password" required>
+            </div>
+        </div>
+
+        <!-- User Activation switch -->
+        <div class="col-md-6 mb-3">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="isActiveId" name="isActive">
+                <label class="form-check-label" for="isActiveId">Activer</label>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="col-12 text-end">
+            <button class="btn btn-success" type="submit">Ajouter</button>
+        </div>
+    </form>
+
+</div>
+{% endif %}

@@ -2,6 +2,7 @@
 
 namespace Worga\src\Model\Entity;
 
+use DateTime;
 use Worga\src\Classes\Hydrate;
 
 class User
@@ -11,6 +12,8 @@ class User
     private $login = 0;
     private $password = 0;
     private $role = 0;
+    private $createdAt = 0;
+    private $updatedAt = 0;
     private $isActive = 0;
 
     /**
@@ -62,9 +65,42 @@ class User
         return $this->role;
     }
 
+    public function getRoleInFrench()
+    {
+        if ($this->role === 'admin') {
+            return "Administrateur";
+        } elseif ($this->role === 'editor') {
+            return "Editeur";
+        } elseif ($this->role === 'visitor') {
+            return "Visiteur";
+        }
+    }
+
     public function setRole ($role)
     {
         $this-> role = $role;
+    }
+
+    public function getCreatedAt(): ?DateTime
+    {
+        $createdAt = new DateTime($this->createdAt);
+        return $createdAt;
+    }
+
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    public function getUpdatedAt(): ?DateTime
+    {
+        $updatedAt = new DateTime($this->updatedAt);
+        return $updatedAt;
+    }
+
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 
     public function getIsActive()

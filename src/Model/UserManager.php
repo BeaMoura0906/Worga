@@ -131,6 +131,47 @@ class UserManager extends Manager
     }
 
     /**
+     * Insert a new user into the database.
+     *
+     * @param User $user User object to be inserted.
+     * @return User|null User object with assigned ID if successful, null otherwise.
+     */
+    public function insertUser(User $user): ?User
+    {
+        $sql = "INSERT INTO users (
+                    login,
+                    password,
+                    role,
+                    created_at,
+                    updated_at,
+                    is_active
+                ) VALUES (
+                    :login,
+                    :password,
+                    :role,
+                    NOW(),
+                    NOW(),
+                    :is_active
+                )";
+        $req = $this->dbManager->db->prepare( $sql );
+        $state = $req->execute([
+            ':login'        => $user->getLogin(),
+            ':password'     => $user->getPassword(),
+            ':role'         => $user->getRole(),
+            ':is_active'    => $user->getIsActive()
+        ]);
+        
+        if( !$state ) {
+            return null;
+        } else {
+            $idUser = $this->dbManager->db->lastInsertId();
+            $user->setId($idUser);
+            
+            return $user;
+        }  
+    }
+
+    /**
      * Update a user's information in the database.
      *
      * @param User $user User object with updated information.
@@ -144,6 +185,7 @@ class UserManager extends Manager
                         login=:login,
                         password=:password,
                         role=:role,
+                        updated_at=NOW(),
                         is_active=:is_active
                     WHERE 
                         id=:id";
@@ -180,40 +222,4 @@ class UserManager extends Manager
         }
     }
 
-    /**
-     * Insert a new user into the database.
-     *
-     * @param User $user User object to be inserted.
-     * @return User|null User object with assigned ID if successful, null otherwise.
-     */
-    public function insertUser(User $user): ?User
-    {
-        $sql = "INSERT INTO users (
-                    login,
-                    password,
-                    role,
-                    is_active
-                ) VALUES (
-                    :login,
-                    :password,
-                    :role,
-                    :is_active
-                )";
-        $req = $this->dbManager->db->prepare( $sql );
-        $state = $req->execute([
-            ':login'        => $user->getLogin(),
-            ':password'     => $user->getPassword(),
-            ':role'         => $user->getRole(),
-            ':is_active'    => $user->getIsActive()
-        ]);
-        
-        if( !$state ) {
-            return null;
-        } else {
-            $idUser = $this->dbManager->db->lastInsertId();
-            $user->setId($idUser);
-            
-            return $user;
-        }  
-    }
 }

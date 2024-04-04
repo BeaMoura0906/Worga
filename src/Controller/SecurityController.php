@@ -55,6 +55,9 @@ class SecurityController extends Controller
             if( $user = $this->userManager->getUserByLogin( $this->vars['login'] ) ) {
 
                 // Verify the hashed password using sodium_crypto_pwhash_str_verify
+                
+                // /!!!\ Verify if user is active first !!!!
+
                 //if( sodium_crypto_pwhash_str_verify( $user->getPassword('password'), $this->vars['password']) ) {
                 if( $this->vars['password'] === $user->getPassword('password') ) {
         

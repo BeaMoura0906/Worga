@@ -17,6 +17,9 @@
                 <div class="col-12">
                     <h4>Liste des utilisateurs</h4>
                 </div>
+                <div class="col-12 mt-3">
+                    <a href="{{ pathRoot  ~ 'user/createUser' }}" class="btn btn-sm btn-success" role="button">Ajouter un utilisateur</a>
+                </div>
             </div>
             <div class="row">
                 <div class="col-12">
@@ -24,7 +27,7 @@
                             class="table"
                             id="table"
                             data-toggle="table"
-                            data-height="460"
+                            data-height="400"
                             data-url="{{ pathRoot  ~ 'user/listUsers' }}"
                             data-ajax="ajaxRequest"
                             data-search="true"
@@ -43,6 +46,18 @@
                                 data-searchable="true"
                                 data-sortable="true"
                             >Login</th>
+                            <th data-field="role"
+                                data-searchable="false"
+                                data-sortable="true"
+                            >Rôle</th>
+                            <th data-field="createdAt"
+                                data-searchable="false"
+                                data-sortable="true"
+                            >Date de création</th>
+                            <th data-field="updatedAt"
+                                data-searchable="false"
+                                data-sortable="true"
+                            >Dernière modification</th>
                             <th data-field="isActive" data-searchable="false" data-formatter="activeFormatter">Activer</th>
                             <th data-field="profil" 
                                 data-searchable="false" 
@@ -56,7 +71,6 @@
 
             <script>
 
-                // your custom ajax request here
                 function ajaxRequest(params) 
                 {
                     const url = $('#table').data('url')
@@ -72,7 +86,7 @@
 
                 function profilFormatter(value, row) 
                 {
-                    return '<a class="btn btn-sm btn-primary" href="{{ pathRoot ~ 'users/updateprofil/id/' }}' + row.id + '">Completer le profil</a>'
+                    return '<a class="btn btn-sm btn-primary" href="{{ pathRoot ~ 'user/updateUser/id/' }}' + row.id + '">Modifier</a>'
                 }
 
 
@@ -81,13 +95,18 @@
                     const isChecked = value == 1 ? 'checked' : ''
                     const isActif = value == false ? 0 : 1
                     return ['<div class="form-check form-switch">',
-                            '<input class="form-check-input active-line" data-isactive="' + isActif + '" data-url="{{ pathRoot ~ 'users/setuserBS/id/' }}' + row.id + '/isactif/" type="checkbox" role="switch" id="flexSwitchCheckChecked" ' + isChecked + '>',
+                            '<input class="form-check-input active-line" data-isactive="' + isActif + '" data-url="{{ pathRoot ~ 'user/setuserBS/id/' }}' + row.id + '/isactif/" type="checkbox" role="switch" id="flexSwitchCheckChecked" ' + isChecked + '>',
                             '</div>'].join('')
                 }
 
             </script>
 
+        {% else %}
+
+            {% include "UserForm.twig" with {'selectedUser': selectedUser ? selectedUser : null} %}
+        
         {% endif %}
+        
 
     </div>
 {% endblock %}
