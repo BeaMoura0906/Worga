@@ -53,32 +53,38 @@ class SecurityController extends Controller
  
             // Attempt to get the user by login
             if( $user = $this->userManager->getUserByLogin( $this->vars['login'] ) ) {
-
-                // Verify the hashed password using sodium_crypto_pwhash_str_verify
                 
-                // /!!!\ Verify if user is active first !!!!
+                // Verify if user is active first
+                if( $user->getIsActive() ) {
 
-                //if( sodium_crypto_pwhash_str_verify( $user->getPassword('password'), $this->vars['password']) ) {
-                if( $this->vars['password'] === $user->getPassword('password') ) {
-        
-                    // Set session variables for user information
-                    $_SESSION['userId'] = $user->getId();
-                    $_SESSION['userLogin'] = $user->getLogin();
-                    $_SESSION['userRole'] = $user->getRole();
+                    // Verify the hashed password using sodium_crypto_pwhash_str_verify
+                    if( sodium_crypto_pwhash_str_verify( $user->getPassword('password'), $this->vars['password']) ) {
+            
+                        // Set session variables for user information
+                        $_SESSION['userId'] = $user->getId();
+                        $_SESSION['userLogin'] = $user->getLogin();
+                        $_SESSION['userRole'] = $user->getRole();
 
-                    $data = [
-                        'user' => $user
-                    ]; 
+                        $data = [
+                            'user' => $user
+                        ]; 
 
-                    // Redirect to the root path
-                    header('Location:' . $this->pathRoot);
-                    exit;
+                        // Redirect to the root path
+                        header('Location:' . $this->pathRoot);
+                        exit;
+                    } else {
+                        $_SESSION['login'] = $user->getLogin();
+                        // Display a warning message for incorrect password
+                        $data['message'] = [
+                            'type'  => 'warning',
+                            'message'  => 'Le mot de passe est incorrect'
+                        ];
+                    }
                 } else {
-                    $_SESSION['login'] = $user->getLogin();
-                    // Display a warning message for incorrect password
+                    // Display a warning message for inactive user
                     $data['message'] = [
                         'type'  => 'warning',
-                        'message'  => 'Le mot de passe est incorrect'
+                        'message'  => 'Ce compte utilisateur est inactif. Veuillez vous référer à l\'administrateur.'
                     ];
                 }
             } else {

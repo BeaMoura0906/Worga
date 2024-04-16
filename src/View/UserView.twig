@@ -92,13 +92,14 @@
 
                 function activeFormatter(value, row)
                 {
-                    const isChecked = value == 1 ? 'checked' : ''
-                    const isActif = value == false ? 0 : 1
-                    return ['<div class="form-check form-switch">',
-                            '<input class="form-check-input active-line" data-isactive="' + isActif + '" data-url="{{ pathRoot ~ 'user/setuserBS/id/' }}' + row.id + '/isactif/" type="checkbox" role="switch" id="flexSwitchCheckChecked" ' + isChecked + '>',
-                            '</div>'].join('')
+                    const isChecked = value == 1 ? 'checked' : '';
+                    const url = '{{ pathRoot ~ "user/setIsActive/id/" }}' + row.id + '/isActive/';
+                    return [
+                        '<div class="form-check form-switch">',
+                        '<input class="form-check-input active-line" data-url="' + url + '" type="checkbox" role="switch" id="isActiveId-' + row.id + '" ' + isChecked + '>',
+                        '</div>'
+                    ].join('');
                 }
-
             </script>
 
         {% else %}

@@ -24,14 +24,13 @@ function sendFetch( paramList, options={}, responseType = 'json' ) {
         })
 }
 
-$('#table').on( 'click', '.active-line', function(e){
-    const elem = e.target
+$('#table').on( 'change', '.active-line', function(e){
+    const elem = e.target;
+    const isActive = elem.dataset.isactive == '0' ? '1' : '0';
+    const url = elem.dataset.url + isActive;
 
-    const isActive = elem.dataset.isactive == 0 ? 1 : 0
-    const url = elem.dataset.url + isActive
-
-    console.log( isActive )
-    elem.dataset.isactive = isActive
+    console.log('Nouvel état actif :', isActive);
+    elem.dataset.isactive = isActive;
 
     const paramList = {
         url: url

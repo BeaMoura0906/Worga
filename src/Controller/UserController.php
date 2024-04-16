@@ -147,6 +147,23 @@ class UserController extends Controller
         }
     }
 
+    public function setIsActiveAction()
+    {
+        $isActive = $this->vars['isActive'] ?? 0;
+
+        if( isset( $this->vars['id'] ) ) {
+            $user = $this->userManager->getUserById( $this->vars['id'] );
+            $data = [
+                'message'   => 'Utilisateur ' . $user->getLogin() 
+            ];
+            $data['message'] .= $isActive ? ' activé.' : ' désactivé';
+            $data['status'] = $this->userManager->setIsActiveByUserId( $this->vars['id'], $isActive ) 
+                                ? 'success' 
+                                : 'warning';
+        }
+        echo json_encode( $data );
+    }
+
     public function createUserAction()
     {
         $data = [
@@ -163,18 +180,17 @@ class UserController extends Controller
         // Retrieve input data from the request
         $login = htmlspecialchars( $this->vars['login'] );
         $role = htmlspecialchars($this->vars['role']);
-        $role = $this->roleUtil->getRoleInEnglish($role);
+        $role = $this->roleUtil->getRoleInEnglish( $role );
         $password = htmlspecialchars( $this->vars['password'] );
         $passwordConfirm = htmlspecialchars( $this->vars['passwordConfirm'] );
-        $isActive = ($this->vars['isActive'] === "on") ? true : false;
-        
+        $isActive = isset($this->vars['isActive']) && $this->vars['isActive'] === "on" ? true : false;
+    
 
         // Create a new User instance
         $user = new User([]);
         $user->setLogin( $login );
         $user->setRole( $role );
         $user->setIsActive( $isActive );
-        
 
         // Verify the password and display a message if verification fails
         if($message = $this->verifPassword( $password, $passwordConfirm )){
@@ -226,26 +242,31 @@ class UserController extends Controller
     public function updateUserValidAction()
     {
         $data = [];
-        $data['roles'] = $this->roleUtil->getRolesInFrench();
+        $data['roles'] = $this->roleUtil->getRolesInFrenchWithoutAdmin();
 
         // Retrieve input data from the request
         $login = htmlspecialchars( $this->vars['login'] );
         $role = htmlspecialchars($this->vars['role']);
-        $role = $this->roleUtil->getRoleInEnglish($role);
         $password = htmlspecialchars( $this->vars['password'] );
         $passwordConfirm = htmlspecialchars( $this->vars['passwordConfirm'] );
-        $isActive = ($this->vars['isActive'] === "on") ? true : false;
-
+        $isActive = isset($this->vars['isActive']) && $this->vars['isActive'] === "on" ? true : false;
+       
         // Check if 'userId' variable is set
         if( $id = $this->vars['userId']){
             // Attempt to get the user details by ID
             $user = $this->userManager->getUserById( $id );
             $user->setLogin( $login );
-            $user->setRole( $role );
+            if ($role) {
+                $role = $this->roleUtil->getRoleInEnglish( $role );
+                $user->setRole( $role );
+            } else {
+                $role = $user->getRole();
+            }
             $user->setIsActive( $isActive );
             $data['selectedUser'] = $user;
         
-        }    
+        }
+        
 
         // Verify the password and display a message if verification fails
         if($message = $this->verifPassword( $password, $passwordConfirm )){

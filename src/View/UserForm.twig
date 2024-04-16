@@ -19,7 +19,7 @@
                 <div class="input-group">
                     <select class="form-select" id="roleId" name="role" required>
                         {% for role in roles %}
-                            <option value="{{ selectedUser.getRoleInFrench }}" {% if selectedUser.getRoleInFrench == role %} selected {% endif %}>
+                            <option value="{{ role }}" {% if selectedUser.getRoleInFrench == role %} selected {% endif %}>
                                 {{ role }}
                             </option>
                         {% endfor %}

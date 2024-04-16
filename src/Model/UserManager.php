@@ -205,21 +205,25 @@ class UserManager extends Manager
     }
 
     /**
-     * Delete a user by their ID.
-     *
-     * @param mixed $id User ID.
-     * @return bool True if the deletion is successful, false otherwise.
+     * Set the user's active status in the database.
+     * 
+     * @param int $id User ID.
+     * @param bool $isActive User active status.
+     * @return bool True if the update is successful, false otherwise.
      */
-    public function deleteUserById($id): bool
+    public function setIsActiveByUserId($id, $isActive): bool
     {
-        $sql = "DELETE FROM users WHERE id =:id";
-        $req = $this->dbManager->db->prepare($sql);
-        if($req->execute(['id' => $id])){
-            $rowCount = $req->rowCount();
-            return $rowCount > 0;
-        } else {
-            return false;
-        }
+        $sql = "UPDATE users 
+                SET 
+                    is_active=:is_active
+                WHERE 
+                    id=:id";
+        $req = $this->dbManager->db->prepare( $sql );
+        $state = $req->execute([
+            ':id'           => $id,
+            ':is_active'    => $isActive
+        ]);
+        return $state;
     }
 
 }
