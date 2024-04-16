@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 16 avr. 2024 à 15:35
+-- Généré le : mar. 16 avr. 2024 à 16:05
 -- Version du serveur : 8.2.0
 -- Version de PHP : 7.4.33
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `worga`
 --
+CREATE DATABASE IF NOT EXISTS `worga` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `worga`;
 
 -- --------------------------------------------------------
 
@@ -77,17 +79,18 @@ CREATE TABLE IF NOT EXISTS `documents` (
   `updated_at` datetime NOT NULL,
   `transaction_id` int NOT NULL,
   `user_id` int NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `idx_doc_id_ft` (`transaction_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `transactions`
+-- Structure de la table `financial_transactions`
 --
 
-DROP TABLE IF EXISTS `transactions`;
-CREATE TABLE IF NOT EXISTS `transactions` (
+DROP TABLE IF EXISTS `financial_transactions`;
+CREATE TABLE IF NOT EXISTS `financial_transactions` (
   `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -98,7 +101,8 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `updated_at` datetime NOT NULL,
   `account_id` int NOT NULL,
   `user_id` int NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `idx_ft_id_account` (`account_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -125,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `login`, `password`, `role`, `created_at`, `updated_at`, `is_active`) VALUES
-(1, 'admin', '$argon2id$v=19$m=65536,t=2,p=1$JOc8M8p7eR1pbMGVeOv6UA$fjy47ZULsRI+zvOxmvAGsZ0MM3rw2tA+DKI6fg5gkzI', 'admin', '2024-03-24', '2024-04-16', 1),
+(1, 'admin', '$argon2id$v=19$m=65536,t=2,p=1$ReP2U85vtpuVglT22qKSKg$jE9ExXAsUXsF+QCyzckM4P6Is/6zoUZgkFu0bxzuKbc', 'admin', '2024-03-24', '2024-04-16', 1),
 (2, 'editor', '$argon2id$v=19$m=65536,t=2,p=1$IIHtPeTazpcLAmCL8DE8Ag$xxw9qahxXMYgykISk09MpfFDPh3hmr8bRagUFeDRkgo', 'editor', '2024-04-04', '2024-04-16', 1),
 (3, 'visitor', '$argon2id$v=19$m=65536,t=2,p=1$MyMgsNzRP390IKbZ2C63gg$D2gbsnppFlFyjX19kCOzt7sp57g6XyCh97/Qrhq1NgI', 'visitor', '2024-04-16', '2024-04-16', 0);
 
@@ -144,6 +148,18 @@ ALTER TABLE `accounts`
 --
 ALTER TABLE `clients`
   ADD CONSTRAINT `idx_client_id_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `documents`
+--
+ALTER TABLE `documents`
+  ADD CONSTRAINT `idx_doc_id_ft` FOREIGN KEY (`transaction_id`) REFERENCES `financial_transactions` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `financial_transactions`
+--
+ALTER TABLE `financial_transactions`
+  ADD CONSTRAINT `idx_ft_id_account` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
