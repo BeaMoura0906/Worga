@@ -246,7 +246,7 @@ class UserController extends Controller
 
         // Retrieve input data from the request
         $login = htmlspecialchars( $this->vars['login'] );
-        $role = htmlspecialchars($this->vars['role']);
+        $role = isset($this->vars['role']) ? htmlspecialchars($this->vars['role']) : null;
         $password = htmlspecialchars( $this->vars['password'] );
         $passwordConfirm = htmlspecialchars( $this->vars['passwordConfirm'] );
         $isActive = isset($this->vars['isActive']) && $this->vars['isActive'] === "on" ? true : false;
