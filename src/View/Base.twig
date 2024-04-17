@@ -47,6 +47,9 @@
                 <ul class="navbar-nav">
                     <!-- Conditional rendering based on user session -->
                     {% if session.userId is defined %}
+                        <li class="nav-item me-4">
+                            <a class="nav-link text-dark fw-bold" href="{{ pathRoot }}client">Clients</a>
+                        </li>
                         {% if session.userRole == 'admin' %}
                             <li class="nav-item me-4">
                                 <a class="nav-link  text-dark" href="{{ pathRoot }}user">Panneau d'administration</a>
