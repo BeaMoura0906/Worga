@@ -63,6 +63,11 @@ class ClientManager extends Manager
         $strLike = false;
         if( !empty( $params['search'] ) && !empty( $params['searchable'] ) ) {
             foreach( $params['searchable'] as $searchItem ) {
+                if( $searchItem === 'lastName' ) {
+                    $searchItem = 'last_name';
+                } elseif( $searchItem === 'firstName' ) {
+                    $searchItem = 'first_name';
+                }
                 $search = $params['search'];
                 $strLike .= $searchItem . " LIKE '%$search%' OR ";
             }
