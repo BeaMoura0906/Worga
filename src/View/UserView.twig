@@ -25,7 +25,7 @@
                 <div class="col-12">
                     <table
                             class="table"
-                            id="table"
+                            id="users-table"
                             data-toggle="table"
                             data-height="400"
                             data-url="{{ pathRoot  ~ 'user/listUsers' }}"
@@ -73,7 +73,7 @@
 
                 function ajaxRequest(params) 
                 {
-                    const url = $('#table').data('url')
+                    const url = $('#users-table').data('url')
 
                     $.get(url + '/?' + $.param(params.data))
                         .then(function (res) {

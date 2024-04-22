@@ -5,9 +5,12 @@ namespace Worga\src\Model\Entity;
 use DateTime;
 use Worga\src\Classes\Hydrate;
 
+/**
+ * Class representing a User entity.
+ */
 class User
 {
-    // Properties representing user details
+    /** Properties representing user details */ 
     private $id = 0;
     private $login = 0;
     private $password = 0;
@@ -28,8 +31,10 @@ class User
         $hydrator->hydrate($userData, $this);
     }
 
-    // Getter and setter methods for each property
-
+    /**
+     * Getter and setter methods for each property
+     */
+    
     public function getId()
     {
         return $this->id;

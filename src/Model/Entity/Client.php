@@ -5,11 +5,15 @@ namespace Worga\src\Model\Entity;
 use Worga\src\Classes\Hydrate;
 use DateTime;
 
+/**
+ * Class representing a Client entity.
+ */
 class Client
 {
-    // Properties representing client details
+    /** Properties representing client details */
     private $id = 0;
-    private $name = 0;
+    private $lastName = 0;
+    private $firstName = 0;
     private $address = 0;
     private $phone = 0;
     private $email = 0;
@@ -30,7 +34,10 @@ class Client
         $hydrator->hydrate($userData, $this);
     }
 
-    // Getters and setters
+    /**
+     * Getters and setters for each property.
+     */
+
     public function getId()
     {
         return $this->id;
@@ -41,14 +48,24 @@ class Client
         $this->id = $id;
     }
 
-    public function getName()
+    public function getLastName()
     {
-        return $this->name;
+        return $this->lastName;
     }
 
-    public function setName($name)
+    public function setLastName($lastName)
     {
-        $this->name = $name;
+        $this->lastName = $lastName;
+    }
+
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
     }
 
     public function getAddress()
@@ -121,6 +138,13 @@ class Client
     public function setUser(User $user)
     {
         $this->user = $user;
+    }
+
+    /** Get number phone formatted with leading 0 */
+    public function getPhoneFormatted(): string
+    {
+        $phoneFormatted = "0".$this->phone;
+        return $phoneFormatted;
     }
 
 }

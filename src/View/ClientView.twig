@@ -1,5 +1,110 @@
 {% extends "Base.twig" %}
 
 {% block main %}
-    Client View
+    <!-- Main Content Container -->
+    <div class="container">
+        <!-- Title Section -->
+        <div class="row text-center">
+            <div class="col-12 mt-5 mb-3">
+                <h2>Clients</h2>
+            </div>
+        </div>
+
+        <!-- Check if listUsers is defined -->
+        {% if listClients is defined %}
+            <!-- Users Table Section -->
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <a href="{{ pathRoot  ~ 'client/addClient' }}" class="btn btn-sm btn-success" role="button">Ajouter un client</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <table
+                            class="table"
+                            id="clients-table"
+                            data-toggle="table"
+                            data-height="400"
+                            data-url="{{ pathRoot  ~ 'client/listClients' }}"
+                            data-ajax="ajaxRequest"
+                            data-search="true"
+                            data-searchable="true"
+                            data-side-pagination="server"
+                            data-sortable="true"
+                            data-pagination="true"
+                            data-page-size="10">
+                        <thead>
+                        <tr>
+                            <th data-field="id" 
+                                data-searchable="false"
+                                data-sortable="true"
+                            >#</th>
+                            <th data-field="lastName" 
+                                data-searchable="true"
+                                data-sortable="true"
+                            >Nom</th>
+                            <th data-field="firstName"
+                                data-searchable="true"
+                                data-sortable="true"
+                            >Prénom</th>
+                            <th data-field="address"
+                                data-searchable="false"
+                                data-sortable="true"
+                            >Adresse</th>
+                            <th data-field="phone"
+                                data-searchable="false"
+                                data-sortable="true"
+                            >Téléphone</th>
+                            <th data-field="email"
+                                data-searchable="false"
+                                data-sortable="true"
+                            >Email</th>
+                            <th data-field="actions"
+                                data-searchable="false"
+                                data-formatter="actionsFormatter"
+                            >Actions</th>
+                            <th data-field="account" 
+                                data-searchable="false" 
+                                data-formatter="accountFormatter"
+                            >Compte client</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+            <script>
+
+                function ajaxRequest(params) 
+                {
+                    const url = $('#clients-table').data('url')
+
+                    $.get(url + '/?' + $.param(params.data))
+                        .then(function (res) {
+                            params.success( JSON.parse(res) )
+                        })
+                        .fail(function (xhr, status, error) {
+                            params.error(xhr.responseText)
+                        })
+                }
+
+                function accountFormatter(value, row) 
+                {
+                    return ''
+                }
+
+                function actionsFormatter(value, row)
+                {
+                    return ''
+                }
+            </script>
+
+        {% else %}
+
+            {% include "ClientForm.twig" with {'selectedClient': selectedClient ? selectedClient : null} %}
+        
+        {% endif %}
+        
+
+    </div>
 {% endblock %}
