@@ -8,8 +8,9 @@ use Worga\src\Model\ClientManager;
 
 class ClientController extends Controller
 {
-    // Property for the ClientManager instance
+    // Properties
     private ClientManager $clientManager;
+    private User $currentUser;
 
     /**
      * Constructor method to initialize properties and call the parent constructor
@@ -21,6 +22,14 @@ class ClientController extends Controller
         // Create an instance of ClientManager
         $this->clientManager = new ClientManager();
 
+        // Create an instance of User for the current user
+        $this->currentUser = new User([
+            'id' => $_SESSION['userId'],
+            'login' => $_SESSION['userLogin'],
+            'password' => '',
+            'role' => $_SESSION['userRole']
+        ]);
+
         // Call the parent constructor with parameters
         parent::__construct($params );
     }
@@ -30,9 +39,8 @@ class ClientController extends Controller
      */
     public function defaultAction()
     {
-        $listClients = $this->clientManager->getAllClients();
         $data = [
-            'listClients' => $listClients
+            'listClients' => true
         ];
         $this->render('client', $data);
     }
@@ -85,7 +93,7 @@ class ClientController extends Controller
     }
 
     /**
-     * 
+     * Action method to render the edit client view with the add client form
      */
     public function addClientAction()
     {
@@ -93,6 +101,7 @@ class ClientController extends Controller
     }
 
     /**
+     * Action method to add a new client to the database 
      */
     public function addClientValidAction()
     {
@@ -105,14 +114,11 @@ class ClientController extends Controller
             $other = isset( $this->vars['other'] ) ?htmlentities( $this->vars['other'] ) : null;
 
             if( $this->clientManager->checkIfClientExists( $lastName, $firstName ) ) {
-                $message = "Un client avec le nom ".$lastName." ".$firstName." existe déjà.";
-                $type = "warning";
-                $message = [
-                    'message' => $message,
-                    'type' => $type
-                ];
                 $data = [
-                    'message' => $message
+                    'message' => [
+                        'message' => "Un client avec le nom ".$lastName." ".$firstName." existe déjà.",
+                        'type' => "warning"
+                    ]
                 ];
                 $this->render('client', $data);
             } else {
@@ -123,45 +129,138 @@ class ClientController extends Controller
                 $client->setPhone( $phone );
                 $client->setEmail( $email );
                 $client->setOther( $other );
-
-                $user = new User([]);
-                $user->setId( $_SESSION['userId'] );
-                $client->setUser( $user );
+                $client->setUser( $this->currentUser );
 
                 if( $client = $this->clientManager->insertClient( $client ) ) {
-                    $message = "Le client ".$lastName." ".$firstName." a bien été ajouté.";
-                    $type = "success";
-                    $message = [
-                        'message' => $message,
-                        'type' => $type
-                    ];
                     $data = [
-                        'message' => $message,
-                        'selectedClient' => $client
+                        'message' => [
+                            'message' => "Le client ".$lastName." ".$firstName." a bien été ajouté.",
+                            'type' => "success"
+                        ]
                     ];
                     $this->render('client', $data);
                 } else {
-                    $message = "Le client ".$lastName." ".$firstName." n'a pas pu être ajouté.";
-                    $type = "danger";
-                    $message = [
-                        'message' => $message,
-                        'type' => $type
-                    ];
                     $data = [
-                        'message' => $message
+                        'message' => [
+                            'message' => "Le client ".$lastName." ".$firstName." n'a pas pu être ajouté.",
+                            'type' => "danger"
+                        ]
                     ];
                     $this->render('client', $data);
                 }
             }
         } else {
-            $message = "Veuillez remplir tous les champs.";
-            $type = "warning";
-            $message = [
-                'message' => $message,
-                'type' => $type
-            ];
             $data = [
-                'message' => $message
+                'message' => [
+                    'message' => "Veuillez remplir tous les champs.",
+                    'type' => 'warning'
+                ]
+            ];
+            $this->render('client', $data);
+        }
+    }
+
+    /**
+     * Action method to render the edit client view with the update client form
+     */
+    public function updateClientAction()
+    {
+        $clientId = $this->vars['clientId'] ?? null;
+        $client = $this->clientManager->getClientById($clientId);
+        if ($client) {
+            $data = ['selectedClient' => $client];
+            $this->render('client', $data);
+        } else {
+            $listClients = $this->clientManager->getAllClients();
+            $data = [
+                'message' => [
+                    'message' => "Une erreur est survenue. Veuillez sélectionner un client.",
+                    'type' => 'warning'
+                ],
+                'listClients' => $listClients
+            ];
+            $this->render('client', $data);
+        }
+    }
+
+    /**
+     * Action method to update a client in the database
+     */
+    public function updateClientValidAction()
+    {
+        if ( isset( $this->vars['clientId'] ) && isset( $this->vars['lastName'] ) && isset( $this->vars['firstName'] ) && isset( $this->vars['address'] ) && isset( $this->vars['phone'] ) && isset( $this->vars['email'] ) ) {
+            $clientId = htmlentities( $this->vars['clientId'] );
+            $lastName = htmlentities( $this->vars['lastName'] );
+            $firstName = htmlentities( $this->vars['firstName'] );
+            $address = htmlentities( $this->vars['address'] );
+            $phone = htmlentities( $this->vars['phone'] );
+            $email = htmlentities( $this->vars['email'] );
+            $other = isset( $this->vars['other'] ) ? htmlentities( $this->vars['other'] ) : null;
+
+            $client = new Client([
+                'id' => $clientId,
+                'last_name' => $lastName,
+                'first_name' => $firstName,
+                'address' => $address,
+                'phone' => $phone,
+                'email' => $email,
+                'other' => $other
+            ]);
+            $client->setUser( $this->currentUser );
+
+            if( $client = $this->clientManager->updateClient( $client ) ) {
+                $data = [
+                    'message' => [
+                        'message' => "Le client ".$lastName." ".$firstName." a bien été mis à jour.",
+                        'type' => "success"
+                    ]
+                ];
+                $this->render('client', $data);
+            } else {
+                $data = [
+                    'message' => [
+                        'message' => "Le client ".$lastName." ".$firstName." n'a pas pu être mis à jour.",
+                        'type' => "danger"
+                    ]
+                ];
+                $this->render('client', $data);
+            }
+        } else {
+            $data = [
+                'message' => [
+                    'message' => "Veuillez remplir tous les champs.",
+                    'type' => 'warning'
+                ]
+            ];
+            $this->render('client', $data);
+        }
+    }
+
+    /**
+     * Action method to delete a client from the database
+     */
+    public function deleteClientAction()
+    {
+        $data['listClients'] = true;
+        if ( isset( $this->vars['clientId'] ) ) {
+            $clientId = htmlentities( $this->vars['clientId'] );
+            if ($this->clientManager->deleteClientById($clientId)) {
+                $data['message'] = [
+                    'message' => "Le client a bien été supprimé.",
+                    'type' => "success"
+                ];
+                $this->render('client', $data);
+            } else {
+                $data['message'] = [
+                    'message' => "Le client n'a pas pu être supprimé.",
+                    'type' => "danger"
+                ];
+                $this->render('client', $data);
+            }
+        } else {
+            $data['message'] = [
+                'message' => "Une erreur est survenue. Veuillez sélectionner un client.",
+                'type' => 'warning'
             ];
             $this->render('client', $data);
         }

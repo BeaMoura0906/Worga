@@ -1,88 +1,134 @@
 {% if selectedClient is not null %}
-<div class="col-12 p-2">
-    <h5 class="mb-3">Modifier <strong>{{ selectedClient.getName }}</strong></h5>
-    <!-- Update Client Form -->
-    <form class="row g-3" action="{{ pathRoot }}client/updateClientValid/clientId/{{ selectedClient.getId }}" method="post">
-        
-        <!-- Client Name -->
-        <div class="col-md-6 mb-3">
-            <label for="nameId" class="col-form-label">Nom et prénom</label>
-            <div class="input-group">
-                <input type="text" class="form-control" id="nameId" name="name" value="{{ selectedClient.getName }}" required>
-            </div>
-        </div>
-
-
-        <!-- Submit Button -->
-        <div class="col-12 text-end">
-            <button class="btn btn-primary" type="submit">Modifier</button>
-        </div>
-    </form>
-</div>
-{% else %}
-<div class="col-12 p-2">
-    <h4 class="mb-3">Ajouter un client</h4>
-    <!-- Create Client Form -->
-    <form class="row g-3" action="{{ pathRoot }}client/addClientValid" method="post">
-
-        <!-- Client LastName -->
-        <div class="col-md-6 mb-3">
-            <label for="lastNameId" class="col-form-label">Nom de famille</label>
-            <div class="input-group">
-                <input type="text" class="form-control" id="lastNameId" name="lastName" value="" required>
-            </div>
-        </div>
-
-        <!-- Client FirstName -->
-        <div class="col-md-6 mb-3">
-            <label for="firstNameId" class="col-form-label">Prénom</label>
-            <div class="input-group">
-                <input type="text" class="form-control" id="firstNameId" name="firstName" value="" required>
-            </div>
-        </div>
-
-        <!-- Client Phone -->
-        <div class="col-md-6 text-align-justify">
-            <label for="phoneId" class="col-form-label">Numéro de téléphone</label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">+33</span>
+    <div class="col-12 p-2">
+        <h5 class="mb-3">Modifier <strong>{{ selectedClient.lastName }} {{ selectedClient.firstName }}</strong></h5>
+        <!-- Update Client Form -->
+        <form class="row g-3" action="{{ pathRoot }}client/updateClientValid/clientId/{{ selectedClient.getId }}" method="post">
+            
+            <!-- Client LastName -->
+            <div class="col-md-6 mb-3">
+                <label for="lastNameId" class="col-form-label">Nom de famille</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="lastNameId" name="lastName" value="{{ selectedClient.lastName }}" required>
                 </div>
-                <input type="hidden" name="countryCode" value="+33">
-                <input type="tel" class="form-control" id="phoneId" name="phone" pattern="^[1-9][0-9]{8}$" placeholder="623456789" value="{{ selectedCard.getFormattedPhoneNumber() }}" required>
             </div>
-            <small class="form-text text-muted">Entrez le reste du numéro de téléphone (sans le 0 initial).</small>
-        </div>
 
-        <!-- Client Email -->
-        <div class="col-md-6 mb-3">
-            <label for="emailId" class="col-form-label">Email</label>
-            <div class="input-group">
-                <input type="email" class="form-control" id="emailId" name="email" value="" required>
+            <!-- Client FirstName -->
+            <div class="col-md-6 mb-3">
+                <label for="firstNameId" class="col-form-label">Prénom</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="firstNameId" name="firstName" value="{{ selectedClient.firstName }}" required>
+                </div>
             </div>
-        </div>
 
-        <!-- Client Address -->
-        <div class="col-md-12 mb-3">
-            <label for="addressId" class="col-form-label">Adresse postale</label>
-            <div class="input-group">
-                <input type="text" class="form-control" id="addressId" name="address" value="" required>
+            <!-- Client Phone -->
+            <div class="col-md-6 text-align-justify">
+                <label for="phoneId" class="col-form-label">Numéro de téléphone</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">+33</span>
+                    </div>
+                    <input type="hidden" name="countryCode" value="+33">
+                    <input type="tel" class="form-control" id="phoneId" name="phone" pattern="^[1-9][0-9]{8}$" placeholder="623456789" value="{{ selectedClient.phone }}" required>
+                </div>
+                <small class="form-text text-muted">Entrez le reste du numéro de téléphone (sans le 0 initial).</small>
             </div>
-        </div>
 
-        <!-- Client Other -->
-        <div class="col-md-12 mb-3">
-            <label for="otherId" class="col-form-label">Autres informations</label>
-            <div class="input-group">
-                <input type="text" class="form-control" id="otherId" name="other" value="">
+            <!-- Client Email -->
+            <div class="col-md-6 mb-3">
+                <label for="emailId" class="col-form-label">Email</label>
+                <div class="input-group">
+                    <input type="email" class="form-control" id="emailId" name="email" value="{{ selectedClient.email }}" required>
+                </div>
             </div>
-        </div>
-        
-        <!-- Submit Button -->
-        <div class="col-12 text-end">
-            <button class="btn btn-success" type="submit">Ajouter</button>
-        </div>
-    </form>
 
-</div>
+            <!-- Client Address -->
+            <div class="col-md-12 mb-3">
+                <label for="addressId" class="col-form-label">Adresse postale</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="addressId" name="address" value="{{ selectedClient.address }}" required>
+                </div>
+            </div>
+
+            <!-- Client Other -->
+            <div class="col-md-12 mb-3">
+                <label for="otherId" class="col-form-label">Autres informations</label>
+                <div class="input-group">
+                    {% set otherValue = selectedClient.other ? selectedClient.other : '' %}
+                    <input type="text" class="form-control" id="otherId" name="other" value="{{ otherValue }}">
+                </div>
+            </div>
+
+            <!-- Submit and Cancel Button -->
+            <div class="col-12 text-end">
+                <button class="btn btn-primary" type="submit">Modifier</button>
+                <a href="{{ pathRoot }}client" class="btn btn-secondary" role="button">Annuler</a>
+            </div>
+        </form>
+    </div>
+{% else %}
+    <div class="col-12 p-2">
+        <h4 class="mb-3">Ajouter un client</h4>
+        <!-- Create Client Form -->
+        <form class="row g-3" action="{{ pathRoot }}client/addClientValid" method="post">
+
+            <!-- Client LastName -->
+            <div class="col-md-6 mb-3">
+                <label for="lastNameId" class="col-form-label">Nom de famille</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="lastNameId" name="lastName" value="" required>
+                </div>
+            </div>
+
+            <!-- Client FirstName -->
+            <div class="col-md-6 mb-3">
+                <label for="firstNameId" class="col-form-label">Prénom</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="firstNameId" name="firstName" value="" required>
+                </div>
+            </div>
+
+            <!-- Client Phone -->
+            <div class="col-md-6 text-align-justify">
+                <label for="phoneId" class="col-form-label">Numéro de téléphone</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">+33</span>
+                    </div>
+                    <input type="hidden" name="countryCode" value="+33">
+                    <input type="tel" class="form-control" id="phoneId" name="phone" pattern="^[1-9][0-9]{8}$" placeholder="623456789" value="" required>
+                </div>
+                <small class="form-text text-muted">Entrez le reste du numéro de téléphone (sans le 0 initial).</small>
+            </div>
+
+            <!-- Client Email -->
+            <div class="col-md-6 mb-3">
+                <label for="emailId" class="col-form-label">Email</label>
+                <div class="input-group">
+                    <input type="email" class="form-control" id="emailId" name="email" value="" required>
+                </div>
+            </div>
+
+            <!-- Client Address -->
+            <div class="col-md-12 mb-3">
+                <label for="addressId" class="col-form-label">Adresse postale</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="addressId" name="address" value="" required>
+                </div>
+            </div>
+
+            <!-- Client Other -->
+            <div class="col-md-12 mb-3">
+                <label for="otherId" class="col-form-label">Autres informations</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="otherId" name="other" value="">
+                </div>
+            </div>
+            
+            <!-- Submit Button -->
+            <div class="col-12 text-end">
+                <button class="btn btn-success" type="submit">Ajouter</button>
+            </div>
+        </form>
+
+    </div>
 {% endif %}

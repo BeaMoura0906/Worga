@@ -73,4 +73,12 @@ class Manager
             $this->dbpassword
         );
     }
+
+    /**
+     * Converts a camelCase string to snake_case. 
+     */
+    protected function convertCamelCaseToSnakeCase($string): string
+    {
+        return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $string));
+    }
 }

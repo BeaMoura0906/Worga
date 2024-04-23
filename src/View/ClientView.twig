@@ -4,9 +4,15 @@
     <!-- Main Content Container -->
     <div class="container">
         <!-- Title Section -->
-        <div class="row text-center">
-            <div class="col-12 mt-5 mb-3">
-                <h2>Clients</h2>
+        <div class="row  mt-5">
+            <!-- Back Button Section -->
+            {% if listClients is not defined %}
+                <div class="col-12">
+                    <a href="{{ pathRoot}}client" class="text-dark text-decoration-none" role="button" style="font-size: 1.5rem;"><i class="bi bi-arrow-left"></i></a>
+                </div>
+            {% endif %}
+            <div class="col-12 mb-3">
+                <h2 class="text-center"><i class="bi bi-people-fill"></i> Clients</h2>
             </div>
         </div>
 
@@ -15,7 +21,7 @@
             <!-- Users Table Section -->
             <div class="row">
                 <div class="col-12 mt-3">
-                    <a href="{{ pathRoot  ~ 'client/addClient' }}" class="btn btn-sm btn-success" role="button">Ajouter un client</a>
+                    <a href="{{ pathRoot  ~ 'client/addClient' }}" class="btn btn-success" role="button">Ajouter un client</a>
                 </div>
             </div>
             <div class="row">
@@ -59,14 +65,14 @@
                                 data-searchable="false"
                                 data-sortable="true"
                             >Email</th>
-                            <th data-field="actions"
-                                data-searchable="false"
-                                data-formatter="actionsFormatter"
-                            >Actions</th>
                             <th data-field="account" 
                                 data-searchable="false" 
                                 data-formatter="accountFormatter"
                             >Compte client</th>
+                            <th data-field="actions"
+                                data-searchable="false"
+                                data-formatter="actionsFormatter"
+                            >Actions</th>
                         </tr>
                         </thead>
                     </table>
@@ -90,12 +96,24 @@
 
                 function accountFormatter(value, row) 
                 {
-                    return ''
+                    return '<a href="{{ pathRoot  ~ 'account/clientId/' }}' + row.id + '" class="btn btn-sm btn-secondary rounded-circle" role="button"><i class="bi bi-person-lines-fill"></i></a>'
                 }
 
                 function actionsFormatter(value, row)
                 {
-                    return ''
+                    return '<a href="{{ pathRoot  ~ 'client/updateClient/clientId/' }}' + row.id + '" class="btn btn-sm btn-primary rounded-circle m-1" role="button"><i class="bi bi-pencil-square"></i></a>' + '<a href="javascript:void(0)" class="btn btn-sm btn-danger rounded-circle m-1" role="button" onclick="confirmDeletion(' + row.id + ')" ><i class="bi bi-trash"></i></a>'
+                }
+
+                function confirmDeletion(clientId) {
+                    var message = "Etes-vous sûr de vouloir supprimer ce client ?\n" + 
+                                "Cette action est irreversible.\n" +
+                                "Par ailleurs, si un compte est lié à ce client, il ne pourra pas être supprimé " +
+                                "(contactez un administrateur si besoin).";
+                    var confirmed = confirm(message);
+                    if (confirmed) {
+                        window.location.href = "{{ pathRoot ~ 'client/deleteClient/clientId/' }}" + clientId;
+                    }
+                    return false;
                 }
             </script>
 
@@ -103,8 +121,7 @@
 
             {% include "ClientForm.twig" with {'selectedClient': selectedClient ? selectedClient : null} %}
         
-        {% endif %}
-        
+        {% endif %} 
 
     </div>
 {% endblock %}

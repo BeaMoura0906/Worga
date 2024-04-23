@@ -23,15 +23,15 @@ class Client
     private $user;
 
     /**
-     * Constructor to initialize the User object with data.
+     * Constructor to initialize the Client object with data.
      *
-     * @param array $userData Data to hydrate the User object.
+     * @param array $clientData Data to hydrate the Client object.
      */
-    public function __construct(array $userData)
+    public function __construct(array $clientData)
     {
         // Call the hydrate method of the Hydrate class to set object properties
         $hydrator = new Hydrate();
-        $hydrator->hydrate($userData, $this);
+        $hydrator->hydrate($clientData, $this);
     }
 
     /**

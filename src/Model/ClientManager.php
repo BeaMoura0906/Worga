@@ -60,14 +60,15 @@ class ClientManager extends Manager
     {
         $order = !empty( $params['order'] ) ? $params['order'] : 'ASC';
         $sort = !empty( $params['sort'] ) ? $params['sort'] : 'id';
+        if( $sort === 'lastName' || $sort === 'firstName' ) {
+            $sort = $this->convertCamelCaseToSnakeCase( $sort );
+        }
         $strLike = false;
         if( !empty( $params['search'] ) && !empty( $params['searchable'] ) ) {
             foreach( $params['searchable'] as $searchItem ) {
-                if( $searchItem === 'lastName' ) {
-                    $searchItem = 'last_name';
-                } elseif( $searchItem === 'firstName' ) {
-                    $searchItem = 'first_name';
-                }
+                if( $searchItem === 'lastName' || $searchItem === 'firstName' ) {
+                    $searchItem = $this->convertCamelCaseToSnakeCase( $searchItem );
+                } 
                 $search = $params['search'];
                 $strLike .= $searchItem . " LIKE '%$search%' OR ";
             }
@@ -90,6 +91,27 @@ class ClientManager extends Manager
             }
             
             return $clients;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Retrieves a client from the database by its ID.
+     * 
+     * @param int $clientId The ID of the client to retrieve.
+     * @return Client|null The retrieved client object, or null if the client does not exist.
+     */
+    public function getClientById(int $clientId): ?Client
+    {
+        $sql = "SELECT * FROM clients WHERE id = :id";
+        $req = $this->dbManager->db->prepare( $sql );
+        $req->execute([
+            'id' => $clientId
+        ]);
+        if ($clientData = $req->fetch()) {
+            $client = new Client($clientData);
+            return $client;
         } else {
             return null;
         }
@@ -164,5 +186,50 @@ class ClientManager extends Manager
         } else {
             return null;
         }
+    }
+
+    /**
+     * Updates a client in the database.
+     * 
+     * @param Client $client The client to update.
+     * @return bool True if the client was updated successfully, false otherwise.
+     */
+    public function updateClient(Client $client): bool
+    {
+        $sql = "UPDATE clients SET
+                    last_name = :last_name,
+                    first_name = :first_name,
+                    address = :address,
+                    phone = :phone,
+                    email = :email,
+                    other = :other,
+                    updated_at = NOW(),
+                    user_id = :user_id
+                WHERE id = :id";
+        $req = $this->dbManager->db->prepare($sql);
+        $state = $req->execute([
+            'last_name' => $client->getLastName(),
+            'first_name' => $client->getFirstName(),
+            'address' => $client->getAddress(),
+            'phone' => $client->getPhone(),
+            'email' => $client->getEmail(),
+            'other' => $client->getOther() ?? null,
+            'user_id' => $client->getUser()->getId(),
+            'id' => $client->getId()
+        ]);
+        return $state;
+    }
+
+    /**
+     * Deletes a client from the database.
+     */
+    public function deleteClientById(int $clientId): bool
+    {
+        $sql = "DELETE FROM clients WHERE id = :id";
+        $req = $this->dbManager->db->prepare($sql);
+        $state = $req->execute([
+            'id' => $clientId
+        ]);
+        return $state;
     }
 }
