@@ -4,14 +4,16 @@
     <!-- Main Content Container -->
     <div class="container">
         <!-- Title Section -->
-        <div class="row  mt-5">
+        <div class="row mt-3">
             <!-- Back Button Section -->
             {% if listClients is not defined %}
-                <div class="col-12">
-                    <a href="{{ pathRoot}}client" class="text-dark text-decoration-none" role="button" style="font-size: 1.5rem;"><i class="bi bi-arrow-left"></i></a>
-                </div>
-            {% endif %}
+            <div class="col-12">
+                <a href="{{ pathRoot}}client" class="text-dark text-decoration-none" role="button" style="font-size: 1.5rem;"><i class="bi bi-arrow-left"></i></a>
+            </div>
             <div class="col-12 mb-3">
+            {% else %}
+            <div class="col-12 mt-3 mb-3">
+            {% endif %}
                 <h2 class="text-center"><i class="bi bi-people-fill"></i> Clients</h2>
             </div>
         </div>
