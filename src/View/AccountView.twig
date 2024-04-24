@@ -1,0 +1,13 @@
+{% extends "Base.twig" %}
+
+{% block main %}
+
+    Client : {{ selectedClient.lastName }} {{ selectedClient.firstName }} </br>
+
+    {% if clientAccount is defined %}
+        Relevé de compte : #{{ clientAccount.id }} 
+    {% else %}
+        Pas de compte client associé. Pour le générer, cliquez sur le bouton ci-dessous. </br> Vous pourrez ensuite y ajouter des transactions financières. 
+    {% endif %}
+
+{% endblock %}
