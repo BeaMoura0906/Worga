@@ -2,12 +2,77 @@
 
 {% block main %}
 
-    Client : {{ selectedClient.lastName }} {{ selectedClient.firstName }} </br>
+    <!-- Main Content Container -->
+    <div class="container">
+        <!-- Title Section -->
+        <div class="row mt-3">
+            <!-- Back to List Clients Button Section -->
+            <div class="col-12">
+                <a href="{{ pathRoot}}client" class="text-dark text-decoration-none" role="button" style="font-size: 1.5rem;"><i class="bi bi-arrow-left"></i></a>
+            </div>
+            <div class="col-12 mb-3">
+                <h2 class="text-center"><i class="bi bi-person-lines-fill"></i> Compte Client</h2>
+            </div>
+        </div>
 
-    {% if clientAccount is defined %}
-        Relevé de compte : #{{ clientAccount.id }} 
-    {% else %}
-        Pas de compte client associé. Pour le générer, cliquez sur le bouton ci-dessous. </br> Vous pourrez ensuite y ajouter des transactions financières. 
-    {% endif %}
+        <div class="row mt-2">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted"><strong>N° Client</strong> &nbsp; #{{ selectedClient.id }}</h6>
+                        <h5 class="card-title text-primary-emphasis fw-bold">{{ selectedClient.lastName | upper }} {{ selectedClient.firstName }}</h5>
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Adresse</th>
+                                        <td>{{ selectedClient.address }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Téléphone</th>
+                                        <td>{{ selectedClient.getPhoneFormatted }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Email</th>
+                                        <td>{{ selectedClient.email }}</td>
+                                    </tr>
+                                    {% if selectedClient.other is not empty %}
+                                        <tr>
+                                            <th scope="row">Autres</th>
+                                            <td>{{ selectedClient.other }}</td>
+                                        </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-text">
+                            <small class="text-muted">Client depuis le {{ selectedClient.insertedAt | date('d/m/Y à H:i') }}</small><br>
+                            <small class="text-muted">Dernière mise à jour le {{ selectedClient.updatedAt | date('d/m/Y à H:i') }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="row justify-content-center mt-3">
+            {% if clientAccount is defined %}
+                Relevé de compte : #{{ clientAccount.id }} 
+            {% else %}
+                <div class="col-12 d-flex justify-content-center text-center">
+                    <div class="alert alert-warning" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        <strong>Attention !</strong> </br> 
+                        Pas de compte client associé. Pour le générer, cliquez sur le bouton ci-dessous. </br>
+                        Vous pourrez ensuite y ajouter les transactions financières.
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <a href="{{ pathRoot}}account/create" class="btn btn-primary" role="button"><i class="bi bi-plus-circle"></i> &nbsp; Créer un compte client</a>
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
 
 {% endblock %}
