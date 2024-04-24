@@ -46,7 +46,7 @@ class Manager
     public function __construct()
     {
 
-        //Configure for the BSC's remote server o2switch 
+        //Configure for the remote server within add .env file to retreive the remote dbname, dblogin and dbpassword
         /*
         if( strstr($_SERVER['HTTP_HOST'], '') ){
             $this->dbname = '';
