@@ -4,6 +4,7 @@ namespace Worga\src\Controller;
 
 use Worga\src\Model\Entity\Account;
 use Worga\src\Model\Entity\Client;
+use Worga\src\Classes\FinTransCategories;
 use Worga\src\Model\AccountManager;
 use Worga\src\Model\ClientManager;
 
@@ -50,7 +51,13 @@ class AccountController extends Controller
             if( $this->selectedClient ) {
                 $this->clientAccount = $this->accountManager->getAccountByClient($this->selectedClient);
                 if( $this->clientAccount ) {
-                    $data = ['selectedClient' => $this->selectedClient, 'clientAccount' => $this->clientAccount];
+                    $finTransCategories = new FinTransCategories();
+                    $finTransCategoriesFr = $finTransCategories->getFinTransCategoriesFr();
+                    $data = [
+                        'selectedClient' => $this->selectedClient, 
+                        'clientAccount' => $this->clientAccount,
+                        'finTransCategoriesFr' => $finTransCategoriesFr
+                    ];
                     $this->render('account', $data);
                 } else {
                     $data = ['selectedClient' => $this->selectedClient];
@@ -65,6 +72,35 @@ class AccountController extends Controller
                     'listClients' => true
                 ];
                 $this->render('client', $data);
+            }
+        } else {
+            $data = [
+                'message' => [
+                    'message' => "Une erreur est survenue. Veuillez reéssayer.",
+                    'type' => 'warning'
+                ],
+                'listClients' => true
+            ];
+            $this->render('client', $data);
+        }
+    }
+
+    public function createAction()
+    {   
+        if( isset( $this->vars['clientId'] ) ) {
+            $this->selectedClient = $this->selectedClient ?? $this->clientManager->getClientById($this->vars['clientId']);
+            $newAccount = $this->accountManager->insertNewAccountToClient($this->selectedClient);
+            if( $newAccount ) {
+                $this->redirectToRoot('account/getAccount/clientId/' . $this->selectedClient->getId());
+            } else {
+                $data = [
+                    'message' => [
+                        'message' => "Une erreur est survenue. Veuillez reéssayer.",
+                        'type' => 'warning'
+                    ],
+                    'selectedClient' => $this->selectedClient
+                ];
+                $this->render('account', $data);
             }
         } else {
             $data = [

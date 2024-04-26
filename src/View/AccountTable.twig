@@ -1,0 +1,70 @@
+<table
+    class="table"
+    id="fin-trans-table"
+    data-toggle="table"
+    data-height="auto"
+    data-url="{{ pathRoot  ~ 'finTrans/listFinTrans' }}"
+    data-ajax="ajaxRequest"
+    data-query-params="queryParams"
+    data-search="true"
+    data-searchable="true"
+    data-side-pagination="server"
+    data-sortable="true"
+    data-pagination="true"
+    data-page-size="10">
+    <input type="hidden" id="account-id" value="{{ clientAccount.id }}">
+    <thead>
+        <tr>
+            <th data-field="actions"
+                data-searchable="false"
+                data-formatter="actionsFormatter"
+            >Actions</th>
+            <th data-field="finTransDate" 
+                data-searchable="true"
+                data-sortable="true"
+            >Date</th>
+            <th data-field="title"
+                data-searchable="true"
+                data-sortable="true"
+            >Titre</th>
+            <th data-field="to_be_debited"
+                data-searchable="false"
+                data-sortable="false"
+            >A débiter</th>
+            <th data-field="debit"
+                data-searchable="false"
+                data-sortable="false"
+            >Débit</th>
+            <th data-field="credit"
+                data-searchable="false"
+                data-sortable="false"
+            >Crédit</th>
+        </tr>
+    </thead>
+</table>
+
+<script>
+    function ajaxRequest(params) 
+    {
+        const url = $('#fin-trans-table').data('url')
+
+        $.get(url + '/?' + $.param(params.data))
+            .then(function (res) {
+                params.success( JSON.parse(res) )
+            })
+            .fail(function (xhr, status, error) {
+                params.error(xhr.responseText)
+            })
+    }
+
+    function queryParams(params)
+    {
+        params.accountId = $('#account-id').val()
+        return params
+    }
+
+    function actionsFormatter(value, row)
+    {
+        return ''
+    }
+</script>

@@ -15,8 +15,8 @@
             </div>
         </div>
 
-        <div class="row mt-2">
-            <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-8 mt-2">
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-subtitle mb-2 text-muted"><strong>N° Client</strong> &nbsp; #{{ selectedClient.id }}</h6>
@@ -52,12 +52,49 @@
                     </div>
                 </div>
             </div>
-            
+            {% if clientAccount is defined %}
+            <div class="col-md-4 ps-3 mt-2">
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-light table-striped-columns text-end">
+                            <tbody>
+                                <tr>
+                                    <td scope="row">Reste à encaisser</td>
+                                    <td>{{ clientAccount.restToCash }} €</td>
+                                </tr>
+                                <tr>
+                                    <td scope="row">Reste à facturer</td>
+                                    <td>{{ clientAccount.restToInvoice }} €</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <form action="{{ pathRoot }}finTrans/addFinTrans/accountId/{{ clientAccount.id }}" method="post">
+                        <h6 class="mt-3">Ajouter une transaction financière</h6>
+                        <div class="col-md-12 mt-2">
+                            <select class="form-select bg-secondary-subtle" name="finTransCategory" required>
+                                {% for finTransCategoryFr in finTransCategoriesFr %}
+                                    <option value="{{ finTransCategoryFr }}">{{ finTransCategoryFr }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-md-12 text-end mb-3">
+                            <button type="submit" class="btn btn-success btn-sm mt-3">Ajouter</button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
         </div>
 
         <div class="row justify-content-center mt-3">
             {% if clientAccount is defined %}
-                Relevé de compte : #{{ clientAccount.id }} 
+                <div class="col-12">
+                    <h4 class="text-center">Relevé de compte client</h4>
+                    {% include "AccountTable.twig" with {clientAccount: clientAccount} %}
+                </div>
             {% else %}
                 <div class="col-12 d-flex justify-content-center text-center">
                     <div class="alert alert-warning" role="alert">
@@ -68,7 +105,7 @@
                     </div>
                 </div>
                 <div class="col-auto">
-                    <a href="{{ pathRoot}}account/create" class="btn btn-primary" role="button"><i class="bi bi-plus-circle"></i> &nbsp; Créer un compte client</a>
+                    <a href="{{ pathRoot}}account/create/clientId/{{ selectedClient.id }}" class="btn btn-primary" role="button" onclick="return confirm('Voulez-vous créer un compte client ? Si oui, vous ne pourrez plus supprimer la fiche client.')"><i class="bi bi-plus-circle"></i> &nbsp; Créer un compte client</a>
                 </div>
             {% endif %}
         </div>

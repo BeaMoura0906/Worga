@@ -94,7 +94,7 @@ abstract class Controller
     {
         $dataSerialize = base64_encode( serialize( $data ) );
 		$_SESSION['redirect'] = $dataSerialize;
-        header( 'Location: http://' . $this->pathRoot . $root );
+        header( 'Location:' . $this->pathRoot . $root );
 		return true;
     }
 

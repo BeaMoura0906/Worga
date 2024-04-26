@@ -12,6 +12,25 @@ use Worga\src\Model\Entity\Client;
 class AccountManager extends Manager
 {
     /**
+     * Retrieves an account from the database by its ID.
+     * 
+     * @param int $id The ID of the account to retrieve.
+     * @return Account|null The retrieved account object, or null if the account does not exist.
+     */
+    public function getAccountById(int $id): ?Account
+    {
+        $sql = "SELECT * FROM accounts WHERE id = :id";
+        $req = $this->dbManager->db->prepare($sql);
+        $req->execute(['id' => $id]);
+        $data = $req->fetch();
+        if($data){
+            $account = new Account($data);
+            return $account;
+        } else {
+            return null;
+        }
+    }
+    /**
      * Inserts a new account for a client in the database.
      * 
      * @param Client $client The client to create the account for.

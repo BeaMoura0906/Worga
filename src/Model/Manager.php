@@ -17,6 +17,12 @@ class Manager
     private $dsn = 'mysql:host=localhost;dbname=';
 
     /**
+     * Database hostname.
+     * @var string
+     */
+    private $dbhost;
+
+    /**
      * Database name.
      * @var string
      */
@@ -80,5 +86,19 @@ class Manager
     protected function convertCamelCaseToSnakeCase($string): string
     {
         return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $string));
+    }
+
+    private function setEnvVarWithDbCredentials()
+    {
+        //Configure for the remote server within add .env file to retreive the remote dbname, dblogin and dbpassword
+        $envFilePath = __DIR__ . '/.env';
+        if( file_exists($envFilePath) ){
+            $envFileContent = file_get_contents($envFilePath);
+            $envFileContent = explode("\n", $envFileContent);
+            $this->dbhost = $envFileContent[0];
+            $this->dbname = $envFileContent[1];
+            $this->dblogin = $envFileContent[2];
+            $this->dbpassword = $envFileContent[3];
+        }
     }
 }
