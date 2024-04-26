@@ -53,18 +53,35 @@ class FinTransController extends Controller
 
         $listFinTrans = $this->finTransManager->getAllFinTransWithParams($searchParams);
 
-        $listFinTransWithoutParams = $this->finTransManager->getAllFinTransByAccountId($this->vars['accountId']);
-        $nbFinTrans = count($listFinTransWithoutParams);
+        $searchParams['order'] = '';
+        $searchParams['sort'] = '';
 
+        $nbFinTrans = count($this->finTransManager->getAllFinTransWithParams($searchParams));
+
+        $listFinTransWithoutParams = $this->finTransManager->getAllFinTransByAccountId($this->vars['accountId']);
         $totals = $this->calculateTotals($listFinTransWithoutParams);
 
         $dataBs = [];
 
         foreach( $listFinTrans as $finTrans ) {
+            $amountIncVat = '';
+            switch ($finTrans->getCategory()) {
+                case FinTransCategories::CATEGORY_TO_BE_DEBITED:
+                    $amountIncVat = '- ' . $finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()) . ' €';
+                    break;
+                case FinTransCategories::CATEGORY_DEBIT:
+                    $amountIncVat = '- ' . $finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()) . ' €';
+                    break;
+                case FinTransCategories::CATEGORY_CREDIT:
+                    $amountIncVat = '+ ' . $finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()) . ' €';
+                    break;
+            }
+
             $dataBs[] = [
                 'finTransDate'           => $finTrans->getFinTransDate()->format('d/m/Y'),
                 'title'                  => $finTrans->getTitle(),
-                $finTrans->getCategory() => $finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate())
+                'description'            => $finTrans->getDescription(),
+                $finTrans->getCategory() => $amountIncVat
             ];
         }
 
@@ -91,20 +108,20 @@ class FinTransController extends Controller
      */
     private function calculateTotals(array $listFinTrans): array
     {
-        $totalToBeDebited = '0.00';
-        $totalDebit = '0.00';
-        $totalCredit = '0.00';
+        $totalToBeDebited = '';
+        $totalDebit = '';
+        $totalCredit = '';
 
         foreach ($listFinTrans as $finTrans) {
             switch ($finTrans->getCategory()) {
                 case FinTransCategories::CATEGORY_TO_BE_DEBITED:
-                    $totalToBeDebited = bcadd($totalToBeDebited, $finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()), 2);
+                    $totalToBeDebited = '- ' . bcadd($totalToBeDebited, $finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()), 2) . ' €';
                     break;
                 case FinTransCategories::CATEGORY_DEBIT:
-                    $totalDebit = bcadd($totalDebit, $finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()), 2);
+                    $totalDebit = '- ' . bcadd($totalDebit, $finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()), 2) . ' €';
                     break;
                 case FinTransCategories::CATEGORY_CREDIT:
-                    $totalCredit = bcadd($totalCredit, $finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()), 2);
+                    $totalCredit = '+ ' . bcadd($totalCredit, $finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()), 2) . ' €';
                     break;
             }
         }

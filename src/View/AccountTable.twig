@@ -12,13 +12,15 @@
     data-sortable="true"
     data-pagination="true"
     data-page-size="10"
-    data-show-footer="true">
+    data-show-footer="true"
+    data-footer-style="footerStyle">
     <input type="hidden" id="account-id" value="{{ clientAccount.id }}">
     <thead>
         <tr>
             <th data-field="actions"
                 data-searchable="false"
                 data-formatter="actionsFormatter"
+                data-width="110px"
             >Actions</th>
             <th data-field="finTransDate" 
                 data-searchable="true"
@@ -28,20 +30,28 @@
                 data-searchable="true"
                 data-sortable="true"
             >Titre</th>
+            <th data-field="description"
+                data-searchable="true"
+                data-sortable="true"
+                data-footer-formatter="totalFooterFormatter"
+            >Description</th>
             <th data-field="to_be_debited"
                 data-searchable="false"
                 data-sortable="false"
                 data-footer-formatter="totalToBeDebitedFormatter"
+                data-width="150px"
             >A débiter</th>
             <th data-field="debit"
                 data-searchable="false"
                 data-sortable="false"
                 data-footer-formatter="totalDebitFormatter"
+                data-width="150px"
             >Débit</th>
             <th data-field="credit"
                 data-searchable="false"
                 data-sortable="false"
                 data-footer-formatter="totalCreditFormatter"
+                data-width="150px"
             >Crédit</th>
         </tr>
     </thead>
@@ -74,7 +84,7 @@
 
     function actionsFormatter(value, row)
     {
-        return ''
+        return '<a href="" class="btn btn-sm btn-secondary rounded-circle m-1" role="button"><i class="bi bi-eye"></i></a>' + '<a href="" class="btn btn-sm btn-primary rounded-circle m-1" role="button"><i class="bi bi-pencil-square"></i></a>'
     }
 
     function totalToBeDebitedFormatter(data) 
@@ -90,6 +100,38 @@
     function totalCreditFormatter(data) 
     {
         return window.totalCredit
+    }
+
+    function totalFooterFormatter()
+    {
+        return 'Total'
+    }
+
+    function footerStyle(column)
+    {
+        return {
+            'actions' : {
+                classes: 'bg-white border-white'
+            },
+            'finTransDate' : {
+                classes: 'bg-white border-white'
+            },
+            'title' : {
+                classes: 'bg-white border-white'
+            },
+            'description' : {
+                classes: 'text-end bg-secondary-subtle'
+            },
+            'to_be_debited' : {
+                classes: 'bg-light'
+            },
+            'debit' : {
+                classes: 'bg-light'
+            },
+            'credit' : {
+                classes: 'bg-light'
+            }
+        }[column.field]
     }
 
 </script>
