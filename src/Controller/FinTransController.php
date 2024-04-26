@@ -3,11 +3,15 @@
 namespace Worga\src\Controller;
 
 use Worga\src\Model\FinTransManager;
+use Worga\src\Model\AccountManager;
+use Worga\src\Classes\FinTransCategories;
 
 class FinTransController extends Controller
 {
     /** Properties */
     private $finTransManager;
+    private $accountManager;
+    private $finTransCategories;
 
     /**
      * FinTransController constructor to initialize properties and call the parent constructor
@@ -17,6 +21,10 @@ class FinTransController extends Controller
     public function __construct(array $params=[])
     {
         $this->finTransManager = new FinTransManager();
+        $this->accountManager = new AccountManager();
+        $this->finTransCategories = new FinTransCategories();
+
+
         parent::__construct($params);
     }
 
@@ -45,9 +53,10 @@ class FinTransController extends Controller
 
         $listFinTrans = $this->finTransManager->getAllFinTransWithParams($searchParams);
 
-        $searchParams['offset'] = '';
-        $searchParams['limit'] = '';
-        $nbFinTrans = count($this->finTransManager->getAllFinTransWithParams($searchParams));
+        $listFinTransWithoutParams = $this->finTransManager->getAllFinTransByAccountId($this->vars['accountId']);
+        $nbFinTrans = count($listFinTransWithoutParams);
+
+        $totals = $this->calculateTotals($listFinTransWithoutParams);
 
         $dataBs = [];
 
@@ -61,9 +70,11 @@ class FinTransController extends Controller
 
         $data = [
             "rows"        => $dataBs,
-            "total"       => $nbFinTrans
+            "total"       => $nbFinTrans,
+            "totals"      => $totals
         ];
         $jsData = json_encode( $data );
+        
         if ($jsData === false) {
             echo "Erreur d'encodage JSON : " . json_last_error_msg();
             error_log("Erreur d'encodage JSON : " . json_last_error_msg());
@@ -71,4 +82,37 @@ class FinTransController extends Controller
             echo $jsData;
         }
     }
+
+    /**
+     * Calculate the totals of the financial transactions in function of the category within bcmath.
+     * 
+     * @param array $listFinTrans List of financial transactions
+     * @return array The list of totals
+     */
+    private function calculateTotals(array $listFinTrans): array
+    {
+        $totalToBeDebited = '0.00';
+        $totalDebit = '0.00';
+        $totalCredit = '0.00';
+
+        foreach ($listFinTrans as $finTrans) {
+            switch ($finTrans->getCategory()) {
+                case FinTransCategories::CATEGORY_TO_BE_DEBITED:
+                    $totalToBeDebited = bcadd($totalToBeDebited, $finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()), 2);
+                    break;
+                case FinTransCategories::CATEGORY_DEBIT:
+                    $totalDebit = bcadd($totalDebit, $finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()), 2);
+                    break;
+                case FinTransCategories::CATEGORY_CREDIT:
+                    $totalCredit = bcadd($totalCredit, $finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()), 2);
+                    break;
+            }
+        }
+
+        return [
+            'totalToBeDebited' => $totalToBeDebited,
+            'totalDebit'       => $totalDebit,
+            'totalCredit'      => $totalCredit
+        ];
+    } 
 }

@@ -11,7 +11,8 @@
     data-side-pagination="server"
     data-sortable="true"
     data-pagination="true"
-    data-page-size="10">
+    data-page-size="10"
+    data-show-footer="true">
     <input type="hidden" id="account-id" value="{{ clientAccount.id }}">
     <thead>
         <tr>
@@ -30,14 +31,17 @@
             <th data-field="to_be_debited"
                 data-searchable="false"
                 data-sortable="false"
+                data-footer-formatter="totalToBeDebitedFormatter"
             >A débiter</th>
             <th data-field="debit"
                 data-searchable="false"
                 data-sortable="false"
+                data-footer-formatter="totalDebitFormatter"
             >Débit</th>
             <th data-field="credit"
                 data-searchable="false"
                 data-sortable="false"
+                data-footer-formatter="totalCreditFormatter"
             >Crédit</th>
         </tr>
     </thead>
@@ -50,7 +54,12 @@
 
         $.get(url + '/?' + $.param(params.data))
             .then(function (res) {
-                params.success( JSON.parse(res) )
+                const parsedResponse = JSON.parse(res) 
+                window.totalToBeDebited = parsedResponse.totals.totalToBeDebited;
+                window.totalDebit = parsedResponse.totals.totalDebit;
+                window.totalCredit = parsedResponse.totals.totalCredit;
+
+                params.success(parsedResponse)
             })
             .fail(function (xhr, status, error) {
                 params.error(xhr.responseText)
@@ -67,4 +76,20 @@
     {
         return ''
     }
+
+    function totalToBeDebitedFormatter(data) 
+    {
+        return window.totalToBeDebited
+    }
+
+    function totalDebitFormatter(data) 
+    {
+        return window.totalDebit
+    }
+
+    function totalCreditFormatter(data) 
+    {
+        return window.totalCredit
+    }
+
 </script>
