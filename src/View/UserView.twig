@@ -4,9 +4,17 @@
     <!-- Main Content Container -->
     <div class="container">
         <!-- Title Section -->
-        <div class="row text-center">
-            <div class="col-12 mt-5 mb-3">
-                <h2>Panneau d'administration</h2>
+        <div class="row mt-3">
+            {% if listUsers is not defined %}
+                <!-- Back Button Section -->
+                <div class="col-12">
+                    <a href="{{ pathRoot}}user" class="text-dark text-decoration-none" role="button" style="font-size: 1.5rem;"><i class="bi bi-arrow-left"></i></a>
+                </div>
+            <div class="col-12 mb-3">
+            {% else %}      
+            <div class="col-12 mt-3 mb-3">
+            {% endif %}  
+                <h2 class="text-center">Panneau d'administration</h2>
             </div>
         </div>
 
