@@ -76,4 +76,113 @@ class FinTransManager extends Manager
             return null;
         }
     }
+
+    /**
+     * Retrieves a financial transaction from the database by its ID.
+     * 
+     * @param int $id The ID of the financial transaction to retrieve.
+     * @return FinancialTransaction|null The retrieved financial transaction object, or null if the financial transaction does not exist.
+     */
+    public function getFinTransById( $id ): ?FinancialTransaction
+    {
+        $sql = "SELECT * FROM financial_transactions WHERE id = :id";
+        $req = $this->dbManager->db->prepare($sql);
+        $req->execute([
+            'id' => $id
+        ]);
+        if( $data = $req->fetch(\PDO::FETCH_ASSOC) ) {
+            $finTrans = new FinancialTransaction($data);
+            return $finTrans;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Inserts a new financial transaction into the database.
+     * 
+     * @param FinancialTransaction $finTrans The financial transaction object to insert.
+     * @return FinancialTransaction|null The inserted financial transaction object, or null if the insertion failed.
+     */
+    public function insertFinTrans( FinancialTransaction $finTrans ): ?FinancialTransaction
+    {
+        $sql = "INSERT INTO financial_transactions (
+                    title,
+                    description,
+                    category,
+                    amount_ex_vat,
+                    vat_rate,
+                    fin_trans_date,
+                    inserted_at,
+                    updated_at,
+                    account_id,
+                    user_id
+                ) VALUES (
+                    :title,
+                    :description,
+                    :category,
+                    :amount_ex_vat,
+                    :vat_rate,
+                    :fin_trans_date,
+                    NOW(),
+                    NOW(),
+                    :account_id,
+                    :user_id
+                )";
+        $req = $this->dbManager->db->prepare($sql);
+        $state = $req->execute([
+            'title' => $finTrans->getTitle(),
+            'description' => $finTrans->getDescription(),
+            'category' => $finTrans->getCategory(),
+            'amount_ex_vat' => $finTrans->getAmountExVat(),
+            'vat_rate' => $finTrans->getVatRate(),
+            'fin_trans_date' => $finTrans->getFinTransDate()->format('Y-m-d'),
+            'account_id' => $finTrans->getAccount()->getId(),
+            'user_id' => $finTrans->getUser()->getId()
+        ]);
+        if( $state ) {
+            $id = $this->dbManager->db->lastInsertId();
+            $finTrans = $this->getFinTransById( $id );
+            return $finTrans;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Updates an existing financial transaction in the database.
+     * 
+     * @param FinancialTransaction $finTrans The financial transaction object to update.
+     * @return FinancialTransaction|null The updated financial transaction object, or null if the update failed.
+     */
+    public function updateFinTrans( FinancialTransaction $finTrans ): ?FinancialTransaction
+    {
+        $sql = "UPDATE financial_transactions SET
+                    title = :title,
+                    description = :description,
+                    category = :category,
+                    amount_ex_vat = :amount_ex_vat,
+                    vat_rate = :vat_rate,
+                    fin_trans_date = :fin_trans_date,
+                    updated_at = NOW(),
+                    user_id = :user_id
+                WHERE id = :id";
+        $req = $this->dbManager->db->prepare($sql);
+        $state = $req->execute([
+            'title' => $finTrans->getTitle(),
+            'description' => $finTrans->getDescription(),
+            'category' => $finTrans->getCategory(),
+            'amount_ex_vat' => $finTrans->getAmountExVat(),
+            'vat_rate' => $finTrans->getVatRate(),
+            'fin_trans_date' => $finTrans->getFinTransDate()->format('Y-m-d'),
+            'user_id' => $finTrans->getUser()->getId(),
+            'id' => $finTrans->getId()
+        ]);
+        if( $state ) {
+            $finTrans = $this->getFinTransById( $finTrans->getId() );
+            return $finTrans;
+        } else {
+            return null;
+        }
+    }
 }

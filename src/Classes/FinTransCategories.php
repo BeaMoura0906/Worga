@@ -30,29 +30,46 @@ class FinTransCategories
     public static function getFinTransCategoriesFr(): array
     {
         return [
-            self::CATEGORY_TO_BE_DEBITED => 'A débiter',
-            self::CATEGORY_DEBIT => 'Débit',
-            self::CATEGORY_CREDIT => 'Crédit'
+            self::CATEGORY_TO_BE_DEBITED => 'À débiter | Devis',
+            self::CATEGORY_DEBIT => 'Débit | Facture',
+            self::CATEGORY_CREDIT => 'Crédit | Paiement'
         ];
+    }
+
+    /**
+     * Get the French financial transaction category from its English category.
+     * 
+     * @param string $finTransCategory The financial transaction category in English.
+     * @return string|null The financial transaction category in French, or null if not found.
+     */
+    public static function getFinTransCategoryFr(string $finTransCategory): string
+    {
+        switch ($finTransCategory) {
+            case self::CATEGORY_TO_BE_DEBITED:
+                return 'À débiter | Devis';
+            case self::CATEGORY_DEBIT:
+                return 'Débit | Facture';
+            case self::CATEGORY_CREDIT:
+                return 'Crédit | Paiement';
+            default:
+                return '';
+        }
     }
     
     /**
      * Get the English financial transaction category from its French category.
      *
-     * @param string 
-     * @return string|null 
+     * @param string $finTransCategoryFr The financial transaction category in French.
+     * @return string|null The financial transaction category in English, or null if not found.
      */
     public static function getRoleInEnglish(string $finTransCategoryFr): ?string
     {
-        $finTransCategoryFrProcessed = strtolower($finTransCategoryFr);
-        $finTransCategoryFrProcessed = str_replace(' ', '', $finTransCategoryFrProcessed);
-
-        switch ($finTransCategoryFrProcessed) {
-            case 'adébiter':
+        switch ($finTransCategoryFr) {
+            case 'À débiter | Devis':
                 return self::CATEGORY_TO_BE_DEBITED;
-            case 'débit':
+            case 'Débit | Facture':
                 return self::CATEGORY_DEBIT;
-            case 'crédit':
+            case 'Crédit | Paiement':
                 return self::CATEGORY_CREDIT;
             default:
                 return null;

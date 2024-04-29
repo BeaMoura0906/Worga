@@ -8,7 +8,7 @@ use Twig\Extension\DebugExtension;
 
 abstract class Controller
 {
-    // Properties for Twig, view paths, controller, root path, action, variables, and fetch status
+    /** Properties for Twig, view paths, controller, root path, action, variables, and fetch status */ 
     protected $twig; 
     protected $pathView = 'View';
     protected $controller;

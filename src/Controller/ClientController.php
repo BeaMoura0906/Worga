@@ -10,7 +10,6 @@ class ClientController extends Controller
 {
     // Properties
     private ClientManager $clientManager;
-    private User $currentUser;
 
     /**
      * Constructor method to initialize properties and call the parent constructor
@@ -21,14 +20,6 @@ class ClientController extends Controller
     {
         // Create an instance of ClientManager
         $this->clientManager = new ClientManager();
-
-        // Create an instance of User for the current user
-        $this->currentUser = new User([
-            'id' => $_SESSION['userId'],
-            'login' => $_SESSION['userLogin'],
-            'password' => '',
-            'role' => $_SESSION['userRole']
-        ]);
 
         // Call the parent constructor with parameters
         parent::__construct($params );
@@ -129,7 +120,7 @@ class ClientController extends Controller
                 $client->setPhone( $phone );
                 $client->setEmail( $email );
                 $client->setOther( $other );
-                $client->setUser( $this->currentUser );
+                $client->setUser( new User(['id' => $_SESSION['userId']]) );
 
                 if( $client = $this->clientManager->insertClient( $client ) ) {
                     $data = [
@@ -206,7 +197,7 @@ class ClientController extends Controller
                 'email' => $email,
                 'other' => $other
             ]);
-            $client->setUser( $this->currentUser );
+            $client->setUser( new User(['id' => $_SESSION['userId']]) );
 
             if( $client = $this->clientManager->updateClient( $client ) ) {
                 $data = [

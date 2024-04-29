@@ -17,6 +17,11 @@
     <input type="hidden" id="account-id" value="{{ clientAccount.id }}">
     <thead>
         <tr>
+            <th data-field="id"
+                data-searchable="false"
+                data-sortable="false"
+                data-visible="false"
+            >#</th>
             <th data-field="actions"
                 data-searchable="false"
                 data-formatter="actionsFormatter"
@@ -40,7 +45,7 @@
                 data-sortable="false"
                 data-footer-formatter="totalToBeDebitedFormatter"
                 data-width="150px"
-            >A débiter</th>
+            >À débiter</th>
             <th data-field="debit"
                 data-searchable="false"
                 data-sortable="false"
@@ -56,6 +61,8 @@
         </tr>
     </thead>
 </table>
+
+{% include "Modals/EditFinTransModal.twig" with {clientAccount: clientAccount} %}
 
 <script>
     function ajaxRequest(params) 
@@ -84,7 +91,7 @@
 
     function actionsFormatter(value, row)
     {
-        return '<a href="" class="btn btn-sm btn-secondary rounded-circle m-1" role="button"><i class="bi bi-eye"></i></a>' + '<a href="" class="btn btn-sm btn-primary rounded-circle m-1" role="button"><i class="bi bi-pencil-square"></i></a>'
+        return '<button type="button" class="btn btn-sm btn-secondary rounded-circle m-1" data-bs-toggle="modal" data-bs-target="#viewFinTransModal" data-url="{{ pathRoot}}finTrans/getFinTransToView/finTransId/' + row.id + '"  ><i class="bi bi-eye"></i></button>' + '<button type="button" class="btn btn-sm btn-primary rounded-circle m-1" data-bs-toggle="modal" data-bs-target="#editFinTransModal" data-url="{{ pathRoot}}finTrans/getFinTransToEdit/finTransId/' + row.id + '"><i class="bi bi-pencil-square"></i></button>'
     }
 
     function totalToBeDebitedFormatter(data) 

@@ -55,6 +55,7 @@
             {% if clientAccount is defined %}
             <div class="col-md-4 ps-3 mt-2">
                 <div class="row">
+                    <h4 class="mb-3">Solde compte</h4>
                     <div class="table-responsive">
                         <table class="table table-bordered table-light table-striped-columns text-end">
                             <tbody>
@@ -71,20 +72,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <form action="{{ pathRoot }}finTrans/addFinTrans/accountId/{{ clientAccount.id }}" method="post">
-                        <h6 class="mt-3">Ajouter une transaction financière</h6>
-                        <div class="col-md-12 mt-2">
-                            <select class="form-select bg-secondary-subtle" name="finTransCategory" required>
-                                {% for finTransCategoryFr in finTransCategoriesFr %}
-                                    <option value="{{ finTransCategoryFr }}">{{ finTransCategoryFr }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-
-                        <div class="col-md-12 text-end mb-3">
-                            <button type="submit" class="btn btn-success btn-sm mt-3">Ajouter</button>
-                    </form>
+                    <div class="col-md-12 text-end mb-3">
+                        <button type="button" class="btn btn-success btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#addFinTransModal"><i class="bi bi-plus"></i> Ajouter une transaction financière</button>
+                    </div>
                 </div>
+                {% if clientAccount is defined %}
+                    {% include "Modals/AddFinTransModal.twig" with {clientAccount: clientAccount} %}
+                {% endif %}
             </div>
             {% endif %}
         </div>
@@ -92,7 +86,7 @@
         <div class="row justify-content-center mt-3">
             {% if clientAccount is defined %}
                 <div class="col-12">
-                    <h4 class="text-center">Relevé de compte client</h4>
+                    <h4 class="text-center fw-bold">Relevé de compte client</h4>
                     {% include "AccountTable.twig" with {clientAccount: clientAccount} %}
                 </div>
             {% else %}

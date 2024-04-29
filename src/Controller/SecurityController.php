@@ -65,6 +65,8 @@ class SecurityController extends Controller
                         $_SESSION['userLogin'] = $user->getLogin();
                         $_SESSION['userRole'] = $user->getRole();
 
+                        $user->setPassword('');
+                        
                         $data = [
                             'user' => $user
                         ]; 

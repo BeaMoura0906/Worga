@@ -70,3 +70,29 @@ $('#clients-table').on( 'change', '.active-line', function(e){
         })
 
 })
+
+$('#editFinTransModal').on('show.bs.modal', function (event) {
+    const button = $(event.relatedTarget)
+    const url = button.data('url')
+
+    const paramList = {
+        url: url
+    }
+
+    sendFetch( paramList )
+        .then( data => {
+            $('#editFinTransModal #id').val(data.id)
+            $('#editFinTransModal #categoryId').val(data.category)
+            $('#editFinTransModal #dateId').val(data.date)
+            $('#editFinTransModal #titleId').val(data.title)
+            $('#editFinTransModal #descriptionId').val(data.description)
+            $('#editFinTransModal #amountId').val(data.amount)
+            $('#editFinTransModal #vatRateId').val(data.vatRate)
+            $('#editFinTransModal #insertedAtId').val(data.insertedAt)
+            $('#editFinTransModal #updatedAtId').val(data.updatedAt)
+            $('#editFinTransModal #userLoginId').val(data.user)
+        })
+        .catch(error => {
+            console.error( 'Erreur :', error )
+        })
+});

@@ -17,7 +17,7 @@ class AccountManager extends Manager
      * @param int $id The ID of the account to retrieve.
      * @return Account|null The retrieved account object, or null if the account does not exist.
      */
-    public function getAccountById(int $id): ?Account
+    public function getAccountById($id): ?Account
     {
         $sql = "SELECT * FROM accounts WHERE id = :id";
         $req = $this->dbManager->db->prepare($sql);
@@ -30,6 +30,7 @@ class AccountManager extends Manager
             return null;
         }
     }
+    
     /**
      * Inserts a new account for a client in the database.
      * 
