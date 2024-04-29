@@ -6,7 +6,7 @@
         
         <!-- User Login -->
         <div class="col-md-{{ selectedUser.getRole == 'admin' ? '12' : '6' }} mb-3">
-            <label for="loginId" class="col-form-label">Login</label>
+            <label for="loginId" class="col-form-label required">Login</label>
             <div class="input-group">
                 <input type="text" class="form-control" id="loginId" name="login" value="{{ selectedUser.getLogin }}" required>
             </div>
@@ -15,7 +15,7 @@
         <!-- User Role -->
         {% if selectedUser.getRole != 'admin' %}
             <div class="col-md-4 mb-3">
-                <label for="roleId" class="col-form-label">Rôle</label>
+                <label for="roleId" class="col-form-label required">Rôle</label>
                 <div class="input-group">
                     <select class="form-select" id="roleId" name="role" required>
                         {% for role in roles %}
@@ -30,7 +30,7 @@
 
         <!-- User Password -->
         <div class="col-md-6 mb-3">
-            <label for="passwordId" class="col-form-label">Mot de passe</label>
+            <label for="passwordId" class="col-form-label required">Mot de passe</label>
             <div class="input-group">
                 <input type="password" class="form-control" id="passwordId" name="password" autocomplete="new-password" required>
             </div>
@@ -41,7 +41,7 @@
 
         <!-- Confirm Password -->
         <div class="col-md-6 mb-3">
-            <label for="passwordConfirmId" class="col-form-label">Confirmation mot de passe</label>
+            <label for="passwordConfirmId" class="col-form-label required">Confirmation mot de passe</label>
             <div class="input-group">
                 <input type="password" class="form-control" id="passwordConfirmId" name="passwordConfirm" autocomplete="new-password" required>
             </div>
@@ -69,7 +69,7 @@
 
         <!-- User Login -->
         <div class="col-md-6 mb-3">
-            <label for="loginId" class="col-form-label">Login</label>
+            <label for="loginId" class="col-form-label required">Login</label>
             <div class="input-group">
                 <input type="text" class="form-control" id="loginId" name="login" value="" required>
             </div>
@@ -77,7 +77,7 @@
 
         <!-- User Role -->
         <div class="col-md-4 mb-3">
-            <label for="rightId" class="col-form-label">Rôle</label>
+            <label for="rightId" class="col-form-label required">Rôle</label>
             <div class="input-group">
                 <select class="form-select" id="roleId" name="role" required>
                     {% for role in roles %}
@@ -91,7 +91,7 @@
 
         <!-- User Password -->
         <div class="col-md-6 mb-3">
-            <label for="passwordId" class="col-form-label">Mot de passe</label>
+            <label for="passwordId" class="col-form-label required">Mot de passe</label>
             <div class="input-group">
                 <input type="password" class="form-control" id="passwordId" name="password" autocomplete="new-password" required>
             </div>
@@ -103,7 +103,7 @@
 
         <!-- Confirm Password -->
         <div class="col-md-6 mb-3">
-            <label for="passwordConfirmId" class="col-form-label">Confirmation mot de passe</label>
+            <label for="passwordConfirmId" class="col-form-label required">Confirmation mot de passe</label>
             <div class="input-group">
                 <input type="password" class="form-control" id="passwordConfirmId" name="passwordConfirm" autocomplete="new-password" required>
             </div>

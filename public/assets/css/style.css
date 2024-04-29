@@ -19,3 +19,8 @@
 .bg-light-beige {
     background-color: #EBE7E1;
 }
+
+label.required::after {
+    content: " *";
+    color: red;
+}

@@ -11,7 +11,7 @@
                     <input type="hidden" name="id" id="id">
                     <input type="hidden" name="accountId" value="{{ clientAccount.id }}">
                     <div class="col-md-10 mb-3">
-                        <label for="categoryId" class="col-form-label">Type</label>
+                        <label for="categoryId" class="col-form-label required">Type</label>
                         <select class="form-select" id="categoryId" name="category" required>
                             {% for finTransCategory in finTransCategoriesFr %}
                                 <option value="{{ finTransCategory }}">
@@ -21,27 +21,27 @@
                         </select>
                     </div>
                     <div class="col-md-10 mb-3">
-                        <label for="dateId" class="col-form-label">Date</label>
+                        <label for="dateId" class="col-form-label required">Date</label>
                         <input type="date" class="form-control" id="dateId" name="date" required>
                     </div>
                     <div class="col-md-10 mb-3">
-                        <label for="titleId" class="col-form-label">Titre</label>
+                        <label for="titleId" class="col-form-label required">Titre</label>
                         <input type="text" class="form-control" id="titleId" name="title" required>
                     </div>
                     <div class="col-md-10 mb-3">
-                        <label for="descriptionId" class="col-form-label">Description</label>
+                        <label for="descriptionId" class="col-form-label required">Description</label>
                         <input type="text" class="form-control" id="descriptionId" name="description" required>
                     </div>
                     <div class="col-md-10 mb-3">
-                        <label for="amountId" class="col-form-label">Montant</label>
+                        <label for="amountId" class="col-form-label required">Montant HT</label>
                         <div class="input-group">
                             <input type="number" step="0.01" class="form-control" id="amountId" name="amount" required>
                             <span class="input-group-text">€</span>
                         </div>
-                        <small class="form-text text-muted">Entrez le montant hors taxes.</small>
+                        <small class="form-text text-muted"><i class="bi bi-exclamation-triangle"></i> Entrez le montant hors taxes ! Le montant TTC sera automatiquement calculé.</small>                    
                     </div>
                     <div class="col-md-10 mb-3">
-                        <label for="vatRateId" class="col-form-label">TVA</label>
+                        <label for="vatRateId" class="col-form-label required">TVA</label>
                         <div class="input-group">
                             <input type="number" step="0.01" class="form-control" id="vatRateId" name="vatRate" required>
                             <span class="input-group-text">%</span>
