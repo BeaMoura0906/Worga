@@ -1,0 +1,64 @@
+<div class="modal fade" id="viewFinTransModal" tabindex="-1" aria-labelledby="viewFinTransModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Détails de la transaction financière</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" id="id">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h6 class="card-title text-info-emphasis fw-bold"><i class="bi bi-clipboard"></i> Informations Générales</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-borderless">
+                                        <tbody>
+                                            <tr><th scope="row">Type</th><td><span id="categoryId"></span></td></tr>
+                                            <tr><th scope="row">Date</th><td><span id="dateId"></span></td></tr>
+                                            <tr><th scope="row">Titre</th><td><span id="titleId"></span></td></tr>
+                                            <tr><th scope="row">Description</th><td><span id="descriptionId"></span></td></tr>
+                                            <tr><th scope="row">Montant</th><td><span id="amountId"></span></td></tr>
+                                            <tr><th scope="row">Taux de TVA</th><td><span id="vatRateId"></span></td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="card-text">
+                                    <small>Créée le <span id="insertedAtId"></span></small> </br>
+                                    <small>Dernière mise à jour le <span id="updatedAtId"></span> par <span id="userLoginId"></span></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title text-warning-emphasis fw-bold mb-3"><i class="bi bi-file-earmark"></i> Document justificatif</h6>
+                        <div class="alert alert-warning alert-dismissible fade show" id="alertDiv" role="alert" style="display: none;">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <div class="alert-message" id="alertMessage"></div>
+                        </div>
+                        <iframe id="pdfViewer" style="width:100%; height:500px; display:none"></iframe>
+                        <form class="row g-1" id="docForm" action="{{ pathRoot }}document/uploadDocument" method="post"  style="display: none;">
+                            <input type="hidden" id="finTransId" name="finTransId">
+                            <input type="hidden" id="accountId" name="accountId">
+                            <label for="documentId" class="form-label text-center text-black">Pas de document justificatif associé à cette transaction. Ajoutez-en un !</label>
+                            <input type="file" class="form-control" id="documentId" name="document" accept=".pdf" required>
+                            <small class="form-text text-muted">Devis, facture ou avis de paiement en fonction du type de transaction. </br> Formats de fichier acceptés : PDF, JPEG ou PNG.</small>
+                            <label for="docNameId" class="form-label text-center text-black required">Nom du document</label>
+                            <input type="text" class="form-control" id="docNameId" name="docName" required>
+                            <div class="col-12 text-end">
+                                <button type="submit" class="btn btn-dark">Ajouter</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

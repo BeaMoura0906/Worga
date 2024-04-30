@@ -4,6 +4,7 @@ namespace Worga\src\Controller;
 
 use Worga\src\Model\FinTransManager;
 use Worga\src\Model\AccountManager;
+use Worga\src\Model\DocumentManager;
 use Worga\src\Classes\FinTransCategories;
 use Worga\src\Model\Entity\FinancialTransaction;
 use Worga\src\Model\Entity\Account;
@@ -17,6 +18,7 @@ class FinTransController extends Controller
     private $finTransManager;
     private $accountManager;
     private $finTransCategories;
+    private $documentManager;
 
     /**
      * FinTransController constructor to initialize properties and call the parent constructor
@@ -28,6 +30,7 @@ class FinTransController extends Controller
         $this->finTransManager = new FinTransManager();
         $this->accountManager = new AccountManager();
         $this->finTransCategories = new FinTransCategories();
+        $this->documentManager = new DocumentManager();
 
         parent::__construct($params);
     }
@@ -212,16 +215,18 @@ class FinTransController extends Controller
     }
 
     /**
-     * Get the financial transaction to edit form on modal view with JSON response.
+     * Get the financial transaction to be displayed on modal view with JSON response.
      */
-    public function getFinTransToEditAction()
+    public function getFinTransAction()
     {
         if( isset($this->vars['finTransId']) ) {
             $finTransId = $this->vars['finTransId'];
             if( $finTrans = $this->finTransManager->getFinTransById($finTransId) ) {
                 $category = $this->finTransCategories->getFinTransCategoryFr($finTrans->getCategory());
+
                 $data = [
-                    'id'                     => $finTrans->getId(),
+                    'accountId'              => $finTrans->getAccount()->getId(),
+                    'finTransId'             => $finTrans->getId(),
                     'category'               => $category,
                     'date'                   => $finTrans->getFinTransDate()->format('Y-m-d'),
                     'title'                  => $finTrans->getTitle(),
@@ -232,6 +237,12 @@ class FinTransController extends Controller
                     'updatedAt'              => $finTrans->getUpdatedAt()->format('d/m/Y à H:i'),
                     'user'                   => $finTrans->getUser()->getLogin()
                 ];
+
+                $document = $this->documentManager->getDocumentByFinTransId($finTransId);
+
+                if( $document ) {
+                    $data['docPath'] = $this->pathRoot . $document->getPath();
+                }
 
                 $jsData = json_encode( $data );
 
