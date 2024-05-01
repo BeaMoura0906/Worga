@@ -241,7 +241,8 @@ class FinTransController extends Controller
                 $document = $this->documentManager->getDocumentByFinTransId($finTransId);
 
                 if( $document ) {
-                    $data['docPath'] = $this->pathRoot . $document->getPath();
+                    $data['docPath'] = $this->pathRoot . 'document/viewDocument/docId/' . $document->getId();
+                    $data['docName'] = $document->getName();
                 }
 
                 $jsData = json_encode( $data );

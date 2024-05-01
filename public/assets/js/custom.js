@@ -121,6 +121,9 @@ $('#viewFinTransModal').on('show.bs.modal', function (event) {
 
     sendFetch( paramList )
         .then( data => {
+            $('#viewFinTransModal #alertDiv').hide()
+            $('#viewFinTransModal #alertDiv').attr('class', '')
+            $('#viewFinTransModal #alertMessage').text('')
             $('#viewFinTransModal #accountId').val(data.accountId)
             $('#viewFinTransModal #finTransId').val(data.finTransId)
             $('#viewFinTransModal #categoryId').text(data.category)
@@ -137,11 +140,12 @@ $('#viewFinTransModal').on('show.bs.modal', function (event) {
             $('#viewFinTransModal #userLoginId').text(data.user)
             if(data.docPath && data.docPath !== null) {
                 $('#viewFinTransModal #docForm').hide()
-                $('#viewFinTransModal #pdfViewer').attr('src', data.docPath)
-                $('#viewFinTransModal #pdfViewer').show()
+                $('#viewFinTransModal #pdfViewer').attr('src', data.docPath + '#toolbar=0&navpanes=0')
+                $('#viewFinTransModal #docNameToDisplayId').text(data.docName)
+                $('#viewFinTransModal #docDiv').show()
             } else {
                 $('#viewFinTransModal #pdfViewer').attr('src', '')
-                $('#viewFinTransModal #pdfViewer').hide()
+                $('#viewFinTransModal #docDiv').hide()
                 $('#viewFinTransModal #docForm').show()
             }
         })
@@ -155,14 +159,16 @@ function updateModalWithResponse(data) {
         $('#viewFinTransModal #alertDiv').show()
         $('#viewFinTransModal #alertDiv').attr('class', 'alert alert-success alert-dismissible fade show')
         $('#viewFinTransModal #alertMessage').text(data.message)
-        $('#viewFinTransModal #pdfViewer').attr('src', data.docPath)
+        $('#viewFinTransModal #pdfViewer').attr('src', data.docPath + '#toolbar=0&navpanes=0')
+        $('#viewFinTransModal #docNameToDisplayId').text(data.docName)
+        $('#viewFinTransModal #docDiv').show()
         $('#viewFinTransModal #docForm')[0].reset()
         $('#viewFinTransModal #docForm').hide()
     } else {
         $('#viewFinTransModal #alertDiv').show()
         $('#viewFinTransModal #alertDiv').attr('class', 'alert alert-warning alert-dismissible fade show')
         $('#viewFinTransModal #alertMessage').text(data.message)
-        $('#viewFinTransModal #pdfViewer').hide()
+        $('#viewFinTransModal #docDiv').hide()
         $('#viewFinTransModal #docForm').show()
     }
     $('#viewFinTransModal').modal('show')
@@ -171,8 +177,8 @@ function updateModalWithResponse(data) {
 $('#docForm').on('submit', function(e) {
     e.preventDefault()
 
-    var formData = new FormData(this)
-    var actionUrl = this.action
+    const formData = new FormData(this)
+    const actionUrl = this.action
 
     sendFormData(actionUrl, formData) 
         .then(data => {
@@ -181,5 +187,40 @@ $('#docForm').on('submit', function(e) {
         })
         .catch(error => {
             console.error('Error:', error)
+        })
+});
+
+$('#deleteDocLinkId').on('click', function(e) {
+    if(!confirm('Voulez-vous supprimer ce document ? Cette action est irréversible.')) {
+        e.preventDefault()
+        return false
+    }
+
+    const btn = $(this)
+    const finTransId = $('#viewFinTransModal #finTransId').val()
+    const url = btn.data('delete-url') + finTransId
+
+    const paramList = {
+        url: url
+    }
+
+    sendFetch( paramList )
+        .then( data => {
+            if(data.success === true) {
+                console.log('Success:', data)
+                $('#viewFinTransModal #docDiv').hide()
+                $('#viewFinTransModal #docForm').show()
+                $('#viewFinTransModal #alertDiv').show()
+                $('#viewFinTransModal #alertDiv').attr('class', 'alert alert-success alert-dismissible fade show')
+                $('#viewFinTransModal #alertMessage').text(data.message)
+            } else {
+                console.log('Error:', data)
+                $('#viewFinTransModal #alertDiv').show()
+                $('#viewFinTransModal #alertDiv').attr('class', 'alert alert-warning alert-dismissible fade show')
+                $('#viewFinTransModal #alertMessage').text(data.message)
+            }
+        })
+        .catch(error => {
+            console.error( 'Erreur :', error )
         })
 });

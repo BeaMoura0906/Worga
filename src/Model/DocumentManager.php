@@ -83,4 +83,17 @@ class DocumentManager extends Manager
             return null;
         }
     }
+
+    /**
+     * Delete a document by its financial transaction ID from the database.
+     * 
+     * @param $finTransId The ID of the financial transaction.
+     * @return bool True if the document was deleted successfully, false otherwise.
+     */
+    public function deleteDocumentByFinTransId($finTransId): bool
+    {
+        $sql = "DELETE FROM documents WHERE fin_trans_id = :fin_trans_id";
+        $req = $this->dbManager->db->prepare($sql);
+        return $req->execute(['fin_trans_id' => $finTransId]);
+    }
 }

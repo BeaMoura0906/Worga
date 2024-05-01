@@ -42,6 +42,23 @@ class DocumentController extends Controller
     }
 
     /**
+     * View a document for a financial transaction. It's display the document in the browser. 
+     */
+    public function viewDocumentAction()
+    {
+        if(isset($this->vars['docId'])) {
+            $docId = htmlentities($this->vars['docId']);
+            $doc = $this->docManager->getDocumentById($docId);
+            header('Content-type: application/pdf');
+            readfile($_SERVER['DOCUMENT_ROOT'] . $this->pathRoot . $doc->getPath());
+            exit;
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Une erreur est survenue. Veuillez reessayer.']);
+            exit;
+        }
+    }
+
+    /**
      * Upload a document for a financial transaction in the database and on the server. It's render the financial-transactions view with the uploaded document with a success or an error message in JSON response. 
      */
     public function uploadDocumentAction() 
@@ -83,8 +100,8 @@ class DocumentController extends Controller
                 $doc->setFinTrans($finTrans);
                 $doc->setUser(new User(['id' => $_SESSION['userId']]));
 
-                if ($this->docManager->insertDocument($doc)) {
-                    $data = ['success' => true, 'message' => 'Téléchargement du document réussi !', 'docPath' => $this->pathRoot . $docPath];
+                if ($doc = $this->docManager->insertDocument($doc)) {
+                    $data = ['success' => true, 'message' => 'Téléchargement du document réussi !', 'docPath' => $this->pathRoot . 'document/viewDocument/docId/' . $doc->getId(), 'docName' => $doc->getName()];
                 } else {
                     $data = ['success' => false, 'message' => 'Échec du téléchargement du document. Veuillez réessayer.'];
                 }
@@ -97,6 +114,26 @@ class DocumentController extends Controller
         } else {
             error_log("Échec du déplacement du fichier vers le dossier de destination.");
             echo json_encode(['success' => false, 'message' => 'Échec du téléchargement du document. Veuillez réessayer.']);
+            exit;
+        }
+    }
+
+    /**
+     * Delete a document for a financial transaction in the database only. It's render the financial-transactions view with a success or an error message in JSON response.
+     */
+    public function deleteDocumentAction()
+    {
+        if (isset($this->vars['finTransId'])) {
+            $finTransId = htmlentities($this->vars['finTransId']);
+            if ($this->docManager->deleteDocumentByFinTransId($finTransId)) {
+                echo json_encode(['success' => true, 'message' => 'Document supprimé.']);
+                exit;
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Une erreur est survenue. Document non supprimé.']);
+                exit;
+            }
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Une erreur est survenue. Document non supprimé.']);
             exit;
         }
     }
