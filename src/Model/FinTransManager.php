@@ -185,4 +185,20 @@ class FinTransManager extends Manager
             return null;
         }
     }
+
+    /**
+     * Deletes a financial transaction from the database by its ID.
+     * 
+     * @param $id The ID of the financial transaction to delete.
+     * @return bool True if the financial transaction was deleted successfully, false otherwise.
+     */
+    public function deleteFinTransById( $id ): bool
+    {
+        $sql = "DELETE FROM financial_transactions WHERE id = :id";
+        $req = $this->dbManager->db->prepare($sql);
+        $state = $req->execute([
+            'id' => $id
+        ]);
+        return $state;
+    }
 }

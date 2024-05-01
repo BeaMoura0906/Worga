@@ -95,7 +95,7 @@ $('#editFinTransModal').on('show.bs.modal', function (event) {
 
     sendFetch( paramList )
         .then( data => {
-            $('#editFinTransModal #id').val(data.id)
+            $('#editFinTransModal #finTransId').val(data.finTransId)
             $('#editFinTransModal #categoryId').val(data.category)
             $('#editFinTransModal #dateId').val(data.date)
             $('#editFinTransModal #titleId').val(data.title)
@@ -224,3 +224,16 @@ $('#deleteDocLinkId').on('click', function(e) {
             console.error( 'Erreur :', error )
         })
 });
+
+$('#deleteFinTransBtn').on('click', function(e) {
+    if(!confirm('Voulez-vous supprimer cette transaction ? Cette action est irréversible.')) {
+        e.preventDefault()
+        return false
+    }
+
+    const btn = $(this)
+    const finTransId = $('#editFinTransModal #finTransId').val()
+    const url = btn.data('url') + finTransId
+
+    window.location.href = url
+})

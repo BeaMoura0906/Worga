@@ -328,4 +328,38 @@ class FinTransController extends Controller
             $this->render('client', $data);
         }
     }
+
+    public function deleteFinTransAction()
+    {
+        if( isset($this->vars['finTransId']) ) {
+            $finTransId = htmlentities($this->vars['finTransId']);
+            $finTrans = $this->finTransManager->getFinTransById($finTransId);
+            $account = $finTrans->getAccount();
+            $client = $account->getClient();
+            $clientId = $client->getId();
+            if( $this->finTransManager->deleteFinTransById($finTransId) ) {
+                $this->redirectToRoot('account/getAccount/clientId/' . $clientId);
+            } else {
+                $data = [
+                    'message' => [
+                        'type' => 'warning',
+                        'message' => 'Une erreur est survenue. Veuillez réessayer.'
+                    ],
+                    'selectedClient' => $client,
+                    'clientAccount' => $account,
+                    'finTransCategoriesFr' => $this->finTransCategories->getFinTransCategoriesFr()
+                ];
+                $this->render('account', $data);
+            }
+        } else {
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => 'Une erreur est survenue. Veuillez réessayer.'
+                ],
+                'listClients' => true
+            ];
+            $this->render('client', $data);
+        }
+    }
 }
