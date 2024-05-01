@@ -77,4 +77,38 @@ class AccountManager extends Manager
             return null;
         }
     }
+
+    /**
+     * Updates an account in the database.
+     * 
+     * @param Account $account The account to update.
+     * @return bool True if the account was updated successfully, false otherwise.
+     * @throws \Exception If the account could not be updated.
+     */
+    public function updateAccount(Account $account): bool
+    {
+        $sql = "UPDATE accounts SET 
+                    estimates_total = :estimates_total,
+                    invoices_total = :invoices_total,
+                    receipts_total = :receipts_total,
+                    rest_to_invoice = :rest_to_invoice,
+                    rest_to_cash = :rest_to_cash
+                WHERE id = :id";
+        $req = $this->dbManager->db->prepare($sql);
+        $state = $req->execute([
+            'estimates_total' => $account->getEstimatesTotal(),
+            'invoices_total' => $account->getInvoicesTotal(),
+            'receipts_total' => $account->getReceiptsTotal(),
+            'rest_to_invoice' => $account->getRestToInvoice(),
+            'rest_to_cash' => $account->getRestToCash(),
+            'id' => $account->getId()
+        ]);
+
+        if(!$state){
+            throw new \Exception('Failed to update account');
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

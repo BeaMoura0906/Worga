@@ -262,8 +262,8 @@ class FinTransController extends Controller
      */
     public function editFinTransValidAction()
     {
-        if( isset($this->vars['id']) && isset($this->vars['date']) && isset($this->vars['title']) && isset($this->vars['description']) && isset($this->vars['category']) && isset($this->vars['amount']) && isset($this->vars['vatRate']) ) {
-            $finTrans = $this->finTransManager->getFinTransById(htmlentities($this->vars['id']));
+        if( isset($this->vars['finTransId']) && isset($this->vars['date']) && isset($this->vars['title']) && isset($this->vars['description']) && isset($this->vars['category']) && isset($this->vars['amount']) && isset($this->vars['vatRate']) ) {
+            $finTrans = $this->finTransManager->getFinTransById(htmlentities($this->vars['finTransId']));
             
             $date = htmlentities($this->vars['date']);
             $title = htmlentities($this->vars['title']);
