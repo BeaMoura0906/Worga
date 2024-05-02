@@ -173,11 +173,7 @@ class FinTransController extends Controller
             $newFinTrans->setUser( new User(['id' => $_SESSION['userId']]) );
             $newFinTrans = $this->finTransManager->insertFinTrans($newFinTrans);
 
-            var_dump($newFinTrans);
-            die;
-
             if( $newFinTrans !== null ) {
-                
                 $clientId = $newFinTrans->getAccount()->getClient()->getId();
                 header('Location: ' . $this->pathRoot . 'account/getAccount/clientId/' . $clientId);
                 exit;
