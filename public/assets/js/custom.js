@@ -1,8 +1,7 @@
-import 'jquery'
+import "jquery"
 import "bootstrap"
 import "bootstrap-table"
 import "bootstrap-table-fr-FR"
-
 
 function sendFetch( paramList, options={}, responseType = 'json' ) {
     if (typeof options === "object") {
