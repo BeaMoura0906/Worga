@@ -91,7 +91,8 @@ class AccountController extends Controller
             $this->selectedClient = $this->selectedClient ?? $this->clientManager->getClientById($this->vars['clientId']);
             $newAccount = $this->accountManager->insertNewAccountToClient($this->selectedClient);
             if( $newAccount ) {
-                $this->redirectToRoot('account/getAccount/clientId/' . $this->selectedClient->getId());
+                header('Location: ' . $this->pathRoot . 'account/getAccount/clientId/' . $this->selectedClient->getId());
+                exit;
             } else {
                 $data = [
                     'message' => [

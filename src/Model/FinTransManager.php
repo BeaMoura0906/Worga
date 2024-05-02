@@ -202,10 +202,11 @@ class FinTransManager extends Manager
                 throw new \Exception('Failed to insert financial transaction.');
             }
 
+            $transId = $this->dbManager->db->lastInsertId();
+
             $finTrans->setAccount( $this->calculateTotalsByCategory( $finTrans->getAccount() ) );
             $this->accountManager->updateAccount( $finTrans->getAccount() );
 
-            $transId = $this->dbManager->db->lastInsertId();
             $this->dbManager->db->commit();
 
             $finTrans = $this->getFinTransById( $transId );

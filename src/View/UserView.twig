@@ -101,10 +101,11 @@
                 function activeFormatter(value, row)
                 {
                     const isChecked = value == 1 ? 'checked' : '';
+                    const isActive = value == false ? 0 : 1;
                     const url = '{{ pathRoot ~ "user/setIsActive/id/" }}' + row.id + '/isActive/';
                     return [
                         '<div class="form-check form-switch">',
-                        '<input class="form-check-input active-line" data-url="' + url + '" type="checkbox" role="switch" id="isActiveId-' + row.id + '" ' + isChecked + '>',
+                        '<input class="form-check-input active-line" data-url="' + url + '" type="checkbox" role="switch" data-isactive="' + isActive + '"' + isChecked + '>',
                         '</div>'
                     ].join('');
                 }

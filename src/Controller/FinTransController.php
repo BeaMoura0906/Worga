@@ -171,10 +171,16 @@ class FinTransController extends Controller
 
             $newFinTrans->setAccount( new Account(['id' => $this->vars['accountId']]) );
             $newFinTrans->setUser( new User(['id' => $_SESSION['userId']]) );
+            $newFinTrans = $this->finTransManager->insertFinTrans($newFinTrans);
 
-            if( $newFinTrans = $this->finTransManager->insertFinTrans($newFinTrans) ) {
+            var_dump($newFinTrans);
+            die;
+
+            if( $newFinTrans !== null ) {
+                
                 $clientId = $newFinTrans->getAccount()->getClient()->getId();
-                $this->redirectToRoot('account/getAccount/clientId/' . $clientId);
+                header('Location: ' . $this->pathRoot . 'account/getAccount/clientId/' . $clientId);
+                exit;
             } else {
                 $account = $this->accountManager->getAccountById($this->vars['accountId']);
                 $selectedClient = $account->getClient();
@@ -289,7 +295,8 @@ class FinTransController extends Controller
 
             if( $finTrans = $this->finTransManager->updateFinTrans($finTrans) ) {
                 $clientId = $finTrans->getAccount()->getClient()->getId();
-                $this->redirectToRoot('account/getAccount/clientId/' . $clientId);
+                header('Location: ' . $this->pathRoot . 'account/getAccount/clientId/' . $clientId);
+                exit;
             } else {
                 $account = $this->accountManager->getAccountById($this->vars['accountId']);
                 $selectedClient = $account->getClient();
@@ -338,7 +345,8 @@ class FinTransController extends Controller
             $client = $account->getClient();
             $clientId = $client->getId();
             if( $this->finTransManager->deleteFinTransById($finTransId) ) {
-                $this->redirectToRoot('account/getAccount/clientId/' . $clientId);
+                header('Location: ' . $this->pathRoot . 'account/getAccount/clientId/' . $clientId);
+                exit;
             } else {
                 $data = [
                     'message' => [
