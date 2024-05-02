@@ -87,7 +87,6 @@ class Manager
     {
         $envPath = dirname ( __DIR__ ) . '/../.env'; 
         
-        echo $envPath;
         if (!file_exists($envPath)) {  
             throw new \Exception('Le fichier .env est introuvable.'); 
         }
