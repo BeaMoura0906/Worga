@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="row justify-content-center g-3" action="{{ pathRoot }}fintrans/editFinTransValid" method="post">
+                <form class="row justify-content-center g-3" action="{{ pathRoot }}finTrans/editFinTransValid" method="post">
                     <input type="hidden" id="finTransId" name="finTransId">
                     <input type="hidden" name="accountId" value="{{ clientAccount.id }}">
                     <div class="col-md-10 mb-3">
@@ -50,7 +50,7 @@
                     </div>
                     <div class="col-12 text-end">
                         <button type="submit" class="btn btn-primary">Modifier</button>
-                        <a href="javascript:void(0);" data-url="{{ pathRoot }}fintrans/deleteFinTrans/finTransId/" class="btn btn-danger" id="deleteFinTransBtn" role="button" >Supprimer</a>
+                        <a href="javascript:void(0);" data-url="{{ pathRoot }}finTrans/deleteFinTrans/finTransId/" class="btn btn-danger" id="deleteFinTransBtn" role="button" >Supprimer</a>
                     </div>
                 </form>
             </div>
