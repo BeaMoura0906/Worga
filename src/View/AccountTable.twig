@@ -43,18 +43,21 @@
             <th data-field="to_be_debited"
                 data-searchable="false"
                 data-sortable="false"
+                data-formatter="toBeDebitedFormatter"
                 data-footer-formatter="totalToBeDebitedFormatter"
                 data-width="150px"
             >À débiter</th>
             <th data-field="debit"
                 data-searchable="false"
                 data-sortable="false"
+                data-formatter="debitFormatter"
                 data-footer-formatter="totalDebitFormatter"
                 data-width="150px"
             >Débit</th>
             <th data-field="credit"
                 data-searchable="false"
                 data-sortable="false"
+                data-formatter="creditFormatter"
                 data-footer-formatter="totalCreditFormatter"
                 data-width="150px"
             >Crédit</th>
@@ -94,6 +97,24 @@
     function actionsFormatter(value, row)
     {
         return '<button type="button" class="btn btn-sm btn-dark rounded-circle m-1" data-bs-toggle="modal" data-bs-target="#viewFinTransModal" data-url="{{ pathRoot}}finTrans/getFinTrans/finTransId/' + row.id + '"  ><i class="bi bi-eye"></i></button>' + '<button type="button" class="btn btn-sm btn-primary rounded-circle m-1" data-bs-toggle="modal" data-bs-target="#editFinTransModal" data-url="{{ pathRoot}}finTrans/getFinTrans/finTransId/' + row.id + '"><i class="bi bi-pencil-square"></i></button>'
+    }
+
+    function toBeDebitedFormatter(data)
+    {
+        if(data) { return data } 
+        return ' '
+    }
+
+    function debitFormatter(data)
+    {
+        if(data) { return data } 
+        return ' '
+    }
+
+    function creditFormatter(data)
+    {
+        if(data) { return data } 
+        return ' '
     }
 
     function totalToBeDebitedFormatter(data) 

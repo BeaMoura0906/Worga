@@ -99,7 +99,7 @@ $('#editFinTransModal').on('show.bs.modal', function (event) {
             $('#editFinTransModal #dateId').val(data.date)
             $('#editFinTransModal #titleId').val(data.title)
             $('#editFinTransModal #descriptionId').val(data.description)
-            $('#editFinTransModal #amountId').val(data.amount)
+            $('#editFinTransModal #amountExVatId').val(data.amountExVat)
             $('#editFinTransModal #vatRateId').val(data.vatRate)
             $('#editFinTransModal #insertedAtId').text(data.insertedAt)
             $('#editFinTransModal #updatedAtId').text(data.updatedAt)
@@ -130,8 +130,10 @@ $('#viewFinTransModal').on('show.bs.modal', function (event) {
             $('#viewFinTransModal #dateId').text(formattedDate);
             $('#viewFinTransModal #titleId').text(data.title)
             $('#viewFinTransModal #descriptionId').text(data.description)
-            const formattedAmount = data.amount + ' €'
-            $('#viewFinTransModal #amountId').text(formattedAmount)
+            const formattedAmountIncVat = data.amountIncVat + ' €'
+            $('#viewFinTransModal #amountIncVatId').text(formattedAmountIncVat)
+            const formattedAmountExVat = data.amountExVat + ' €'
+            $('#viewFinTransModal #amountExVatId').text(formattedAmountExVat)
             const formattedVatRate = data.vatRate + ' %'
             $('#viewFinTransModal #vatRateId').text(formattedVatRate)
             $('#viewFinTransModal #insertedAtId').text(data.insertedAt)
