@@ -51,23 +51,18 @@ class Manager
      */
     public function __construct()
     {
+        $this->setEnvVarWithDbCredentials();
 
         //Configure for the remote server within add .env file to retreive the remote dbname, dblogin and dbpassword
-        /*
-        if( strstr($_SERVER['HTTP_HOST'], '') ){
-            $this->dbname = '';
-            $this->dblogin = '';
-            $this->dbpassword = '';
+        if( strstr($_SERVER['HTTP_HOST'], $_ENV['DB_HOST'] )){
+            $this->dbname = getenv('DB_NAME');
+            $this->dblogin = getenv('DB_LOGIN');
+            $this->dbpassword = getenv('DB_PASSWORD');
         } else {
             $this->dbname = 'worga';
             $this->dblogin = 'root';
             $this->dbpassword = '';
         }
-        */
-
-        $this->dbname = 'worga';
-        $this->dblogin = 'root';
-        $this->dbpassword = '';
 
         // Build DSN for the database connection
         $this->dsn .= $this->dbname . ';charset=utf8';
@@ -90,15 +85,27 @@ class Manager
 
     private function setEnvVarWithDbCredentials()
     {
-        //Configure for the remote server within add .env file to retreive the remote dbname, dblogin and dbpassword
-        $envFilePath = __DIR__ . '/.env';
-        if( file_exists($envFilePath) ){
-            $envFileContent = file_get_contents($envFilePath);
-            $envFileContent = explode("\n", $envFileContent);
-            $this->dbhost = $envFileContent[0];
-            $this->dbname = $envFileContent[1];
-            $this->dblogin = $envFileContent[2];
-            $this->dbpassword = $envFileContent[3];
+        $envPath = dirname ( __DIR__ ) . '/../.env'; 
+        
+        echo $envPath;
+        if (!file_exists($envPath)) {  
+            throw new \Exception('Le fichier .env est introuvable.'); 
+        }
+
+        $lines = file($envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES); 
+        foreach ($lines as $line) { 
+            if (strpos(trim($line), '#') === 0) {
+                continue;
+            }
+
+            list($name, $value) = explode('=', $line, 2);
+            $name = trim($name); 
+            $value = trim($value);
+
+            if (!array_key_exists($name, $_ENV)) {
+                putenv(sprintf('%s=%s', $name, $value));
+                $_ENV[$name] = $value;
+            }
         }
     }
 }
