@@ -8,7 +8,9 @@ Ces instructions vous permettront de mettre en place une copie du projet.
 
 ### Prérequis
 
-- Serveur web : PHP 8.2.13
+Pour installer le projet, vous devez avoir les outils suivants :
+
+- Serveur web : Apache 2.4.53 et PHP 8.2.13
 - Base de données : MySQL 8.0.27
 - Composer : 2.4.4
 
@@ -27,12 +29,11 @@ Suivez ces étapes pour configurer le projet :
 
 3. Configurez la base de données :
 
-Veuillez importer le fichier `db\worga.sql` dans votre base de données.
+    Veuillez importer le fichier `db\worga.sql` dans votre base de données.
 
-Si la base de données se trouve sur un serveur distant, vous pouvez utiliser un fichier `.env` à placer à la racine du projet pour la configurer la connexion à celle-ci tel que :
+    Si la base de données se trouve sur un serveur distant, vous pouvez utiliser un fichier `.env` à placer à la racine du projet pour la configurer la connexion à celle-ci, tel que :
 
-    ```bash
-    # .env
+    ```bash 
     DB_HOST=dbhostexample
     DB_NAME=dbnameexample
     DB_LOGIN=dbloginexample
@@ -41,7 +42,7 @@ Si la base de données se trouve sur un serveur distant, vous pouvez utiliser un
 
 4. Lancez l'application :
 
-Pour cela, veuillez ouvrir votre navigateur et placez-vous dans le dossier `Worga` à l'aide du cheminement de votre projet au sein du serveur. 
+    Pour cela, veuillez ouvrir votre navigateur et placez-vous dans le dossier `Worga` à l'aide du cheminement de votre projet au sein du serveur. 
 
 ### Utilisation
 
