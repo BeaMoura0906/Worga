@@ -6,12 +6,16 @@ use Worga\src\Model\UserManager;
 use Worga\src\Model\Entity\User;
 use Worga\src\Classes\Role;
 
+/**
+ * Class UserController
+ * It manages operations related to users, including database interactions by using the managers and rendering views.
+ */
 class UserController extends Controller
 {
-    // Property for the UserManager instance
+    /** Property for the UserManager instance */
     private $userManager;
 
-    // Property for the Role instance
+    /** Property for the Role instance */
     private $roleUtil;
 
     /**
@@ -106,6 +110,9 @@ class UserController extends Controller
         return $passHash;
     }
 
+    /**
+     * Action method to list all users with params and JSON response
+     */
     public function listUsersAction()
     {
         $nbUsers = $this->userManager->countAll() ?? 0;
@@ -147,6 +154,9 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Action method to set the active status of a user
+     */
     public function setIsActiveAction()
     {
         $isActive = $this->vars['isActive'] ?? 0;
@@ -164,6 +174,9 @@ class UserController extends Controller
         echo json_encode( $data );
     }
 
+    /**
+     * Action method to render the form to create a new user
+     */
     public function createUserAction()
     {
         $data = [
@@ -172,6 +185,9 @@ class UserController extends Controller
         $this->render('user', $data);
     }
 
+    /**
+     * Action method to validate the creation of a new user
+     */
     public function createUserValidAction()
     {
         $data = [];
@@ -226,6 +242,9 @@ class UserController extends Controller
         $this->render('user', $data);
     }
     
+    /**
+     * Action method to render the form to update an existing user
+     */
     public function updateUserAction()
     {
         $id = $this->vars['id'];
@@ -239,6 +258,9 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Action method to validate the update of an existing user
+     */
     public function updateUserValidAction()
     {
         $data = [];

@@ -1,5 +1,7 @@
 Options -MultiViews
 
 RewriteEngine on 
-RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ public/index.php?$1 [QSA]
 
+RewriteRule ^docs(/|$) - [L]
+
+RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ public/index.php?$1 [QSA]

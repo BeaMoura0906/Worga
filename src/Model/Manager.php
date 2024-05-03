@@ -83,6 +83,9 @@ class Manager
         return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $string));
     }
 
+    /**
+     * Sets environment variables with database credentials.
+     */
     private function setEnvVarWithDbCredentials()
     {
         $envPath = dirname ( __DIR__ ) . '/../.env'; 

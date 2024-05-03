@@ -2,8 +2,13 @@
 
 namespace Worga\src\Classes;
 
+/**
+ * Class FinTransCategories
+ * Util class for financial transaction categories.
+ */
 class FinTransCategories
 {
+    /** Properties CATEGORY_* */
     public const CATEGORY_TO_BE_DEBITED = 'to_be_debited';
     public const CATEGORY_DEBIT = 'debit';
     public const CATEGORY_CREDIT = 'credit';

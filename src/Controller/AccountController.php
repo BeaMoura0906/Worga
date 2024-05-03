@@ -10,7 +10,7 @@ use Worga\src\Model\ClientManager;
 
 /**
  * Class AccountController
- * 
+ * It manages operations related to client accounts, including database interactions by using the managers and rendering views.
  */
 class AccountController extends Controller
 {
@@ -85,6 +85,9 @@ class AccountController extends Controller
         }
     }
 
+    /**
+     * Action method to create a new account for the selected client
+     */
     public function createAction()
     {   
         if( isset( $this->vars['clientId'] ) ) {

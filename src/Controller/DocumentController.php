@@ -13,6 +13,7 @@ use finfo;
 
 /**
  * Class DocumentController
+ * It manages operations related to documents, including database interactions by using the managers and rendering the views.
  */
 class DocumentController extends Controller
 {

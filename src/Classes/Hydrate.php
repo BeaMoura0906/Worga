@@ -9,13 +9,20 @@ use Worga\src\Model\UserManager;
 use Worga\src\Model\ClientManager;
 use Worga\src\Model\AccountManager;
 
+/**
+ * Class Hydrate
+ * Utility class to hydrate object properties based on provided data.
+ */
 class Hydrate 
 {
-    // Properties for the Hydrate class
+    /** Properties for the Hydrate class */
     private UserManager $userManager;
     private ClientManager $clientManager;
     private AccountManager $accountManager;
 
+    /**
+     * Constructor for the Hydrate class.
+     */
     public function __construct()
     {
         $this->userManager = new UserManager();

@@ -12,6 +12,10 @@ use Worga\src\Model\Entity\User;
 
 use DateTime;
 
+/**
+ * Class FinTransController
+ * It manages operations related to financial transactions, including database interactions by using the managers and rendering views.
+ */
 class FinTransController extends Controller
 {
     /** Properties */
@@ -333,6 +337,9 @@ class FinTransController extends Controller
         }
     }
 
+    /**
+     * Method action to delete a financial transaction.
+     */
     public function deleteFinTransAction()
     {
         if( isset($this->vars['finTransId']) ) {

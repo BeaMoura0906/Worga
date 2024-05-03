@@ -1,5 +1,8 @@
 {
     "require": {
         "twig/twig": "^3.0"
+    },
+    "require-dev": {
+        "code-lts/doctum": "^5.5"
     }
 }

@@ -2,8 +2,13 @@
 
 namespace Worga\src\Classes;
 
+/**
+ * Class Role
+ * Util class for user roles.
+ */
 class Role
 {
+    /** Properties ROLE_* */
     public const ROLE_ADMIN = 'admin';
     public const ROLE_EDITOR = 'editor';
     public const ROLE_VISITOR = 'visitor';

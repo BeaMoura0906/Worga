@@ -2,13 +2,12 @@
 
 namespace Worga\src\Controller;
 
-// use Worga\src\Model\Manager;
-
+/**
+ * Class IndexController
+ * It manages operations related to the index view, including rendering it. 
+ */
 class IndexController extends Controller
 {
-    // Properties for the Manager instance
-    private $manager;
-
     /**
      * Constructor method to initialize properties and call the parent constructor
      *
@@ -16,9 +15,6 @@ class IndexController extends Controller
      */
     public function __construct(array $params=[])
     {
-        // Create an instance of Manager
-        // $this->manager = new Manager();
-
         // Call the parent constructor with parameters
         parent::__construct($params);
     }

@@ -2,12 +2,16 @@
 
 namespace Worga\src\Classes;
 
+/**
+ * Class dbConnect
+ * Manages database connections and PDO instances with singleton pattern.
+ */
 class dbConnect
 {
-    // Public property to hold the PDO instance
+    /** Public property to hold the PDO instance */
     public $db;
 
-    // Private static property to hold the instance of the class (singleton pattern)
+    /** Private static property to hold the instance of the class (singleton pattern) */
     private static $instance = null;
 
     /**

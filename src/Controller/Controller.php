@@ -6,6 +6,10 @@ use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Twig\Extension\DebugExtension;
 
+/**
+ * Class Controller
+ * It is the base class for all controllers in the application.
+ */
 abstract class Controller
 {
     /** Properties for Twig, view paths, controller, root path, action, variables, and fetch status */ 
@@ -82,20 +86,6 @@ abstract class Controller
             }
         }
         $this->isFetched = $params['isFetched'];
-    }
-
-    /**
-     * Redirects to the specified root with optional data.
-     *
-     * @param string $root The route to redirect to
-     * @param array $data An optional array of data to pass
-     */
-    protected function redirectToRoot( string $root, array $data=[] )
-    {
-        $dataSerialize = base64_encode( serialize( $data ) );
-		$_SESSION['redirect'] = $dataSerialize;
-        header( 'Location:' . $this->pathRoot . $root );
-		return true;
     }
 
     /**

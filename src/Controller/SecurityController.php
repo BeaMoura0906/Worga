@@ -4,10 +4,14 @@ namespace Worga\src\Controller;
 
 use Worga\src\Model\UserManager;
 
+/**
+ * Class SecurityController
+ * It is used to manage user login and logout.
+ */
 class SecurityController extends Controller
 {
-    // Property for the UserManager instance
-    private $userManager;
+    /** Property for the UserManager instance */
+   private $userManager;
 
     /**
      * Constructor method to initialize properties and call the parent constructor
@@ -103,6 +107,9 @@ class SecurityController extends Controller
 
     }
 
+    /**
+     * Action method to destroy the session and redirect to the root path
+     */
     public function logoutAction()
     {
         // Destroy the session

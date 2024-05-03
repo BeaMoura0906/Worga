@@ -6,6 +6,10 @@ use Worga\src\Model\Entity\Client;
 use Worga\src\Model\Entity\User;
 use Worga\src\Model\ClientManager;
 
+/**
+ * Class ClientController
+ * It manages operations related to clients, including database interactions by using the managers and rendering views.
+ */
 class ClientController extends Controller
 {
     // Properties

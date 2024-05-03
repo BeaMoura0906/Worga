@@ -44,7 +44,7 @@ Suivez ces étapes pour configurer le projet :
 
     Pour cela, veuillez ouvrir votre navigateur et placez-vous dans le dossier `Worga` à l'aide du cheminement de votre projet au sein du serveur. 
 
-### Utilisation
+## Utilisation
 
 Veuillez ouvrir votre navigateur et placez-vous dans le dossier `Worga` à l'aide du cheminement de votre projet au sein du serveur.
 
@@ -81,10 +81,12 @@ Veuillez consulter la documentation de Worga dans le dossier `docs`. Vous y trou
 
 - Le cahier des charges (contexte, spécifications fonctionnelles et techniques, diagrammes de cas d'utilisation et de séquences, arborescence des pages, maquette de la page de relevé de compte client) : `docs\cdd.pdf`.
 - Les MCD (Modéle de Conception de Données), MLD (Modéle Logiciel de Données) et schéma E-R (Schéma de Relation Entité-Association) : `docs\diagrams\`.
-- La documentation de classes PHP : `docs\php\`. 
+- La documentation de classes PHP : `docs\phpdoc\`. Pour y accéder, ouvrez le fichier `docs\phpdoc\index.html` dans votre navigateur. 
 
 ## Auteur
 
 Beatriz Moura - Développement initial | GitHub : @BeaMoura0906
 
-Ce projet a été réalisé dans le cadre de l'UE 5 "Conception et développement d'applications" du BTS SIO (Services Informatiques aux Organisations) option SLAM (Solutions Logicielles et Applications Métiers). Réalisation n° 1 | 18 juin 2024. 
+Ce projet a été réalisé dans le cadre de l'UE 5 "Conception et développement d'applications" du BTS SIO (Services Informatiques aux Organisations) option SLAM (Solutions Logicielles et Applications Métiers). 
+
+E5 : Réalisation n° 1 | 18 juin 2024
