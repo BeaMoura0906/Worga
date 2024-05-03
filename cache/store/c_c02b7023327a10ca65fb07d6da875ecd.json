@@ -1,0 +1,178 @@
+{
+    "name": "Worga\\src\\Classes\\FinTransCategories",
+    "line": 9,
+    "short_desc": "Class FinTransCategories\nUtil class for financial transaction categories.",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Worga\\src\\Classes",
+    "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Classes\\FinTransCategories.php",
+    "relative_file": null,
+    "hash": "f4fa77be0c022f4f9b3c90f08881635f8897bf67",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "is_read_only": false,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "getFinTransCategories": {
+            "name": "getFinTransCategories",
+            "line": 21,
+            "short_desc": "Retrieves the list of financial transaction categories.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "The list of financial transaction categories.",
+            "tags": [],
+            "see": [],
+            "modifiers": 9,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getFinTransCategoriesFr": {
+            "name": "getFinTransCategoriesFr",
+            "line": 35,
+            "short_desc": "Retrieves the list of financial transaction categories in French.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "The list of financial transaction categories in French.",
+            "tags": [],
+            "see": [],
+            "modifiers": 9,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getFinTransCategoryFr": {
+            "name": "getFinTransCategoryFr",
+            "line": 50,
+            "short_desc": "Get the French financial transaction category from its English category.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "The financial transaction category in French, or null if not found.",
+            "tags": [],
+            "see": [],
+            "modifiers": 9,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "finTransCategory": {
+                    "name": "finTransCategory",
+                    "line": 50,
+                    "short_desc": "The financial transaction category in English.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "getRoleInEnglish": {
+            "name": "getRoleInEnglish",
+            "line": 70,
+            "short_desc": "Get the English financial transaction category from its French category.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "The financial transaction category in English, or null if not found.",
+            "tags": [],
+            "see": [],
+            "modifiers": 9,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "finTransCategoryFr": {
+                    "name": "finTransCategoryFr",
+                    "line": 70,
+                    "short_desc": "The financial transaction category in French.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        }
+    },
+    "constants": {
+        "CATEGORY_TO_BE_DEBITED": {
+            "name": "CATEGORY_TO_BE_DEBITED",
+            "line": 12,
+            "short_desc": "Properties CATEGORY_*",
+            "long_desc": "",
+            "modifiers": 1,
+            "tags": []
+        },
+        "CATEGORY_DEBIT": {
+            "name": "CATEGORY_DEBIT",
+            "line": 13,
+            "short_desc": null,
+            "long_desc": null,
+            "modifiers": 1,
+            "tags": []
+        },
+        "CATEGORY_CREDIT": {
+            "name": "CATEGORY_CREDIT",
+            "line": 14,
+            "short_desc": null,
+            "long_desc": null,
+            "modifiers": 1,
+            "tags": []
+        }
+    }
+}

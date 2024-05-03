@@ -1,0 +1,363 @@
+{
+    "name": "Worga\\src\\Model\\FinTransManager",
+    "line": 14,
+    "short_desc": "Class FinTransManager\nManages operations related to financial transactions, including database interactions.",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Worga\\src\\Model",
+    "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Model\\FinTransManager.php",
+    "relative_file": null,
+    "hash": "2cca73fa03596c56830dc238a8bb876639c2d528",
+    "parent": "Worga\\src\\Model\\Manager",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "is_read_only": false,
+    "aliases": {
+        "AccountManager": "Worga\\src\\Model\\AccountManager",
+        "Account": "Worga\\src\\Model\\Entity\\Account",
+        "FinancialTransaction": "Worga\\src\\Model\\Entity\\FinancialTransaction",
+        "FinTransCategories": "Worga\\src\\Classes\\FinTransCategories"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 20,
+            "short_desc": "Constructor",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getAllFinTransByAccountId": {
+            "name": "getAllFinTransByAccountId",
+            "line": 32,
+            "short_desc": "Retrieves all financial transactions from the database for a given account ID.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "An array of FinancialTransaction objects, or null if there are no financial transactions.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "accountId": {
+                    "name": "accountId",
+                    "line": 32,
+                    "short_desc": "The ID of the account to retrieve financial transactions for.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "int",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "getAllFinTransWithParams": {
+            "name": "getAllFinTransWithParams",
+            "line": 56,
+            "short_desc": "Retrieves all financial transactions from the database for a given account ID with parameters.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "An array of FinancialTransaction objects, or null if there are no financial transactions in the database for this account.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "params": {
+                    "name": "params",
+                    "line": 56,
+                    "short_desc": "The parameters to filter the financial transactions by.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "getFinTransById": {
+            "name": "getFinTransById",
+            "line": 99,
+            "short_desc": "Retrieves a financial transaction from the database by its ID.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Worga\\src\\Model\\Worga\\src\\Model\\Entity\\FinancialTransaction",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "The retrieved financial transaction object, or null if the financial transaction does not exist.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "id": {
+                    "name": "id",
+                    "line": 99,
+                    "short_desc": "The ID of the financial transaction to retrieve.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "int",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "calculateTotalsByCategory": {
+            "name": "calculateTotalsByCategory",
+            "line": 120,
+            "short_desc": "Calculates the total amount of each category for a given account ID and the rest to invoice and to cash.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Worga\\src\\Model\\Entity\\Account",
+                    false
+                ]
+            ],
+            "hint_desc": "The account with the totals and rests calculated.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "account": {
+                    "name": "account",
+                    "line": 120,
+                    "short_desc": "The account to calculate the totals and rests for.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\Worga\\src\\Model\\Entity\\Account",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "insertFinTrans": {
+            "name": "insertFinTrans",
+            "line": 161,
+            "short_desc": "Inserts a new financial transaction into the database with a db transaction which updates the client account.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Worga\\src\\Model\\Worga\\src\\Model\\Entity\\FinancialTransaction",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "The inserted financial transaction object, or null if the insertion failed.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [
+                [
+                    "\\Worga\\src\\Model\\Exception",
+                    "If the db transaction fails because of the financial transaction insertion or the client account update."
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "finTrans": {
+                    "name": "finTrans",
+                    "line": 161,
+                    "short_desc": "The financial transaction object to insert.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\Worga\\src\\Model\\Entity\\FinancialTransaction",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "updateFinTrans": {
+            "name": "updateFinTrans",
+            "line": 228,
+            "short_desc": "Updates an existing financial transaction in the database with a db transaction which updates the client account.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Worga\\src\\Model\\Worga\\src\\Model\\Entity\\FinancialTransaction",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "The updated financial transaction object, or null if the update failed.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [
+                [
+                    "\\Worga\\src\\Model\\Exception",
+                    "If the db transaction fails because of the financial transaction update or the client account update."
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "finTrans": {
+                    "name": "finTrans",
+                    "line": 228,
+                    "short_desc": "The financial transaction object to update.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\Worga\\src\\Model\\Entity\\FinancialTransaction",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "deleteFinTransById": {
+            "name": "deleteFinTransById",
+            "line": 280,
+            "short_desc": "Deletes a financial transaction from the database by its ID with a db transaction which updates the client account.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "bool",
+                    false
+                ]
+            ],
+            "hint_desc": "True if the financial transaction was deleted successfully, false otherwise.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [
+                [
+                    "\\Worga\\src\\Model\\Exception",
+                    "If the db transaction fails because of the financial transaction deletion or the client account update."
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "id": {
+                    "name": "id",
+                    "line": 280,
+                    "short_desc": "The ID of the financial transaction to delete.",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

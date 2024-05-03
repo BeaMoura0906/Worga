@@ -1,0 +1,358 @@
+{
+    "name": "Worga\\src\\Model\\UserManager",
+    "line": 11,
+    "short_desc": "Class UserManager\nManages operations related to users, including database interactions.",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Worga\\src\\Model",
+    "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Model\\UserManager.php",
+    "relative_file": null,
+    "hash": "65dfeff99817d4c63a8d7d1cc850d9c30050aa47",
+    "parent": "Worga\\src\\Model\\Manager",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "is_read_only": false,
+    "aliases": {
+        "User": "Worga\\src\\Model\\Entity\\User"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "getAllUsers": {
+            "name": "getAllUsers",
+            "line": 18,
+            "short_desc": "Get all users.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "List of User objects or null if an error occurs.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "countAll": {
+            "name": "countAll",
+            "line": 42,
+            "short_desc": "Count all users.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "int",
+                    false
+                ]
+            ],
+            "hint_desc": "Number of users.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getAllUsersWithParams": {
+            "name": "getAllUsersWithParams",
+            "line": 57,
+            "short_desc": "Get all users.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "List of User objects or null if an error occurs.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "params": {
+                    "name": "params",
+                    "line": 57,
+                    "short_desc": "Parameters for the query.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "getUserByLogin": {
+            "name": "getUserByLogin",
+            "line": 96,
+            "short_desc": "Get a user by their login.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Worga\\src\\Model\\Worga\\src\\Model\\Entity\\User",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "User object or null if not found or an error occurs.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "login": {
+                    "name": "login",
+                    "line": 96,
+                    "short_desc": "User login.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "getUserById": {
+            "name": "getUserById",
+            "line": 120,
+            "short_desc": "Get a user by their ID.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Worga\\src\\Model\\Worga\\src\\Model\\Entity\\User",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "User object or null if not found or an error occurs.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "id": {
+                    "name": "id",
+                    "line": 120,
+                    "short_desc": "User ID.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "mixed",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "insertUser": {
+            "name": "insertUser",
+            "line": 139,
+            "short_desc": "Insert a new user into the database.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Worga\\src\\Model\\Worga\\src\\Model\\Entity\\User",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "User object with assigned ID if successful, null otherwise.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "user": {
+                    "name": "user",
+                    "line": 139,
+                    "short_desc": "User object to be inserted.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\Worga\\src\\Model\\Entity\\User",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "updateUser": {
+            "name": "updateUser",
+            "line": 180,
+            "short_desc": "Update a user's information in the database.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "bool",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "True if the update is successful, false otherwise.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "user": {
+                    "name": "user",
+                    "line": 180,
+                    "short_desc": "User object with updated information.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\Worga\\src\\Model\\Entity\\User",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "setIsActiveByUserId": {
+            "name": "setIsActiveByUserId",
+            "line": 214,
+            "short_desc": "Set the user's active status in the database.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "bool",
+                    false
+                ]
+            ],
+            "hint_desc": "True if the update is successful, false otherwise.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "id": {
+                    "name": "id",
+                    "line": 214,
+                    "short_desc": "User ID.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "int",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                },
+                "isActive": {
+                    "name": "isActive",
+                    "line": 214,
+                    "short_desc": "User active status.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "bool",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

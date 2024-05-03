@@ -1,0 +1,100 @@
+{
+    "name": "Worga\\src\\Model\\Manager",
+    "line": 11,
+    "short_desc": "Class Manager\nBase class for managing database connections and common functionalities.",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Worga\\src\\Model",
+    "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Model\\Manager.php",
+    "relative_file": null,
+    "hash": "4373c5a72aa708ad37b1cff947e40bc867896998",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "is_read_only": false,
+    "aliases": {
+        "dbConnect": "Worga\\src\\Classes\\dbConnect"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": {
+        "dbManager": {
+            "name": "dbManager",
+            "line": 47,
+            "short_desc": "Database manager object.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Worga\\src\\Classes\\dbConnect",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": 2,
+            "default": null,
+            "errors": [],
+            "is_read_only": false,
+            "is_write_only": false,
+            "is_intersection_type": false
+        }
+    },
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 52,
+            "short_desc": "Constructor to initialize the Manager object and establish a database connection.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "convertCamelCaseToSnakeCase": {
+            "name": "convertCamelCaseToSnakeCase",
+            "line": 81,
+            "short_desc": "Converts a camelCase string to snake_case.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 2,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "string": {
+                    "name": "string",
+                    "line": 81,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

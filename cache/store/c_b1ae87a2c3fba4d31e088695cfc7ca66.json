@@ -1,0 +1,355 @@
+{
+    "name": "Worga\\src\\Model\\ClientManager",
+    "line": 12,
+    "short_desc": "Class ClientManager\nManages operations related to clients, including database interactions.",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Worga\\src\\Model",
+    "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Model\\ClientManager.php",
+    "relative_file": null,
+    "hash": "c407c9236ed81275b9d1b2da56cd3637087fde87",
+    "parent": "Worga\\src\\Model\\Manager",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "is_read_only": false,
+    "aliases": {
+        "Client": "Worga\\src\\Model\\Entity\\Client",
+        "User": "Worga\\src\\Model\\Entity\\User"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "countAllClients": {
+            "name": "countAllClients",
+            "line": 19,
+            "short_desc": "Retrieves the number of clients in the database.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "int",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "The number of clients in the database, or null if there are no clients in the database.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getAllClients": {
+            "name": "getAllClients",
+            "line": 36,
+            "short_desc": "Retrieves all clients from the database.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "An array of Client objects, or null if there are no clients in the database.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getAllClientsWithParams": {
+            "name": "getAllClientsWithParams",
+            "line": 59,
+            "short_desc": "Retrieves all clients from the database with parameters.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "An array of Client objects, or null if there are no clients in the database.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "params": {
+                    "name": "params",
+                    "line": 59,
+                    "short_desc": "The parameters to filter the clients by.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "getClientById": {
+            "name": "getClientById",
+            "line": 105,
+            "short_desc": "Retrieves a client from the database by its ID.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Worga\\src\\Model\\Worga\\src\\Model\\Entity\\Client",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "The retrieved client object, or null if the client does not exist.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "clientId": {
+                    "name": "clientId",
+                    "line": 105,
+                    "short_desc": "The ID of the client to retrieve.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "int",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "checkIfClientExists": {
+            "name": "checkIfClientExists",
+            "line": 127,
+            "short_desc": "Checks if a client with the given last name and first name exists in the database.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "bool",
+                    false
+                ]
+            ],
+            "hint_desc": "True if the client exists, false otherwise.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "lastName": {
+                    "name": "lastName",
+                    "line": 127,
+                    "short_desc": "The last name of the client.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                },
+                "firstName": {
+                    "name": "firstName",
+                    "line": 127,
+                    "short_desc": "The first name of the client.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "insertClient": {
+            "name": "insertClient",
+            "line": 148,
+            "short_desc": "Inserts a new client into the database.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Worga\\src\\Model\\Worga\\src\\Model\\Entity\\Client",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "True if the client was inserted successfully, false otherwise.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "client": {
+                    "name": "client",
+                    "line": 148,
+                    "short_desc": "The client to insert.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\Worga\\src\\Model\\Entity\\Client",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "updateClient": {
+            "name": "updateClient",
+            "line": 197,
+            "short_desc": "Updates a client in the database.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "bool",
+                    false
+                ]
+            ],
+            "hint_desc": "True if the client was updated successfully, false otherwise.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "client": {
+                    "name": "client",
+                    "line": 197,
+                    "short_desc": "The client to update.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\Worga\\src\\Model\\Entity\\Client",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "deleteClientById": {
+            "name": "deleteClientById",
+            "line": 226,
+            "short_desc": "Deletes a client from the database.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "bool",
+                    false
+                ]
+            ],
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "clientId": {
+                    "name": "clientId",
+                    "line": 226,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "int",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

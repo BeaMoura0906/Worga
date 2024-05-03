@@ -3,6 +3,8 @@
 use Doctum\Doctum;
 use Symfony\Component\Finder\Finder;
 
+// php vendor/bin/doctum.php update doctum.php -> to generate phpdoc
+
 $finder = Finder::create()
     ->files()
     ->name('*.php')

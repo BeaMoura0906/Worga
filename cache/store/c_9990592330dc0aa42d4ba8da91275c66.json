@@ -1,0 +1,133 @@
+{
+    "name": "Worga\\src\\Controller\\DocumentController",
+    "line": 18,
+    "short_desc": "Class DocumentController\nIt manages operations related to documents, including database interactions by using the managers and rendering the views.",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Worga\\src\\Controller",
+    "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Controller\\DocumentController.php",
+    "relative_file": null,
+    "hash": "e0bb3565668a4ccbbbf6c9664465e9627650aaf7",
+    "parent": "Worga\\src\\Controller\\Controller",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "is_read_only": false,
+    "aliases": {
+        "Error": "Error",
+        "DocumentManager": "Worga\\src\\Model\\DocumentManager",
+        "FinTransManager": "Worga\\src\\Model\\FinTransManager",
+        "Document": "Worga\\src\\Model\\Entity\\Document",
+        "FinancialTransaction": "Worga\\src\\Model\\Entity\\FinancialTransaction",
+        "User": "Worga\\src\\Model\\Entity\\User",
+        "finfo": "finfo"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 29,
+            "short_desc": "Constructor method to initialize properties and call the parent constructor",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "params": {
+                    "name": "params",
+                    "line": 29,
+                    "short_desc": "Parameters for the controller",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": "[]",
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "defaultAction": {
+            "name": "defaultAction",
+            "line": 40,
+            "short_desc": "Default action",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "viewDocumentAction": {
+            "name": "viewDocumentAction",
+            "line": 48,
+            "short_desc": "View a document for a financial transaction. It's display the document in the browser.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "uploadDocumentAction": {
+            "name": "uploadDocumentAction",
+            "line": 65,
+            "short_desc": "Upload a document for a financial transaction in the database and on the server. It's render the financial-transactions view with the uploaded document with a success or an error message in JSON response.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "deleteDocumentAction": {
+            "name": "deleteDocumentAction",
+            "line": 125,
+            "short_desc": "Delete a document for a financial transaction in the database only. It's render the financial-transactions view with a success or an error message in JSON response.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

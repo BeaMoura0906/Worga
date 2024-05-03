@@ -1,0 +1,213 @@
+{
+    "name": "Worga\\src\\Model\\AccountManager",
+    "line": 12,
+    "short_desc": "Class AccountManager\nManages operations related to accounts, including database interactions.",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Worga\\src\\Model",
+    "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Model\\AccountManager.php",
+    "relative_file": null,
+    "hash": "200a0fae5c992765964f7b8e789f02bf6aedeb96",
+    "parent": "Worga\\src\\Model\\Manager",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "is_read_only": false,
+    "aliases": {
+        "Account": "Worga\\src\\Model\\Entity\\Account",
+        "Client": "Worga\\src\\Model\\Entity\\Client"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "getAccountById": {
+            "name": "getAccountById",
+            "line": 20,
+            "short_desc": "Retrieves an account from the database by its ID.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Worga\\src\\Model\\Worga\\src\\Model\\Entity\\Account",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "The retrieved account object, or null if the account does not exist.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "id": {
+                    "name": "id",
+                    "line": 20,
+                    "short_desc": "The ID of the account to retrieve.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "int",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "insertNewAccountToClient": {
+            "name": "insertNewAccountToClient",
+            "line": 40,
+            "short_desc": "Inserts a new account for a client in the database.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Worga\\src\\Model\\Worga\\src\\Model\\Entity\\Account",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "The newly created account, or null if the account could not be inserted.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "client": {
+                    "name": "client",
+                    "line": 40,
+                    "short_desc": "The client to create the account for.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\Worga\\src\\Model\\Entity\\Client",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "getAccountByClient": {
+            "name": "getAccountByClient",
+            "line": 62,
+            "short_desc": "Retrieves an account from the database by client.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Worga\\src\\Model\\Worga\\src\\Model\\Entity\\Account",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "The retrieved account, or null if the account could not be found.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "client": {
+                    "name": "client",
+                    "line": 62,
+                    "short_desc": "The client to retrieve the account for.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Worga\\src\\Model\\Worga\\src\\Model\\Entity\\Client",
+                            false
+                        ],
+                        [
+                            "null",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "updateAccount": {
+            "name": "updateAccount",
+            "line": 88,
+            "short_desc": "Updates an account in the database.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "bool",
+                    false
+                ]
+            ],
+            "hint_desc": "True if the account was updated successfully, false otherwise.",
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [
+                [
+                    "\\Exception",
+                    "If the account could not be updated."
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "account": {
+                    "name": "account",
+                    "line": 88,
+                    "short_desc": "The account to update.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\Worga\\src\\Model\\Entity\\Account",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

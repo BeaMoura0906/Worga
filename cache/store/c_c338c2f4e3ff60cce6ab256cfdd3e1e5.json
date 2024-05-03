@@ -1,0 +1,115 @@
+{
+    "name": "Worga\\src\\Controller\\AccountController",
+    "line": 15,
+    "short_desc": "Class AccountController\nIt manages operations related to client accounts, including database interactions by using the managers and rendering views.",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Worga\\src\\Controller",
+    "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Controller\\AccountController.php",
+    "relative_file": null,
+    "hash": "3e76a88407f1a450f5a0c678731f10773ef76d07",
+    "parent": "Worga\\src\\Controller\\Controller",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "is_read_only": false,
+    "aliases": {
+        "Account": "Worga\\src\\Model\\Entity\\Account",
+        "Client": "Worga\\src\\Model\\Entity\\Client",
+        "FinTransCategories": "Worga\\src\\Classes\\FinTransCategories",
+        "AccountManager": "Worga\\src\\Model\\AccountManager",
+        "ClientManager": "Worga\\src\\Model\\ClientManager"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 28,
+            "short_desc": "Constructor method to initialize properties and call the parent constructor",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "params": {
+                    "name": "params",
+                    "line": 28,
+                    "short_desc": "Parameters for the controller",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": "[]",
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "defaultAction": {
+            "name": "defaultAction",
+            "line": 39,
+            "short_desc": "Default action method to render the account view. It calls getAccountAction() method.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getAccountAction": {
+            "name": "getAccountAction",
+            "line": 47,
+            "short_desc": "Action method to render the account view with the client and its account details. If no client is selected, it redirects to the list of clients view. If the selected client has no account, it redirects to the account view without the account details to add one.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "createAction": {
+            "name": "createAction",
+            "line": 91,
+            "short_desc": "Action method to create a new account for the selected client",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

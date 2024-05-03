@@ -1,0 +1,103 @@
+{
+    "name": "Worga\\src\\Classes\\Hydrate",
+    "line": 16,
+    "short_desc": "Class Hydrate\nUtility class to hydrate object properties based on provided data.",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Worga\\src\\Classes",
+    "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Classes\\Hydrate.php",
+    "relative_file": null,
+    "hash": "445d8866e3c0623834f9593a0f6da5ad359fe9d0",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "is_read_only": false,
+    "aliases": {
+        "User": "Worga\\src\\Model\\Entity\\User",
+        "Client": "Worga\\src\\Model\\Entity\\Client",
+        "Account": "Worga\\src\\Model\\Entity\\Account",
+        "UserManager": "Worga\\src\\Model\\UserManager",
+        "ClientManager": "Worga\\src\\Model\\ClientManager",
+        "AccountManager": "Worga\\src\\Model\\AccountManager"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 26,
+            "short_desc": "Constructor for the Hydrate class.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "hydrate": {
+            "name": "hydrate",
+            "line": 39,
+            "short_desc": "Hydrate method to set object properties based on provided data.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "data": {
+                    "name": "data",
+                    "line": 39,
+                    "short_desc": "Data to hydrate the object.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                },
+                "object": {
+                    "name": "object",
+                    "line": 39,
+                    "short_desc": "The object to hydrate.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "object",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

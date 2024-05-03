@@ -1,0 +1,194 @@
+{
+    "name": "Worga\\src\\Classes\\dbConnect",
+    "line": 9,
+    "short_desc": "Class dbConnect\nManages database connections and PDO instances with singleton pattern.",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Worga\\src\\Classes",
+    "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Classes\\dbConnect.php",
+    "relative_file": null,
+    "hash": "b4acb3f742839c82eaf970e885ad45ea07864e01",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "is_read_only": false,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": {
+        "db": {
+            "name": "db",
+            "line": 12,
+            "short_desc": "Public property to hold the PDO instance",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": 1,
+            "default": null,
+            "errors": [],
+            "is_read_only": false,
+            "is_write_only": false,
+            "is_intersection_type": false
+        }
+    },
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 24,
+            "short_desc": "Constructor method to establish a database connection",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "dsn": {
+                    "name": "dsn",
+                    "line": 24,
+                    "short_desc": "Database connection string",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                },
+                "dblogin": {
+                    "name": "dblogin",
+                    "line": 24,
+                    "short_desc": "Database username",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                },
+                "dbpassword": {
+                    "name": "dbpassword",
+                    "line": 24,
+                    "short_desc": "Database password",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "getDb": {
+            "name": "getDb",
+            "line": 52,
+            "short_desc": "Static method to get the database connection instance (singleton pattern)",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Worga\\src\\Classes\\dbConnect",
+                    false
+                ]
+            ],
+            "hint_desc": "Returns an instance of the dbConnect class",
+            "tags": [],
+            "see": [],
+            "modifiers": 9,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "dsn": {
+                    "name": "dsn",
+                    "line": 52,
+                    "short_desc": "Database connection string",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                },
+                "dblogin": {
+                    "name": "dblogin",
+                    "line": 52,
+                    "short_desc": "Database username",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                },
+                "dbpassword": {
+                    "name": "dbpassword",
+                    "line": 52,
+                    "short_desc": "Database password",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

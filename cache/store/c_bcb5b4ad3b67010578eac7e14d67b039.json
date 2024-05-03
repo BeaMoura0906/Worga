@@ -1,0 +1,158 @@
+{
+    "name": "Worga\\src\\Classes\\Role",
+    "line": 9,
+    "short_desc": "Class Role\nUtil class for user roles.",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Worga\\src\\Classes",
+    "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Classes\\Role.php",
+    "relative_file": null,
+    "hash": "5e3d0d61f3942f4475537ed7bcf388254af0668d",
+    "parent": null,
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "is_read_only": false,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "getRoles": {
+            "name": "getRoles",
+            "line": 21,
+            "short_desc": "Retrieves the list of roles.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "The list of roles.",
+            "tags": [],
+            "see": [],
+            "modifiers": 9,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getRolesInFrench": {
+            "name": "getRolesInFrench",
+            "line": 35,
+            "short_desc": "Retrieves the list of roles in French.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "The list of roles in French.",
+            "tags": [],
+            "see": [],
+            "modifiers": 9,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getRolesInFrenchWithoutAdmin": {
+            "name": "getRolesInFrenchWithoutAdmin",
+            "line": 49,
+            "short_desc": "Retrieves the list of roles in French without the admin role.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "The list of roles in French without the admin role.",
+            "tags": [],
+            "see": [],
+            "modifiers": 9,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getRoleInEnglish": {
+            "name": "getRoleInEnglish",
+            "line": 63,
+            "short_desc": "Get the English role from the French role.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "The role in English, or null if not found.",
+            "tags": [],
+            "see": [],
+            "modifiers": 9,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "roleInFrench": {
+                    "name": "roleInFrench",
+                    "line": 63,
+                    "short_desc": "The role in French.",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": null,
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        }
+    },
+    "constants": {
+        "ROLE_ADMIN": {
+            "name": "ROLE_ADMIN",
+            "line": 12,
+            "short_desc": "Properties ROLE_*",
+            "long_desc": "",
+            "modifiers": 1,
+            "tags": []
+        },
+        "ROLE_EDITOR": {
+            "name": "ROLE_EDITOR",
+            "line": 13,
+            "short_desc": null,
+            "long_desc": null,
+            "modifiers": 1,
+            "tags": []
+        },
+        "ROLE_VISITOR": {
+            "name": "ROLE_VISITOR",
+            "line": 14,
+            "short_desc": null,
+            "long_desc": null,
+            "modifiers": 1,
+            "tags": []
+        }
+    }
+}

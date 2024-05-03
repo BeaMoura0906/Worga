@@ -1,0 +1,77 @@
+{
+    "name": "Worga\\src\\Controller\\IndexController",
+    "line": 9,
+    "short_desc": "Class IndexController\nIt manages operations related to the index view, including rendering it.",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Worga\\src\\Controller",
+    "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Controller\\IndexController.php",
+    "relative_file": null,
+    "hash": "4d2eeba99f14a25f4fceba298dca1f020908fce8",
+    "parent": "Worga\\src\\Controller\\Controller",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "is_read_only": false,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 16,
+            "short_desc": "Constructor method to initialize properties and call the parent constructor",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "params": {
+                    "name": "params",
+                    "line": 16,
+                    "short_desc": "Parameters for the controller",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": "[]",
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "defaultAction": {
+            "name": "defaultAction",
+            "line": 25,
+            "short_desc": "Default action method to render the index view",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

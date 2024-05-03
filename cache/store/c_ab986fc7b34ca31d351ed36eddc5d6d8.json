@@ -1,0 +1,127 @@
+{
+    "name": "Worga\\src\\Controller\\SecurityController",
+    "line": 11,
+    "short_desc": "Class SecurityController\nIt is used to manage user login and logout.",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Worga\\src\\Controller",
+    "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Controller\\SecurityController.php",
+    "relative_file": null,
+    "hash": "1f2d63c2bc8d568b969455268449f39c573350e8",
+    "parent": "Worga\\src\\Controller\\Controller",
+    "modifiers": 0,
+    "is_trait": false,
+    "is_interface": false,
+    "is_read_only": false,
+    "aliases": {
+        "UserManager": "Worga\\src\\Model\\UserManager"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 21,
+            "short_desc": "Constructor method to initialize properties and call the parent constructor",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "params": {
+                    "name": "params",
+                    "line": 21,
+                    "short_desc": "Parameters for the controller",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": 0,
+                    "default": "[]",
+                    "variadic": false,
+                    "is_by_ref": false,
+                    "is_read_only": false,
+                    "is_intersection_type": false
+                }
+            }
+        },
+        "defaultAction": {
+            "name": "defaultAction",
+            "line": 32,
+            "short_desc": "Default action method, redirects to login action",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "loginAction": {
+            "name": "loginAction",
+            "line": 41,
+            "short_desc": "Action method to render the login view",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "verifyLoginAction": {
+            "name": "verifyLoginAction",
+            "line": 51,
+            "short_desc": "Action method to verify user login credentials",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "logoutAction": {
+            "name": "logoutAction",
+            "line": 113,
+            "short_desc": "Action method to destroy the session and redirect to the root path",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}
