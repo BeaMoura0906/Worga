@@ -73,14 +73,14 @@ N'hésitez pas à consulter le dossier `screenshots` pour plus de captures d'éc
 
 ## Tests
 
-Un plan de tests fonctionnels est disponible dans le dossier `tests`, retraçant les tests effectués pour chaque fonctionnalité.
+Un plan de tests fonctionnels est disponible dans le dossier `tests\functional`, retraçant les tests effectués pour chaque fonctionnalité.
 
 ## Documentation
 
 Veuillez consulter la documentation de Worga dans le dossier `docs`. Vous y trouverez :
 
-- Le cahier des charges (contexte, spécifications fonctionnelles et techniques, diagrammes de cas d'utilisation et de séquences, arborescence des pages, maquette de la page de relevé de compte client) : `docs\cdd.pdf`.
-- Les MCD (Modéle de Conception de Données), MLD (Modéle Logiciel de Données) et schéma E-R (Schéma de Relation Entité-Association) : `docs\diagrams\`.
+- Le cahier des charges (contexte, spécifications fonctionnelles et techniques, diagrammes de cas d'utilisation et de séquences, arborescence des pages, maquette de la page de relevé de compte client) : `docs\Worga_RequirementsDocument.pdf`.
+- Les MCD (Modéle de Conception de Données), MLD (Modéle Logiciel de Données) et schéma E-R (Schéma de Relation Entité-Association) : `docs\diagrams\CDM.png`, `docs\diagrams\LDM.png` et `docs\diagrams\ERD.png`, .
 - La documentation de classes PHP : `docs\phpdoc\`. Pour y accéder, ouvrez le fichier `docs\phpdoc\index.html` dans votre navigateur. 
 
 ## Auteur
