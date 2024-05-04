@@ -40,7 +40,8 @@
                             data-side-pagination="server"
                             data-sortable="true"
                             data-pagination="true"
-                            data-page-size="10">
+                            data-page-size="10"
+                            data-header-style="headerStyle">
                         <thead>
                         <tr>
                             <th data-field="id" 
@@ -116,6 +117,12 @@
                         window.location.href = "{{ pathRoot ~ 'client/deleteClient/clientId/' }}" + clientId;
                     }
                     return false;
+                }
+
+                function headerStyle(column) {
+                    return { 
+                        classes: 'bg-secondary-subtle text-dark'
+                    }
                 }
             </script>
 
