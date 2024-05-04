@@ -49,31 +49,42 @@ Suivez ces étapes pour configurer le projet :
 Veuillez ouvrir votre navigateur et placez-vous dans le dossier `Worga` à l'aide du cheminement de votre projet au sein du serveur.
 
 1. Page d'accueil
+![Homepage](screenshots/homepage.png)
 
 2. Page de connexion
+![Login](screenshots/login.png)
 
 3. Tableau de bord contenant les fiches clients
+![Dashboard](screenshots/dashboard.png)
 
 4. Page d'ajout/modification d'une fiche client
+![AddClient](screenshots/addclient.png)
 
 5. Page d'un compte client avec le relevé de compte client
+![ClientAccount](screenshots/clientaccount.png)
+![ClientAccountDetails](screenshots/clientaccount_2.png)
 
 6. Popup d'ajout/modification d'une transaction financière du compte client
+![AddFinTrans](screenshots/addfintrans.png)
+![EditFinTrans](screenshots/editfintrans.png)
 
 7. Popup de visualisation des détails d'une transaction financière avec la possibilité de l'associer à un document justificatif
+![FinTransDetails](screenshots/viewfintrans.png)
 
 8. Exportation du relevé de compte client en PDF
+![ExportPDF](screenshots/exportpdf.png)
 
 9. Panneau d'administration
+![AdminPanel](screenshots/adminpanel.png)
 
 10. Page de création/modification d'un utilisateur
-
+![AddUser](screenshots/adduser.png)
 
 N'hésitez pas à consulter le dossier `screenshots` pour plus de captures d'écran de l'application, notamment pour visualizer le design responsive.
 
 ## Tests
 
-Un plan de tests fonctionnels est disponible dans le dossier `tests\functional`, retraçant les tests effectués pour chaque fonctionnalité.
+Un plan de tests fonctionnels est disponible dans le fichier `tests\functional\Worga_FunctionalTest.pdf`, retraçant les tests effectués pour chaque fonctionnalité.
 
 ## Documentation
 
