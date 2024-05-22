@@ -2,9 +2,29 @@
     background-color: #E1DDD6;
 }
 
+.image-container {
+    width: 90%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: top center;
+}
+
 .index-img {
-    width: 70rem; 
-    height: auto;
+    width: auto;
+    height: 90%;
+    object-fit: cover;
+    object-position: top center;
+}
+
+@media (max-width: 1200px) {
+    .index-img {
+        width: auto;
+        height: 45%;
+        object-fit: cover;
+        object-position: top center;
+    }
 }
 
 .navbar-img {
