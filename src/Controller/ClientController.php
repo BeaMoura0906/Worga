@@ -33,7 +33,18 @@ class ClientController extends Controller
      * Default action method to render the client view
      */
     public function defaultAction()
-    {
+    {   
+        if( !$this->checkIfUserIsConnected() ) {
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => 'Veuillez vous connecter pour accéder à cette page.'
+                ]
+            ];
+            $this->render('login', $data);
+            exit();
+        }
+
         $data = [
             'listClients' => true
         ];
@@ -45,6 +56,17 @@ class ClientController extends Controller
      */
     public function listClientsAction()
     {
+        if( !$this->checkIfUserIsConnected() ) {
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => 'Veuillez vous connecter pour accéder à cette page.'
+                ]
+            ];
+            echo json_encode($data);
+            exit();
+        }
+
         $nbClients = $this->clientManager->countAllClients() ?? 0;
 
         $searchParams = [
@@ -92,6 +114,18 @@ class ClientController extends Controller
      */
     public function addClientAction()
     {
+        if( !$this->checkIfIsAdminOrEditor() ) {
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => 'Vos droits d\'accès ne permettent pas d\'accéder à cette fonctionnalité.'
+                ],
+                'listClients' => true
+            ];
+            $this->render('client', $data);
+            exit();
+        }
+
         $this->render('client', []);
     }
 
@@ -100,6 +134,18 @@ class ClientController extends Controller
      */
     public function addClientValidAction()
     {
+        if( !$this->checkIfIsAdminOrEditor() ) {
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => 'Vos droits d\'accès ne permettent pas d\'accéder à cette fonctionnalité.'
+                ],
+                'listClients' => true
+            ];
+            $this->render('client', $data);
+            exit();
+        }
+
         if( isset( $this->vars['lastName'] ) && isset( $this->vars['firstName'] ) && isset( $this->vars['address'] ) && isset( $this->vars['phone'] ) && isset( $this->vars['email'] )) {
             $lastName = filter_var( $this->vars['lastName'] );
             $firstName = filter_var( $this->vars['firstName'] );
@@ -160,6 +206,18 @@ class ClientController extends Controller
      */
     public function updateClientAction()
     {
+        if( !$this->checkIfIsAdminOrEditor() ) {
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => 'Vos droits d\'accès ne permettent pas d\'accéder à cette fonctionnalité.'
+                ],
+                'listClients' => true
+            ];
+            $this->render('client', $data);
+            exit();
+        }
+
         $clientId = $this->vars['clientId'] ?? null;
         $client = $this->clientManager->getClientById($clientId);
         if ($client) {
@@ -183,6 +241,18 @@ class ClientController extends Controller
      */
     public function updateClientValidAction()
     {
+        if( !$this->checkIfIsAdminOrEditor() ) {
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => 'Vos droits d\'accès ne permettent pas d\'accéder à cette fonctionnalité.'
+                ],
+                'listClients' => true
+            ];
+            $this->render('client', $data);
+            exit();
+        }
+
         if ( isset( $this->vars['clientId'] ) && isset( $this->vars['lastName'] ) && isset( $this->vars['firstName'] ) && isset( $this->vars['address'] ) && isset( $this->vars['phone'] ) && isset( $this->vars['email'] ) ) {
             $clientId = filter_var( $this->vars['clientId'] );
             $lastName = filter_var( $this->vars['lastName'] );
@@ -236,6 +306,18 @@ class ClientController extends Controller
      */
     public function deleteClientAction()
     {
+        if( !$this->checkIfIsAdminOrEditor() ) {
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => 'Vos droits d\'accès ne permettent pas d\'accéder à cette fonctionnalité.'
+                ],
+                'listClients' => true
+            ];
+            $this->render('client', $data);
+            exit();
+        }
+
         $data['listClients'] = true;
         if ( isset( $this->vars['clientId'] ) ) {
             $clientId = filter_var( $this->vars['clientId'] );

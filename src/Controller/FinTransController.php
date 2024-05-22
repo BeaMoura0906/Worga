@@ -46,6 +46,17 @@ class FinTransController extends Controller
      */
     public function defaultAction() 
     {
+        if( !$this->checkIfUserIsConnected() ) {
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => "Vous devez vous connecter pour accéder à cette page."
+                ]
+            ];
+            $this->render('login', $data);
+            exit();
+        }
+
         $data = [
             'listFinTrans' => true
         ];
@@ -57,6 +68,17 @@ class FinTransController extends Controller
      */
     public function listFinTransAction()
     {
+        if( !$this->checkIfUserIsConnected() ) {
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => "Vous devez vous connecter pour accéder à cette page."
+                ]
+            ];
+            echo json_encode($data);
+            exit();
+        }
+
         $searchParams = [
             'search'		=> $this->vars['search'],
 			'sort'			=> $this->vars['sort'],
@@ -157,7 +179,18 @@ class FinTransController extends Controller
      * Method action to export the list of financial transactions in PDF format.
      */
     public function exportToPdfAction()
-    {
+    {   
+        if( !$this->checkIfUserIsConnected() ) {
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => "Vous devez vous connecter pour accéder à cette page."
+                ]
+            ];
+            $this->render('login', $data);
+            exit();
+        }
+
         if (isset($this->vars['accountId'])) {
             $accountId = $this->vars['accountId'];
             $account = $this->accountManager->getAccountById($accountId);
@@ -267,6 +300,30 @@ class FinTransController extends Controller
      */
     public function addFinTransValidAction()
     {
+        if( !$this->checkIfIsAdminOrEditor() ) {
+            $account = isset($this->vars['accountId']) ? $this->accountManager->getAccountById($this->vars['accountId']) : null;
+            $selectedClient = $account !== null ? $account->getClient() : null;
+
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => 'Vos droits d\'accès ne vous permettent pas d\'accéder à cette fonctionnalité.'
+                ]
+            ];
+
+            if( $account !== null && $selectedClient !== null ) {
+                $data['selectedClient'] = $selectedClient;
+                $data['clientAccount'] = $account;
+                $data['finTransCategoriesFr'] = $this->finTransCategories->getFinTransCategoriesFr();
+                $this->render('account', $data);
+                exit();
+            } else {
+                $data['listClients'] = true;
+                $this->render('clients', $data);
+                exit();
+            }
+        }
+
         if( isset($this->vars['accountId']) && isset($this->vars['date']) && isset($this->vars['title']) && isset($this->vars['description']) && isset($this->vars['category']) && isset($this->vars['amount']) && isset($this->vars['vatRate']) ) {
             $date = filter_var($this->vars['date']);
             $title = filter_var($this->vars['title']);
@@ -342,6 +399,17 @@ class FinTransController extends Controller
      */
     public function getFinTransAction()
     {
+        if( !$this->checkIfUserIsConnected() ) {
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => "Vous devez vous connecter pour accéder à cette page."
+                ]
+            ];
+            $this->render('login', $data);
+            exit();
+        }
+        
         if( isset($this->vars['finTransId']) ) {
             $finTransId = $this->vars['finTransId'];
             if( $finTrans = $this->finTransManager->getFinTransById($finTransId) ) {
@@ -386,6 +454,30 @@ class FinTransController extends Controller
      */
     public function editFinTransValidAction()
     {
+        if( !$this->checkIfIsAdminOrEditor() ) {
+            $account = isset($this->vars['accountId']) ? $this->accountManager->getAccountById($this->vars['accountId']) : null;
+            $selectedClient = $account !== null ? $account->getClient() : null;
+
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => 'Vos droits d\'accès ne vous permettent pas d\'accéder à cette fonctionnalité.'
+                ]
+            ];
+
+            if( $account !== null && $selectedClient !== null ) {
+                $data['selectedClient'] = $selectedClient;
+                $data['clientAccount'] = $account;
+                $data['finTransCategoriesFr'] = $this->finTransCategories->getFinTransCategoriesFr();
+                $this->render('account', $data);
+                exit();
+            } else {
+                $data['listClients'] = true;
+                $this->render('clients', $data);
+                exit();
+            }
+        }
+
         if( isset($this->vars['finTransId']) && isset($this->vars['date']) && isset($this->vars['title']) && isset($this->vars['description']) && isset($this->vars['category']) && isset($this->vars['amount']) && isset($this->vars['vatRate']) ) {
             $finTrans = $this->finTransManager->getFinTransById(filter_var($this->vars['finTransId']));
             
@@ -459,6 +551,30 @@ class FinTransController extends Controller
      */
     public function deleteFinTransAction()
     {
+        if( !$this->checkIfIsAdminOrEditor() ) {
+            $account = isset($this->vars['accountId']) ? $this->accountManager->getAccountById($this->vars['accountId']) : null;
+            $selectedClient = $account !== null ? $account->getClient() : null;
+
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => 'Vos droits d\'accès ne vous permettent pas d\'accéder à cette fonctionnalité.'
+                ]
+            ];
+
+            if( $account !== null && $selectedClient !== null ) {
+                $data['selectedClient'] = $selectedClient;
+                $data['clientAccount'] = $account;
+                $data['finTransCategoriesFr'] = $this->finTransCategories->getFinTransCategoriesFr();
+                $this->render('account', $data);
+                exit();
+            } else {
+                $data['listClients'] = true;
+                $this->render('clients', $data);
+                exit();
+            }
+        }
+
         if( isset($this->vars['finTransId']) ) {
             $finTransId = filter_var($this->vars['finTransId']);
             $finTrans = $this->finTransManager->getFinTransById($finTransId);

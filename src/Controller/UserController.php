@@ -115,6 +115,17 @@ class UserController extends Controller
      */
     public function listUsersAction()
     {
+        if( !$this->checkIfIsAdmin() ){
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => 'Vos droits d\'accès ne permettent pas d\'accéder à cette page.'
+                ]
+            ];
+            echo json_encode($data);
+            die;
+        }
+
         $nbUsers = $this->userManager->countAll() ?? 0;
 
         $searchParams = [
@@ -159,6 +170,17 @@ class UserController extends Controller
      */
     public function setIsActiveAction()
     {
+        if( !$this->checkIfIsAdmin() ){
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => 'Vos droits d\'accès ne permettent pas d\'accéder à cette fonctionnalité.'
+                ]
+            ];
+            echo json_encode($data);
+            die;
+        }
+
         $isActive = $this->vars['isActive'] ?? 0;
 
         if( isset( $this->vars['id'] ) ) {
@@ -179,6 +201,17 @@ class UserController extends Controller
      */
     public function createUserAction()
     {
+        if( !$this->checkIfIsAdmin() ){
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => 'Vos droits d\'accès ne permettent pas d\'accéder à cette fonctionnalité.'
+                ]
+            ];
+            $this->render('index', $data);
+            die;
+        };
+
         $data = [
             'roles' => $this->roleUtil->getRolesInFrenchWithoutAdmin()
         ];
@@ -190,6 +223,17 @@ class UserController extends Controller
      */
     public function createUserValidAction()
     {
+        if( !$this->checkIfIsAdmin() ){
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => 'Vos droits d\'accès ne permettent pas d\'accéder à cette fonctionnalité.'
+                ]
+            ];
+            $this->render('index', $data);
+            die;
+        };
+
         $data = [];
         $data['roles'] = $this->roleUtil->getRolesInFrench(); 
 
@@ -247,6 +291,17 @@ class UserController extends Controller
      */
     public function updateUserAction()
     {
+        if( !$this->checkIfIsAdmin() ){
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => 'Vos droits d\'accès ne permettent pas d\'accéder à cette fonctionnalité.'
+                ]
+            ];
+            $this->render('index', $data);
+            die;
+        };
+
         $id = $this->vars['id'];
         $user = $this->userManager->getUserById( $id );
         if( $user ){
@@ -263,6 +318,17 @@ class UserController extends Controller
      */
     public function updateUserValidAction()
     {
+        if( !$this->checkIfIsAdmin() ){
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => 'Vos droits d\'accès ne permettent pas d\'accéder à cette fonctionnalité.'
+                ]
+            ];
+            $this->render('index', $data);
+            die;
+        };
+        
         $data = [];
         $data['roles'] = $this->roleUtil->getRolesInFrenchWithoutAdmin();
 

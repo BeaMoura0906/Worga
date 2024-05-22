@@ -110,4 +110,37 @@ abstract class Controller
         
     }
 
+    /**
+     * Check if the user is connected
+     *
+     * @return bool True if the user is connected, false otherwise
+     */
+    protected function checkIfUserIsConnected()
+    {
+        if( isset( $_SESSION['userId'] ) ) { return true; } else { return false; }
+    }
+
+    /**
+     * Check if the user is an admin or an editor
+     * 
+     * @return bool True if the user is an admin or an editor, false otherwise
+     */
+    protected function checkIfIsAdminOrEditor()
+    {
+        if( isset( $_SESSION['userId'] ) && $_SESSION['userRole'] == 'admin' || $_SESSION['userRole'] == 'editor' ) { return true; } else { return false; }
+    }
+
+    /**
+     * Method to check if the user is logged in with admin rights
+     * 
+     * @return bool True if the user is logged in with admin rights, false otherwise
+     */
+    protected function checkIfIsAdmin()
+    {
+        if( isset( $_SESSION['userId'] ) && $_SESSION['userRole'] === 'admin' ){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

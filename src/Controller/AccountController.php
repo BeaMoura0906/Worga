@@ -46,6 +46,17 @@ class AccountController extends Controller
      */
     public function getAccountAction()
     {
+        if( !$this->checkIfUserIsConnected() ) {
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => "Vous devez vous connecter pour accéder à cette page."
+                ]
+            ];
+            $this->render('login', $data);
+            exit();
+        }
+
         if( isset($this->vars['clientId']) ) {
             $this->selectedClient = $this->clientManager->getClientById($this->vars['clientId']);
             if( $this->selectedClient ) {
@@ -90,6 +101,29 @@ class AccountController extends Controller
      */
     public function createAction()
     {   
+        if( !$this->checkIfIsAdminOrEditor() ) {
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => 'Vos droits d\'accès ne permettent pas d\'accéder à cette fonctionnalité.'
+                ]
+            ];
+
+            if( $this->selectedClient ) {
+                $data['selectedClient'] = $this->selectedClient;
+                $this->render('account', $data);
+                exit();
+            } else if ( isset($this->vars['clientId']) ) {
+                $data['selectedClient'] = $this->clientManager->getClientById($this->vars['clientId']);
+                $this->render('account', $data);
+                exit();
+            } else {
+                $data['listClients'] = true;
+                $this->render('client', $data);
+                exit();
+            }
+        } 
+        
         if( isset( $this->vars['clientId'] ) ) {
             $this->selectedClient = $this->selectedClient ?? $this->clientManager->getClientById($this->vars['clientId']);
             $newAccount = $this->accountManager->insertNewAccountToClient($this->selectedClient);

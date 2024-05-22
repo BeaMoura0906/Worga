@@ -39,14 +39,25 @@ class DocumentController extends Controller
      */
     public function defaultAction() 
     {
-
+        $this->viewDocumentAction();
     }
 
     /**
      * View a document for a financial transaction. It's display the document in the browser. 
      */
     public function viewDocumentAction()
-    {
+    {   
+        if( !$this->checkIfUserIsConnected() ) {
+            $data = [
+                'message' => [
+                    'type' => 'warning',
+                    'message' => "Vous devez vous connecter pour accéder à cette page."
+                ]
+            ];
+            $this->render('login', $data);
+            exit();
+        }
+
         if(isset($this->vars['docId'])) {
             $docId = filter_var($this->vars['docId']);
             $doc = $this->docManager->getDocumentById($docId);
@@ -64,6 +75,15 @@ class DocumentController extends Controller
      */
     public function uploadDocumentAction() 
     {
+        if ( !$this->checkIfIsAdminOrEditor() ) {
+            $data = [
+                'success' => false,
+                'message' => 'Vos droits d\'accès ne vous permettent pas d\'accéder à cette fonctionnalité.'
+            ];
+            echo json_encode($data);
+            exit;
+        }
+
         if (isset($this->vars['finTransId']) && isset($this->vars['accountId']) && isset($this->vars['docName']) && isset($_FILES['document']) && $_FILES['document']['error'] == UPLOAD_ERR_OK) { 
             $file = $_FILES['document'];
             $accountId = filter_var($this->vars['accountId']);
@@ -124,6 +144,15 @@ class DocumentController extends Controller
      */
     public function deleteDocumentAction()
     {
+        if ( !$this->checkIfIsAdminOrEditor() ) {
+            $data = [
+                'success' => false,
+                'message' => 'Vos droits d\'accès ne vous permettent pas d\'accéder à cette fonctionnalité.'
+            ];
+            echo json_encode($data);
+            exit;
+        }
+        
         if (isset($this->vars['finTransId'])) {
             $finTransId = filter_var($this->vars['finTransId']);
             if ($this->docManager->deleteDocumentByFinTransId($finTransId)) {
