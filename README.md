@@ -73,6 +73,7 @@ Veuillez ouvrir votre navigateur et placez-vous dans le dossier `Worga` à l'aid
 ![FinTransWithDoc](screenshots/viewdoc.png)
 
 8. Exportation du relevé de compte client en PDF
+![ExportPDF](screenshots/exportpdf.png)
 
 9. Panneau d'administration
 ![AdminPanel](screenshots/adminpanel.png)
