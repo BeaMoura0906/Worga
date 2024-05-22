@@ -101,12 +101,12 @@ class ClientController extends Controller
     public function addClientValidAction()
     {
         if( isset( $this->vars['lastName'] ) && isset( $this->vars['firstName'] ) && isset( $this->vars['address'] ) && isset( $this->vars['phone'] ) && isset( $this->vars['email'] )) {
-            $lastName = htmlentities( $this->vars['lastName'] );
-            $firstName = htmlentities( $this->vars['firstName'] );
-            $address = htmlentities( $this->vars['address'] );
-            $phone = htmlentities( $this->vars['phone'] );
-            $email = htmlentities( $this->vars['email'] );
-            $other = isset( $this->vars['other'] ) ?htmlentities( $this->vars['other'] ) : null;
+            $lastName = filter_var( $this->vars['lastName'] );
+            $firstName = filter_var( $this->vars['firstName'] );
+            $address = filter_var( $this->vars['address'] );
+            $phone = filter_var( $this->vars['phone'] );
+            $email = filter_var( $this->vars['email'] );
+            $other = isset( $this->vars['other'] ) ?filter_var( $this->vars['other'] ) : null;
 
             if( $this->clientManager->checkIfClientExists( $lastName, $firstName ) ) {
                 $data = [
@@ -184,13 +184,13 @@ class ClientController extends Controller
     public function updateClientValidAction()
     {
         if ( isset( $this->vars['clientId'] ) && isset( $this->vars['lastName'] ) && isset( $this->vars['firstName'] ) && isset( $this->vars['address'] ) && isset( $this->vars['phone'] ) && isset( $this->vars['email'] ) ) {
-            $clientId = htmlentities( $this->vars['clientId'] );
-            $lastName = htmlentities( $this->vars['lastName'] );
-            $firstName = htmlentities( $this->vars['firstName'] );
-            $address = htmlentities( $this->vars['address'] );
-            $phone = htmlentities( $this->vars['phone'] );
-            $email = htmlentities( $this->vars['email'] );
-            $other = isset( $this->vars['other'] ) ? htmlentities( $this->vars['other'] ) : null;
+            $clientId = filter_var( $this->vars['clientId'] );
+            $lastName = filter_var( $this->vars['lastName'] );
+            $firstName = filter_var( $this->vars['firstName'] );
+            $address = filter_var( $this->vars['address'] );
+            $phone = filter_var( $this->vars['phone'] );
+            $email = filter_var( $this->vars['email'] );
+            $other = isset( $this->vars['other'] ) ? filter_var( $this->vars['other'] ) : null;
 
             $client = new Client([
                 'id' => $clientId,
@@ -238,7 +238,7 @@ class ClientController extends Controller
     {
         $data['listClients'] = true;
         if ( isset( $this->vars['clientId'] ) ) {
-            $clientId = htmlentities( $this->vars['clientId'] );
+            $clientId = filter_var( $this->vars['clientId'] );
             if ($this->clientManager->deleteClientById($clientId)) {
                 $data['message'] = [
                     'message' => "Le client a bien été supprimé.",

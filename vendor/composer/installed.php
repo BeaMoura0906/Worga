@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '2aa70039287ea12740eb16a402570b97e5ed4670',
+        'reference' => 'e5eb6a7bb7edb49baa3d6e1fa882b8a5f74bd77a',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '2aa70039287ea12740eb16a402570b97e5ed4670',
+            'reference' => 'e5eb6a7bb7edb49baa3d6e1fa882b8a5f74bd77a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -114,6 +114,15 @@
             'provided' => array(
                 0 => '1.0|2.0|3.0',
             ),
+        ),
+        'setasign/fpdf' => array(
+            'pretty_version' => '1.8.6',
+            'version' => '1.8.6.0',
+            'reference' => '0838e0ee4925716fcbbc50ad9e1799b5edfae0a0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../setasign/fpdf',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'symfony/console' => array(
             'pretty_version' => 'v6.4.7',

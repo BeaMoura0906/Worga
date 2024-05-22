@@ -12,6 +12,8 @@ use Worga\src\Model\Entity\User;
 
 use DateTime;
 
+use FPDF;
+
 /**
  * Class FinTransController
  * It manages operations related to financial transactions, including database interactions by using the managers and rendering views.
@@ -50,6 +52,9 @@ class FinTransController extends Controller
         $this->render('account', $data);  
     }
 
+    /**
+     * Method action to list all financial transactions for an account with JSON response.
+     */
     public function listFinTransAction()
     {
         $searchParams = [
@@ -71,6 +76,9 @@ class FinTransController extends Controller
 
         $listFinTransWithoutParams = $this->finTransManager->getAllFinTransByAccountId($this->vars['accountId']);
         $totals = $this->calculateTotals($listFinTransWithoutParams);
+        $totals['totalToBeDebited'] = '- ' . number_format($totals['totalToBeDebited'], 2, ',', ' ') . ' €';
+        $totals['totalDebit'] = '- ' . number_format($totals['totalDebit'], 2, ',', ' ') . ' €';
+        $totals['totalCredit'] = '+ ' . number_format($totals['totalCredit'], 2, ',', ' ') . ' €';
 
         $dataBs = [];
 
@@ -78,13 +86,13 @@ class FinTransController extends Controller
             $amountIncVat = '';
             switch ($finTrans->getCategory()) {
                 case FinTransCategories::CATEGORY_TO_BE_DEBITED:
-                    $amountIncVat = '- ' . $finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()) . ' €';
+                    $amountIncVat = '- ' . number_format($finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()), 2, ',', ' ') . ' €';
                     break;
                 case FinTransCategories::CATEGORY_DEBIT:
-                    $amountIncVat = '- ' . $finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()) . ' €';
+                    $amountIncVat = '- ' . number_format($finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()), 2, ',', ' ') . ' €';
                     break;
                 case FinTransCategories::CATEGORY_CREDIT:
-                    $amountIncVat = '+ ' . $finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()) . ' €';
+                    $amountIncVat = '+ ' . number_format($finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()), 2, ',', ' ') . ' €';
                     break;
             }
 
@@ -139,10 +147,119 @@ class FinTransController extends Controller
         }
 
         return [
-            'totalToBeDebited' => '- ' . $totalToBeDebited . ' €',
-            'totalDebit'       => '- ' . $totalDebit . ' €',
-            'totalCredit'      => '+ ' . $totalCredit . ' €'
+            'totalToBeDebited' => $totalToBeDebited,
+            'totalDebit'       => $totalDebit,
+            'totalCredit'      => $totalCredit
         ];
+    }
+
+    /**
+     * Method action to export the list of financial transactions in PDF format.
+     */
+    public function exportToPdfAction()
+    {
+        if (isset($this->vars['accountId'])) {
+            $accountId = $this->vars['accountId'];
+            $account = $this->accountManager->getAccountById($accountId);
+            $listFinTrans = $this->finTransManager->getAllFinTransByAccountId($accountId);
+            $totals = $this->calculateTotals($listFinTrans);
+
+            // FPDF instance with landscape format
+            $pdf = new FPDF('L', 'mm', 'A4');
+            $pdf->AddPage();
+
+            // Add DejaVu font
+            $pdf->AddFont('DejaVu', '', 'DejaVuSans.php');
+            $pdf->AddFont('DejaVu-Bold', '', 'DejaVuSans-Bold.php');
+            $pdf->SetFont('DejaVu-Bold', '', 14);
+
+            // Function to convert UTF-8 to Windows-1252
+            function toWin1252($text) {
+                return iconv('UTF-8', 'Windows-1252//IGNORE', $text);
+            }
+
+            // Function to truncate the text in function of the max width
+            function truncateText($pdf, $text, $maxWidth) {
+                while ($pdf->GetStringWidth($text) > $maxWidth) {
+                    $text = substr($text, 0, -1);
+                }
+                return $text;
+            }
+
+            // Function to display the header of the table
+            function headerTable($pdf, $widths) {
+                $header = array(toWin1252('Date'), toWin1252('Titre'), toWin1252('Description'), toWin1252('À débiter'), toWin1252('Débit'), toWin1252('Crédit'));
+                foreach ($header as $key => $heading) {
+                    $pdf->Cell($widths[$key], 10, $heading, 1);
+                }
+                $pdf->Ln();
+            }
+
+            // PDF Title
+            $pdf->Cell(0, 10, toWin1252('Client #' . $account->getClient()->getId() . ' : ' . $account->getClient()->getLastName() . ' ' . $account->getClient()->getFirstName() . ' | Relevé de Compte Client'), 0, 1, 'C');
+            $pdf->Ln(10);
+
+            // Table Header
+            $pdf->SetFont('DejaVu-Bold', '', 10);
+            $widths = array(30, 50, 80, 40, 40, 40);
+            headerTable($pdf, $widths);
+
+            // Table Body 
+            $pdf->SetFont('DejaVu', '', 10);
+            foreach ($listFinTrans as $finTrans) {
+                // Check if page needs to be created in function of the remaining space
+                if ($pdf->GetY() > 190) {
+                    $pdf->AddPage();
+                    headerTable($pdf, $widths);
+                }
+
+                $toBeDebited = ' ';
+                $credit = ' ';
+                $debit = ' ';
+
+                switch ($finTrans->getCategory()) {
+                    case FinTransCategories::CATEGORY_TO_BE_DEBITED:
+                        $toBeDebited = '- ' . toWin1252(number_format($finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()), 2, ',', ' ') . ' EUR');
+                        break;
+                    case FinTransCategories::CATEGORY_DEBIT:
+                        $debit = '- ' . toWin1252(number_format($finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()), 2, ',', ' ') . ' EUR');
+                        break;
+                    case FinTransCategories::CATEGORY_CREDIT:
+                        $credit = '+ ' . toWin1252(number_format($finTrans->getAmountIncVat($finTrans->getAmountExVat(), $finTrans->getVatRate()), 2, ',', ' ') . ' EUR');
+                        break;
+                }
+
+                $date = toWin1252($finTrans->getFinTransDate()->format('d/m/Y'));
+                $title = truncateText($pdf, toWin1252($finTrans->getTitle()), $widths[1]);
+                $description = truncateText($pdf, toWin1252($finTrans->getDescription()), $widths[2]);
+                
+                $pdf->Cell($widths[0], 10, $date, 1);
+                $pdf->Cell($widths[1], 10, $title, 1);
+                $pdf->Cell($widths[2], 10, $description, 1);
+                $pdf->Cell($widths[3], 10, $toBeDebited, 1, 0, 'R');
+                $pdf->Cell($widths[4], 10, $debit, 1, 0, 'R');
+                $pdf->Cell($widths[5], 10, $credit, 1, 0, 'R');
+                $pdf->Ln();
+            }
+
+            // Table Footer
+            $pdf->SetFont('DejaVu-Bold', '', 10);
+            $pdf->Cell($widths[0] + $widths[1] + $widths[2], 10, 'Total', 1);
+            $pdf->Cell($widths[3], 10, toWin1252('- ' . number_format($totals['totalToBeDebited'], 2, ',', ' ') . ' EUR'), 1, 0, 'R');
+            $pdf->Cell($widths[4], 10, toWin1252('- ' . number_format($totals['totalDebit'], 2, ',', ' ') . ' EUR'), 1, 0, 'R');
+            $pdf->Cell($widths[5], 10, toWin1252('+ ' . number_format($totals['totalCredit'], 2, ',', ' ') . ' EUR'), 1, 0, 'R');
+            $pdf->Ln();
+
+            // PDF Output
+            $pdf->Output('D', 'releve_de_compte_client_n' . $account->getId() . '.pdf');
+
+            $data = [
+                'selectedClient' => $account->getClient(),
+                'clientAccount' => $account,
+                'finTransCategoriesFr' => $this->finTransCategories->getFinTransCategoriesFr()
+            ];
+            $this->render('account', $data);
+        } 
     }
 
     /**
@@ -151,12 +268,12 @@ class FinTransController extends Controller
     public function addFinTransValidAction()
     {
         if( isset($this->vars['accountId']) && isset($this->vars['date']) && isset($this->vars['title']) && isset($this->vars['description']) && isset($this->vars['category']) && isset($this->vars['amount']) && isset($this->vars['vatRate']) ) {
-            $date = htmlentities($this->vars['date']);
-            $title = htmlentities($this->vars['title']);
-            $description = htmlentities($this->vars['description']);
-            $category = htmlentities($this->vars['category']);
-            $amount = htmlentities($this->vars['amount']);
-            $vatRate = htmlentities($this->vars['vatRate']);
+            $date = filter_var($this->vars['date']);
+            $title = filter_var($this->vars['title']);
+            $description = filter_var($this->vars['description']);
+            $category = filter_var($this->vars['category']);
+            $amount = filter_var($this->vars['amount']);
+            $vatRate = filter_var($this->vars['vatRate']);
 
             $date = new DateTime($date);
             $date = $date->format('Y-m-d');
@@ -270,14 +387,14 @@ class FinTransController extends Controller
     public function editFinTransValidAction()
     {
         if( isset($this->vars['finTransId']) && isset($this->vars['date']) && isset($this->vars['title']) && isset($this->vars['description']) && isset($this->vars['category']) && isset($this->vars['amount']) && isset($this->vars['vatRate']) ) {
-            $finTrans = $this->finTransManager->getFinTransById(htmlentities($this->vars['finTransId']));
+            $finTrans = $this->finTransManager->getFinTransById(filter_var($this->vars['finTransId']));
             
-            $date = htmlentities($this->vars['date']);
-            $title = htmlentities($this->vars['title']);
-            $description = htmlentities($this->vars['description']);
-            $category = htmlentities($this->vars['category']);
-            $amount = htmlentities($this->vars['amount']);
-            $vatRate = htmlentities($this->vars['vatRate']);
+            $date = filter_var($this->vars['date']);
+            $title = filter_var($this->vars['title']);
+            $description = filter_var($this->vars['description']);
+            $category = filter_var($this->vars['category']);
+            $amount = filter_var($this->vars['amount']);
+            $vatRate = filter_var($this->vars['vatRate']);
 
             $date = new DateTime($date);
             $date = $date->format('Y-m-d');
@@ -343,7 +460,7 @@ class FinTransController extends Controller
     public function deleteFinTransAction()
     {
         if( isset($this->vars['finTransId']) ) {
-            $finTransId = htmlentities($this->vars['finTransId']);
+            $finTransId = filter_var($this->vars['finTransId']);
             $finTrans = $this->finTransManager->getFinTransById($finTransId);
             $account = $finTrans->getAccount();
             $client = $account->getClient();

@@ -1,6 +1,7 @@
 {
     "require": {
-        "twig/twig": "^3.0"
+        "twig/twig": "^3.0",
+        "setasign/fpdf": "^1.8"
     },
     "require-dev": {
         "code-lts/doctum": "^5.5"

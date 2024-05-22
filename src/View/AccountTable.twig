@@ -1,6 +1,12 @@
+<div class="ms-2" id="toolbar">
+    <a href="{{ pathRoot }}finTrans/exportToPdf/accountId/{{ clientAccount.id }}" class="btn btn-secondary" role="button"><i class="bi bi-download"></i></a>
+</div>
+
 <table
     class="table"
     id="fin-trans-table"
+    data-toolbar="#toolbar"
+    data-toolbar-align="right"
     data-toggle="table"
     data-height="auto"
     data-url="{{ pathRoot  ~ 'finTrans/listFinTrans' }}"

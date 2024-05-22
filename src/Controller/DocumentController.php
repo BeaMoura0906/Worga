@@ -48,7 +48,7 @@ class DocumentController extends Controller
     public function viewDocumentAction()
     {
         if(isset($this->vars['docId'])) {
-            $docId = htmlentities($this->vars['docId']);
+            $docId = filter_var($this->vars['docId']);
             $doc = $this->docManager->getDocumentById($docId);
             header('Content-type: application/pdf');
             readfile($_SERVER['DOCUMENT_ROOT'] . $this->pathRoot . $doc->getPath());
@@ -66,7 +66,7 @@ class DocumentController extends Controller
     {
         if (isset($this->vars['finTransId']) && isset($this->vars['accountId']) && isset($this->vars['docName']) && isset($_FILES['document']) && $_FILES['document']['error'] == UPLOAD_ERR_OK) { 
             $file = $_FILES['document'];
-            $accountId = htmlentities($this->vars['accountId']);
+            $accountId = filter_var($this->vars['accountId']);
             $uploadDir = $_SERVER['DOCUMENT_ROOT'] . $this->pathRoot . 'financial-documents/act' . $accountId . '/'; 
 
             if (!is_dir($uploadDir)) { 
@@ -91,12 +91,12 @@ class DocumentController extends Controller
             $docPath = 'financial-documents/act' . $accountId . '/' . $newFileName;
 
             if (move_uploaded_file($file['tmp_name'], $uploadFile)) {
-                $docName = htmlentities($this->vars['docName']);
+                $docName = filter_var($this->vars['docName']);
                 $doc = new Document([
                     'name' => $docName,
                     'path' => $docPath
                 ]);
-                $finTransId = htmlentities($this->vars['finTransId']);   
+                $finTransId = filter_var($this->vars['finTransId']);   
                 $finTrans = $this->finTransManager->getFinTransById($finTransId) ?? new FinancialTransaction(['id' => $finTransId]);
                 $doc->setFinTrans($finTrans);
                 $doc->setUser(new User(['id' => $_SESSION['userId']]));
@@ -125,7 +125,7 @@ class DocumentController extends Controller
     public function deleteDocumentAction()
     {
         if (isset($this->vars['finTransId'])) {
-            $finTransId = htmlentities($this->vars['finTransId']);
+            $finTransId = filter_var($this->vars['finTransId']);
             if ($this->docManager->deleteDocumentByFinTransId($finTransId)) {
                 echo json_encode(['success' => true, 'message' => 'Document supprimé.']);
                 exit;
