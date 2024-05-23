@@ -8,7 +8,7 @@
     "namespace": "Worga\\src\\Controller",
     "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Controller\\Controller.php",
     "relative_file": null,
-    "hash": "9ffd751b02fc7dc4c646874d81f634ed64f0e1be",
+    "hash": "903f58b5429e9fa3e9cd08b0bdffb144d2da5ef3",
     "parent": null,
     "modifiers": 16,
     "is_trait": false,
@@ -318,6 +318,69 @@
                     "is_intersection_type": false
                 }
             }
+        },
+        "checkIfUserIsConnected": {
+            "name": "checkIfUserIsConnected",
+            "line": 118,
+            "short_desc": "Check if the user is connected",
+            "long_desc": "",
+            "hint": [
+                [
+                    "bool",
+                    false
+                ]
+            ],
+            "hint_desc": "True if the user is connected, false otherwise",
+            "tags": [],
+            "see": [],
+            "modifiers": 2,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "checkIfIsAdminOrEditor": {
+            "name": "checkIfIsAdminOrEditor",
+            "line": 128,
+            "short_desc": "Check if the user is an admin or an editor",
+            "long_desc": "",
+            "hint": [
+                [
+                    "bool",
+                    false
+                ]
+            ],
+            "hint_desc": "True if the user is an admin or an editor, false otherwise",
+            "tags": [],
+            "see": [],
+            "modifiers": 2,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "checkIfIsAdmin": {
+            "name": "checkIfIsAdmin",
+            "line": 138,
+            "short_desc": "Method to check if the user is logged in with admin rights",
+            "long_desc": "",
+            "hint": [
+                [
+                    "bool",
+                    false
+                ]
+            ],
+            "hint_desc": "True if the user is logged in with admin rights, false otherwise",
+            "tags": [],
+            "see": [],
+            "modifiers": 2,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
         }
     },
     "constants": []

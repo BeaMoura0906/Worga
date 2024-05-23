@@ -126,8 +126,6 @@ class UserController extends Controller
             die;
         }
 
-        $nbUsers = $this->userManager->countAll() ?? 0;
-
         $searchParams = [
             'search'		=> $this->vars['search'],
 			'sort'			=> $this->vars['sort'],
@@ -138,6 +136,11 @@ class UserController extends Controller
         ];
 
         $listUsers = $this->userManager->getAllUsersWithParams($searchParams);
+
+        $searchParams['offset'] = '';
+        $searchParams['limit'] = '';
+
+        $nbUsers = count( $this->userManager->getAllUsersWithParams($searchParams) );
 
         $dataBs = [];
 

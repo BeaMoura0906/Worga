@@ -70,8 +70,10 @@ class FinTransManager extends Manager
         if( $strLike ) {
             $sql .= " AND $strLike";
         }
+        $offset = !empty( $params['offset']) ? $params['offset'] : 0;
+        $limit = !empty( $params['limit'] ) ? $params['limit'] : 1000;
         $sql .= " ORDER BY $sort $order";
-
+        $sql .= " LIMIT $offset, $limit";
         
 
         $req = $this->dbManager->db->prepare( $sql );

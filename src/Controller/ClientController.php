@@ -67,8 +67,6 @@ class ClientController extends Controller
             exit();
         }
 
-        $nbClients = $this->clientManager->countAllClients() ?? 0;
-
         $searchParams = [
             'search'		=> $this->vars['search'],
 			'sort'			=> $this->vars['sort'],
@@ -79,6 +77,11 @@ class ClientController extends Controller
         ];
 
         $listClients = $this->clientManager->getAllClientsWithParams($searchParams);
+        
+        $searchParams['offset'] = '';
+        $searchParams['limit'] = '';
+
+        $nbClients = count( $this->clientManager->getAllClientsWithParams($searchParams) );
 
         $dataBs = [];
 

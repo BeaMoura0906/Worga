@@ -8,7 +8,7 @@
     "namespace": "Worga\\src\\Model",
     "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Model\\UserManager.php",
     "relative_file": null,
-    "hash": "65dfeff99817d4c63a8d7d1cc850d9c30050aa47",
+    "hash": "2b10c636dd3c63672588c5a404a7143334b82870",
     "parent": "Worga\\src\\Model\\Manager",
     "modifiers": 0,
     "is_trait": false,
@@ -115,7 +115,7 @@
         },
         "getUserByLogin": {
             "name": "getUserByLogin",
-            "line": 96,
+            "line": 99,
             "short_desc": "Get a user by their login.",
             "long_desc": "",
             "hint": [
@@ -139,7 +139,7 @@
             "parameters": {
                 "login": {
                     "name": "login",
-                    "line": 96,
+                    "line": 99,
                     "short_desc": "User login.",
                     "long_desc": null,
                     "hint": [
@@ -160,7 +160,7 @@
         },
         "getUserById": {
             "name": "getUserById",
-            "line": 120,
+            "line": 123,
             "short_desc": "Get a user by their ID.",
             "long_desc": "",
             "hint": [
@@ -184,7 +184,7 @@
             "parameters": {
                 "id": {
                     "name": "id",
-                    "line": 120,
+                    "line": 123,
                     "short_desc": "User ID.",
                     "long_desc": null,
                     "hint": [
@@ -205,7 +205,7 @@
         },
         "insertUser": {
             "name": "insertUser",
-            "line": 139,
+            "line": 142,
             "short_desc": "Insert a new user into the database.",
             "long_desc": "",
             "hint": [
@@ -229,7 +229,7 @@
             "parameters": {
                 "user": {
                     "name": "user",
-                    "line": 139,
+                    "line": 142,
                     "short_desc": "User object to be inserted.",
                     "long_desc": null,
                     "hint": [
@@ -250,7 +250,7 @@
         },
         "updateUser": {
             "name": "updateUser",
-            "line": 180,
+            "line": 183,
             "short_desc": "Update a user's information in the database.",
             "long_desc": "",
             "hint": [
@@ -274,7 +274,7 @@
             "parameters": {
                 "user": {
                     "name": "user",
-                    "line": 180,
+                    "line": 183,
                     "short_desc": "User object with updated information.",
                     "long_desc": null,
                     "hint": [
@@ -295,7 +295,7 @@
         },
         "setIsActiveByUserId": {
             "name": "setIsActiveByUserId",
-            "line": 214,
+            "line": 217,
             "short_desc": "Set the user's active status in the database.",
             "long_desc": "",
             "hint": [
@@ -315,7 +315,7 @@
             "parameters": {
                 "id": {
                     "name": "id",
-                    "line": 214,
+                    "line": 217,
                     "short_desc": "User ID.",
                     "long_desc": null,
                     "hint": [
@@ -334,7 +334,7 @@
                 },
                 "isActive": {
                     "name": "isActive",
-                    "line": 214,
+                    "line": 217,
                     "short_desc": "User active status.",
                     "long_desc": null,
                     "hint": [

@@ -8,7 +8,7 @@
     "namespace": "Worga\\src\\Model",
     "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Model\\FinTransManager.php",
     "relative_file": null,
-    "hash": "2cca73fa03596c56830dc238a8bb876639c2d528",
+    "hash": "bb70116f287e6e37716f3625807c94edb8c5539a",
     "parent": "Worga\\src\\Model\\Manager",
     "modifiers": 0,
     "is_trait": false,
@@ -133,7 +133,7 @@
         },
         "getFinTransById": {
             "name": "getFinTransById",
-            "line": 99,
+            "line": 101,
             "short_desc": "Retrieves a financial transaction from the database by its ID.",
             "long_desc": "",
             "hint": [
@@ -157,7 +157,7 @@
             "parameters": {
                 "id": {
                     "name": "id",
-                    "line": 99,
+                    "line": 101,
                     "short_desc": "The ID of the financial transaction to retrieve.",
                     "long_desc": null,
                     "hint": [
@@ -178,7 +178,7 @@
         },
         "calculateTotalsByCategory": {
             "name": "calculateTotalsByCategory",
-            "line": 120,
+            "line": 122,
             "short_desc": "Calculates the total amount of each category for a given account ID and the rest to invoice and to cash.",
             "long_desc": "",
             "hint": [
@@ -198,7 +198,7 @@
             "parameters": {
                 "account": {
                     "name": "account",
-                    "line": 120,
+                    "line": 122,
                     "short_desc": "The account to calculate the totals and rests for.",
                     "long_desc": null,
                     "hint": [
@@ -219,7 +219,7 @@
         },
         "insertFinTrans": {
             "name": "insertFinTrans",
-            "line": 161,
+            "line": 163,
             "short_desc": "Inserts a new financial transaction into the database with a db transaction which updates the client account.",
             "long_desc": "",
             "hint": [
@@ -248,7 +248,7 @@
             "parameters": {
                 "finTrans": {
                     "name": "finTrans",
-                    "line": 161,
+                    "line": 163,
                     "short_desc": "The financial transaction object to insert.",
                     "long_desc": null,
                     "hint": [
@@ -269,7 +269,7 @@
         },
         "updateFinTrans": {
             "name": "updateFinTrans",
-            "line": 228,
+            "line": 230,
             "short_desc": "Updates an existing financial transaction in the database with a db transaction which updates the client account.",
             "long_desc": "",
             "hint": [
@@ -298,7 +298,7 @@
             "parameters": {
                 "finTrans": {
                     "name": "finTrans",
-                    "line": 228,
+                    "line": 230,
                     "short_desc": "The financial transaction object to update.",
                     "long_desc": null,
                     "hint": [
@@ -319,7 +319,7 @@
         },
         "deleteFinTransById": {
             "name": "deleteFinTransById",
-            "line": 280,
+            "line": 282,
             "short_desc": "Deletes a financial transaction from the database by its ID with a db transaction which updates the client account.",
             "long_desc": "",
             "hint": [
@@ -344,7 +344,7 @@
             "parameters": {
                 "id": {
                     "name": "id",
-                    "line": 280,
+                    "line": 282,
                     "short_desc": "The ID of the financial transaction to delete.",
                     "long_desc": null,
                     "hint": [],

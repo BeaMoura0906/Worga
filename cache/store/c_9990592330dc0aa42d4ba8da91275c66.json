@@ -8,7 +8,7 @@
     "namespace": "Worga\\src\\Controller",
     "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Controller\\DocumentController.php",
     "relative_file": null,
-    "hash": "e0bb3565668a4ccbbbf6c9664465e9627650aaf7",
+    "hash": "11452fc281c382d9def5db28ea07a21b2a5ba920",
     "parent": "Worga\\src\\Controller\\Controller",
     "modifiers": 0,
     "is_trait": false,
@@ -98,7 +98,7 @@
         },
         "uploadDocumentAction": {
             "name": "uploadDocumentAction",
-            "line": 65,
+            "line": 76,
             "short_desc": "Upload a document for a financial transaction in the database and on the server. It's render the financial-transactions view with the uploaded document with a success or an error message in JSON response.",
             "long_desc": "",
             "hint": null,
@@ -114,7 +114,7 @@
         },
         "deleteDocumentAction": {
             "name": "deleteDocumentAction",
-            "line": 125,
+            "line": 145,
             "short_desc": "Delete a document for a financial transaction in the database only. It's render the financial-transactions view with a success or an error message in JSON response.",
             "long_desc": "",
             "hint": null,

@@ -25,7 +25,7 @@
         "__construct": {
             "name": "__construct",
             "line": 21,
-            "short_desc": "Constructor method to initialize properties and call the parent constructor",
+            "short_desc": "Constructor method to set up the controller and execute the appropriate action",
             "long_desc": "",
             "hint": null,
             "hint_desc": null,
@@ -61,7 +61,7 @@
         "defaultAction": {
             "name": "defaultAction",
             "line": 32,
-            "short_desc": "Default action method, redirects to login action",
+            "short_desc": "Abstract method for the default action that must be implemented by subclasses",
             "long_desc": "",
             "hint": null,
             "hint_desc": null,

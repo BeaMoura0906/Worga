@@ -8,7 +8,7 @@
     "namespace": "Worga\\src\\Controller",
     "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Controller\\AccountController.php",
     "relative_file": null,
-    "hash": "3e76a88407f1a450f5a0c678731f10773ef76d07",
+    "hash": "303881808df5e41cb02f511b75df8b3dbf5f2189",
     "parent": "Worga\\src\\Controller\\Controller",
     "modifiers": 0,
     "is_trait": false,
@@ -96,7 +96,7 @@
         },
         "createAction": {
             "name": "createAction",
-            "line": 91,
+            "line": 102,
             "short_desc": "Action method to create a new account for the selected client",
             "long_desc": "",
             "hint": null,

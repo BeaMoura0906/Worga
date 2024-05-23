@@ -222,13 +222,55 @@ It manages operations related to financial transactions, including database inte
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_checkIfUserIsConnected">checkIfUserIsConnected</a>()
+        
+                                            <p><p>Check if the user is connected</p></p>                </div>
+                <div class="col-md-2"><small>depuis&nbsp;<a href="../../../Worga/src/Controller/Controller.html#method_checkIfUserIsConnected">
+<abbr title="Worga\src\Controller\Controller">Controller</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_checkIfIsAdminOrEditor">checkIfIsAdminOrEditor</a>()
+        
+                                            <p><p>Check if the user is an admin or an editor</p></p>                </div>
+                <div class="col-md-2"><small>depuis&nbsp;<a href="../../../Worga/src/Controller/Controller.html#method_checkIfIsAdminOrEditor">
+<abbr title="Worga\src\Controller\Controller">Controller</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_checkIfIsAdmin">checkIfIsAdmin</a>()
+        
+                                            <p><p>Method to check if the user is logged in with admin rights</p></p>                </div>
+                <div class="col-md-2"><small>depuis&nbsp;<a href="../../../Worga/src/Controller/Controller.html#method_checkIfIsAdmin">
+<abbr title="Worga\src\Controller\Controller">Controller</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
                 </div>
                 <div class="col-md-8">
                     <a href="#method_listFinTransAction">listFinTransAction</a>()
         
-                                            <p class="no-description">Pas de description</p>
-                                    </div>
+                                            <p><p>Method action to list all financial transactions for an account with JSON response.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_exportToPdfAction">exportToPdfAction</a>()
+        
+                                            <p><p>Method action to export the list of financial transactions in PDF format.</p></p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -279,7 +321,7 @@ It manages operations related to financial transactions, including database inte
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">à la ligne 32</div>
+        <div class="location">à la ligne 34</div>
         <code>                    
     <strong>__construct</strong>(array $params = [])
         </code>
@@ -312,7 +354,7 @@ It manages operations related to financial transactions, including database inte
             </div>
                     <div class="method-item">
                     <h3 id="method_defaultAction">
-        <div class="location">à la ligne 45</div>
+        <div class="location">à la ligne 47</div>
         <code>                    
     <strong>defaultAction</strong>()
         </code>
@@ -407,8 +449,107 @@ It manages operations related to financial transactions, including database inte
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_checkIfUserIsConnected">
+        <div class="location">dans <a href="../../../Worga/src/Controller/Controller.html#method_checkIfUserIsConnected">
+<abbr title="Worga\src\Controller\Controller">Controller</abbr></a> à la ligne 118</div>
+        <code>            protected        bool
+    <strong>checkIfUserIsConnected</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Check if the user is connected</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Valeur de retour</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td><p>True if the user is connected, false otherwise</p></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_checkIfIsAdminOrEditor">
+        <div class="location">dans <a href="../../../Worga/src/Controller/Controller.html#method_checkIfIsAdminOrEditor">
+<abbr title="Worga\src\Controller\Controller">Controller</abbr></a> à la ligne 128</div>
+        <code>            protected        bool
+    <strong>checkIfIsAdminOrEditor</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Check if the user is an admin or an editor</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Valeur de retour</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td><p>True if the user is an admin or an editor, false otherwise</p></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_checkIfIsAdmin">
+        <div class="location">dans <a href="../../../Worga/src/Controller/Controller.html#method_checkIfIsAdmin">
+<abbr title="Worga\src\Controller\Controller">Controller</abbr></a> à la ligne 138</div>
+        <code>            protected        bool
+    <strong>checkIfIsAdmin</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Method to check if the user is logged in with admin rights</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Valeur de retour</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td><p>True if the user is logged in with admin rights, false otherwise</p></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_listFinTransAction">
-        <div class="location">à la ligne 53</div>
+        <div class="location">à la ligne 69</div>
         <code>                    
     <strong>listFinTransAction</strong>()
         </code>
@@ -418,8 +559,30 @@ It manages operations related to financial transactions, including database inte
             
 
         <div class="method-description">
-                            <p class="no-description">Pas de description</p>
-                    
+                            <p><p>Method action to list all financial transactions for an account with JSON response.</p></p>                        
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_exportToPdfAction">
+        <div class="location">à la ligne 181</div>
+        <code>                    
+    <strong>exportToPdfAction</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Method action to export the list of financial transactions in PDF format.</p></p>                        
         </div>
         <div class="tags">
             
@@ -432,7 +595,7 @@ It manages operations related to financial transactions, including database inte
             </div>
                     <div class="method-item">
                     <h3 id="method_addFinTransValidAction">
-        <div class="location">à la ligne 151</div>
+        <div class="location">à la ligne 301</div>
         <code>                    
     <strong>addFinTransValidAction</strong>()
         </code>
@@ -455,7 +618,7 @@ It manages operations related to financial transactions, including database inte
             </div>
                     <div class="method-item">
                     <h3 id="method_getFinTransAction">
-        <div class="location">à la ligne 226</div>
+        <div class="location">à la ligne 400</div>
         <code>                    
     <strong>getFinTransAction</strong>()
         </code>
@@ -478,7 +641,7 @@ It manages operations related to financial transactions, including database inte
             </div>
                     <div class="method-item">
                     <h3 id="method_editFinTransValidAction">
-        <div class="location">à la ligne 270</div>
+        <div class="location">à la ligne 455</div>
         <code>                    
     <strong>editFinTransValidAction</strong>()
         </code>
@@ -501,7 +664,7 @@ It manages operations related to financial transactions, including database inte
             </div>
                     <div class="method-item">
                     <h3 id="method_deleteFinTransAction">
-        <div class="location">à la ligne 343</div>
+        <div class="location">à la ligne 552</div>
         <code>                    
     <strong>deleteFinTransAction</strong>()
         </code>

@@ -8,7 +8,7 @@
     "namespace": "Worga\\src\\Model",
     "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Model\\ClientManager.php",
     "relative_file": null,
-    "hash": "c407c9236ed81275b9d1b2da56cd3637087fde87",
+    "hash": "313a24eca8784f7a57d9ae309d2fe2eb78b2d2ac",
     "parent": "Worga\\src\\Model\\Manager",
     "modifiers": 0,
     "is_trait": false,
@@ -120,7 +120,7 @@
         },
         "getClientById": {
             "name": "getClientById",
-            "line": 105,
+            "line": 108,
             "short_desc": "Retrieves a client from the database by its ID.",
             "long_desc": "",
             "hint": [
@@ -144,7 +144,7 @@
             "parameters": {
                 "clientId": {
                     "name": "clientId",
-                    "line": 105,
+                    "line": 108,
                     "short_desc": "The ID of the client to retrieve.",
                     "long_desc": null,
                     "hint": [
@@ -165,7 +165,7 @@
         },
         "checkIfClientExists": {
             "name": "checkIfClientExists",
-            "line": 127,
+            "line": 130,
             "short_desc": "Checks if a client with the given last name and first name exists in the database.",
             "long_desc": "",
             "hint": [
@@ -185,7 +185,7 @@
             "parameters": {
                 "lastName": {
                     "name": "lastName",
-                    "line": 127,
+                    "line": 130,
                     "short_desc": "The last name of the client.",
                     "long_desc": null,
                     "hint": [
@@ -204,7 +204,7 @@
                 },
                 "firstName": {
                     "name": "firstName",
-                    "line": 127,
+                    "line": 130,
                     "short_desc": "The first name of the client.",
                     "long_desc": null,
                     "hint": [
@@ -225,7 +225,7 @@
         },
         "insertClient": {
             "name": "insertClient",
-            "line": 148,
+            "line": 151,
             "short_desc": "Inserts a new client into the database.",
             "long_desc": "",
             "hint": [
@@ -249,7 +249,7 @@
             "parameters": {
                 "client": {
                     "name": "client",
-                    "line": 148,
+                    "line": 151,
                     "short_desc": "The client to insert.",
                     "long_desc": null,
                     "hint": [
@@ -270,7 +270,7 @@
         },
         "updateClient": {
             "name": "updateClient",
-            "line": 197,
+            "line": 200,
             "short_desc": "Updates a client in the database.",
             "long_desc": "",
             "hint": [
@@ -290,7 +290,7 @@
             "parameters": {
                 "client": {
                     "name": "client",
-                    "line": 197,
+                    "line": 200,
                     "short_desc": "The client to update.",
                     "long_desc": null,
                     "hint": [
@@ -311,7 +311,7 @@
         },
         "deleteClientById": {
             "name": "deleteClientById",
-            "line": 226,
+            "line": 229,
             "short_desc": "Deletes a client from the database.",
             "long_desc": "",
             "hint": [
@@ -331,7 +331,7 @@
             "parameters": {
                 "clientId": {
                     "name": "clientId",
-                    "line": 226,
+                    "line": 229,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [

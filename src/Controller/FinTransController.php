@@ -91,8 +91,8 @@ class FinTransController extends Controller
 
         $listFinTrans = $this->finTransManager->getAllFinTransWithParams($searchParams);
 
-        $searchParams['order'] = '';
-        $searchParams['sort'] = '';
+        $searchParams['offset'] = '';
+        $searchParams['limit'] = '';
 
         $nbFinTrans = count($this->finTransManager->getAllFinTransWithParams($searchParams));
 

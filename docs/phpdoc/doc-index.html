@@ -82,7 +82,7 @@
                                                 <li class="disabled"><a href="#letterB">B</a></li>
                                                 <li><a href="#letterC">C</a></li>
                                                 <li><a href="#letterD">D</a></li>
-                                                <li class="disabled"><a href="#letterE">E</a></li>
+                                                <li><a href="#letterE">E</a></li>
                                                 <li><a href="#letterF">F</a></li>
                                                 <li><a href="#letterG">G</a></li>
                                                 <li><a href="#letterH">H</a></li>
@@ -129,7 +129,13 @@ It manages operations related to clients, including database interactions by usi
                     <dd><p>Class Controller
 It is the base class for all controllers in the application.</p></dd><dt>$<a href="Worga/src/Controller/Controller.html#property_controller">
 <abbr title="Worga\src\Controller\Controller">Controller</abbr>#controller</a> &mdash; <em>Propriété de la classe <a href="Worga/src/Controller/Controller.html"><abbr title="Worga\src\Controller\Controller">Controller</abbr></a></em></dt>
-                    <dd></dd><dt><a href="Worga/src/Controller/UserController.html#method_createUserAction">
+                    <dd></dd><dt><a href="Worga/src/Controller/Controller.html#method_checkIfUserIsConnected">
+<abbr title="Worga\src\Controller\Controller">Controller</abbr>::checkIfUserIsConnected</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Controller/Controller.html"><abbr title="Worga\src\Controller\Controller">Controller</abbr></a></em></dt>
+                    <dd><p>Check if the user is connected</p></dd><dt><a href="Worga/src/Controller/Controller.html#method_checkIfIsAdminOrEditor">
+<abbr title="Worga\src\Controller\Controller">Controller</abbr>::checkIfIsAdminOrEditor</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Controller/Controller.html"><abbr title="Worga\src\Controller\Controller">Controller</abbr></a></em></dt>
+                    <dd><p>Check if the user is an admin or an editor</p></dd><dt><a href="Worga/src/Controller/Controller.html#method_checkIfIsAdmin">
+<abbr title="Worga\src\Controller\Controller">Controller</abbr>::checkIfIsAdmin</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Controller/Controller.html"><abbr title="Worga\src\Controller\Controller">Controller</abbr></a></em></dt>
+                    <dd><p>Method to check if the user is logged in with admin rights</p></dd><dt><a href="Worga/src/Controller/UserController.html#method_createUserAction">
 <abbr title="Worga\src\Controller\UserController">UserController</abbr>::createUserAction</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Controller/UserController.html"><abbr title="Worga\src\Controller\UserController">UserController</abbr></a></em></dt>
                     <dd><p>Action method to render the form to create a new user</p></dd><dt><a href="Worga/src/Controller/UserController.html#method_createUserValidAction">
 <abbr title="Worga\src\Controller\UserController">UserController</abbr>::createUserValidAction</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Controller/UserController.html"><abbr title="Worga\src\Controller\UserController">UserController</abbr></a></em></dt>
@@ -171,9 +177,9 @@ It manages operations related to documents, including database interactions by u
 <abbr title="Worga\src\Controller\FinTransController">FinTransController</abbr>::deleteFinTransAction</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Controller/FinTransController.html"><abbr title="Worga\src\Controller\FinTransController">FinTransController</abbr></a></em></dt>
                     <dd><p>Method action to delete a financial transaction.</p></dd><dt><a href="Worga/src/Controller/IndexController.html#method_defaultAction">
 <abbr title="Worga\src\Controller\IndexController">IndexController</abbr>::defaultAction</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Controller/IndexController.html"><abbr title="Worga\src\Controller\IndexController">IndexController</abbr></a></em></dt>
-                    <dd><p>Default action method to render the index view</p></dd><dt><a href="Worga/src/Controller/SecurityController.html#method_defaultAction">
+                    <dd><p>Abstract method for the default action that must be implemented by subclasses</p></dd><dt><a href="Worga/src/Controller/SecurityController.html#method_defaultAction">
 <abbr title="Worga\src\Controller\SecurityController">SecurityController</abbr>::defaultAction</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Controller/SecurityController.html"><abbr title="Worga\src\Controller\SecurityController">SecurityController</abbr></a></em></dt>
-                    <dd><p>Default action method, redirects to login action</p></dd><dt><a href="Worga/src/Controller/UserController.html#method_defaultAction">
+                    <dd><p>Abstract method for the default action that must be implemented by subclasses</p></dd><dt><a href="Worga/src/Controller/UserController.html#method_defaultAction">
 <abbr title="Worga\src\Controller\UserController">UserController</abbr>::defaultAction</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Controller/UserController.html"><abbr title="Worga\src\Controller\UserController">UserController</abbr></a></em></dt>
                     <dd><p>Default action method to render the user view</p></dd><dt><a href="Worga/src/Model/ClientManager.html#method_deleteClientById">
 <abbr title="Worga\src\Model\ClientManager">ClientManager</abbr>::deleteClientById</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Model/ClientManager.html"><abbr title="Worga\src\Model\ClientManager">ClientManager</abbr></a></em></dt>
@@ -187,7 +193,9 @@ Manages operations related to documents, including database interactions.</p></d
                     <dd><p>Deletes a financial transaction from the database by its ID with a db transaction which updates the client account.</p></dd><dt>$<a href="Worga/src/Model/Manager.html#property_dbManager">
 <abbr title="Worga\src\Model\Manager">Manager</abbr>#dbManager</a> &mdash; <em>Propriété de la classe <a href="Worga/src/Model/Manager.html"><abbr title="Worga\src\Model\Manager">Manager</abbr></a></em></dt>
                     <dd><p>Database manager object.</p></dd>        </dl><h2 id="letterE">E</h2>
-        <dl id="indexE"><dt><a href="Worga/src/Controller/FinTransController.html#method_editFinTransValidAction">
+        <dl id="indexE"><dt><a href="Worga/src/Controller/FinTransController.html#method_exportToPdfAction">
+<abbr title="Worga\src\Controller\FinTransController">FinTransController</abbr>::exportToPdfAction</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Controller/FinTransController.html"><abbr title="Worga\src\Controller\FinTransController">FinTransController</abbr></a></em></dt>
+                    <dd><p>Method action to export the list of financial transactions in PDF format.</p></dd><dt><a href="Worga/src/Controller/FinTransController.html#method_editFinTransValidAction">
 <abbr title="Worga\src\Controller\FinTransController">FinTransController</abbr>::editFinTransValidAction</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Controller/FinTransController.html"><abbr title="Worga\src\Controller\FinTransController">FinTransController</abbr></a></em></dt>
                     <dd><p>Method action to edit a financial transaction.</p></dd>        </dl><h2 id="letterF">F</h2>
         <dl id="indexF"><dt><a href="Worga/src/Classes/FinTransCategories.html"><abbr title="Worga\src\Classes\FinTransCategories">FinTransCategories</abbr></a> &mdash; <em>Classe dans le namespace <a href="Worga/src/Classes.html">Worga\src\Classes</a></em></dt>
@@ -365,7 +373,7 @@ It manages operations related to the index view, including rendering it.</p></dd
 <abbr title="Worga\src\Controller\ClientController">ClientController</abbr>::listClientsAction</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Controller/ClientController.html"><abbr title="Worga\src\Controller\ClientController">ClientController</abbr></a></em></dt>
                     <dd><p>Action method to list all clients with parameters and pagination options for clients bootstrap table.</p></dd><dt><a href="Worga/src/Controller/FinTransController.html#method_listFinTransAction">
 <abbr title="Worga\src\Controller\FinTransController">FinTransController</abbr>::listFinTransAction</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Controller/FinTransController.html"><abbr title="Worga\src\Controller\FinTransController">FinTransController</abbr></a></em></dt>
-                    <dd></dd><dt><a href="Worga/src/Controller/SecurityController.html#method_loginAction">
+                    <dd><p>Method action to list all financial transactions for an account with JSON response.</p></dd><dt><a href="Worga/src/Controller/SecurityController.html#method_loginAction">
 <abbr title="Worga\src\Controller\SecurityController">SecurityController</abbr>::loginAction</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Controller/SecurityController.html"><abbr title="Worga\src\Controller\SecurityController">SecurityController</abbr></a></em></dt>
                     <dd><p>Action method to render the login view</p></dd><dt><a href="Worga/src/Controller/SecurityController.html#method_logoutAction">
 <abbr title="Worga\src\Controller\SecurityController">SecurityController</abbr>::logoutAction</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Controller/SecurityController.html"><abbr title="Worga\src\Controller\SecurityController">SecurityController</abbr></a></em></dt>
@@ -530,9 +538,9 @@ Manages operations related to users, including database interactions.</p></dd><d
 <abbr title="Worga\src\Controller\FinTransController">FinTransController</abbr>::__construct</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Controller/FinTransController.html"><abbr title="Worga\src\Controller\FinTransController">FinTransController</abbr></a></em></dt>
                     <dd><p>FinTransController constructor to initialize properties and call the parent constructor</p></dd><dt><a href="Worga/src/Controller/IndexController.html#method___construct">
 <abbr title="Worga\src\Controller\IndexController">IndexController</abbr>::__construct</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Controller/IndexController.html"><abbr title="Worga\src\Controller\IndexController">IndexController</abbr></a></em></dt>
-                    <dd><p>Constructor method to initialize properties and call the parent constructor</p></dd><dt><a href="Worga/src/Controller/SecurityController.html#method___construct">
+                    <dd><p>Constructor method to set up the controller and execute the appropriate action</p></dd><dt><a href="Worga/src/Controller/SecurityController.html#method___construct">
 <abbr title="Worga\src\Controller\SecurityController">SecurityController</abbr>::__construct</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Controller/SecurityController.html"><abbr title="Worga\src\Controller\SecurityController">SecurityController</abbr></a></em></dt>
-                    <dd><p>Constructor method to initialize properties and call the parent constructor</p></dd><dt><a href="Worga/src/Controller/UserController.html#method___construct">
+                    <dd><p>Constructor method to set up the controller and execute the appropriate action</p></dd><dt><a href="Worga/src/Controller/UserController.html#method___construct">
 <abbr title="Worga\src\Controller\UserController">UserController</abbr>::__construct</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Controller/UserController.html"><abbr title="Worga\src\Controller\UserController">UserController</abbr></a></em></dt>
                     <dd><p>Constructor method to initialize properties and call the parent constructor</p></dd><dt><a href="Worga/src/Model/Entity/Account.html#method___construct">
 <abbr title="Worga\src\Model\Entity\Account">Account</abbr>::__construct</a>() &mdash; <em>Méthode de la classe <a href="Worga/src/Model/Entity/Account.html"><abbr title="Worga\src\Model\Entity\Account">Account</abbr></a></em></dt>

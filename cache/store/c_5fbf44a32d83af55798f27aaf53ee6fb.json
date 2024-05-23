@@ -8,7 +8,7 @@
     "namespace": "Worga\\src\\Controller",
     "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Controller\\UserController.php",
     "relative_file": null,
-    "hash": "98d5197daffa791f76aeec4d5d6dac6dde0b5bb1",
+    "hash": "ee4ac899770b18aa63a24755a504ff57b9944983",
     "parent": "Worga\\src\\Controller\\Controller",
     "modifiers": 0,
     "is_trait": false,
@@ -203,7 +203,7 @@
         },
         "setIsActiveAction": {
             "name": "setIsActiveAction",
-            "line": 160,
+            "line": 174,
             "short_desc": "Action method to set the active status of a user",
             "long_desc": "",
             "hint": null,
@@ -219,7 +219,7 @@
         },
         "createUserAction": {
             "name": "createUserAction",
-            "line": 180,
+            "line": 205,
             "short_desc": "Action method to render the form to create a new user",
             "long_desc": "",
             "hint": null,
@@ -235,7 +235,7 @@
         },
         "createUserValidAction": {
             "name": "createUserValidAction",
-            "line": 191,
+            "line": 227,
             "short_desc": "Action method to validate the creation of a new user",
             "long_desc": "",
             "hint": null,
@@ -251,7 +251,7 @@
         },
         "updateUserAction": {
             "name": "updateUserAction",
-            "line": 248,
+            "line": 295,
             "short_desc": "Action method to render the form to update an existing user",
             "long_desc": "",
             "hint": null,
@@ -267,7 +267,7 @@
         },
         "updateUserValidAction": {
             "name": "updateUserValidAction",
-            "line": 264,
+            "line": 322,
             "short_desc": "Action method to validate the update of an existing user",
             "long_desc": "",
             "hint": null,

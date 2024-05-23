@@ -8,7 +8,7 @@
     "namespace": "Worga\\src\\Controller",
     "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Controller\\ClientController.php",
     "relative_file": null,
-    "hash": "428356c99a3f45714dbc33ac3731d8931123f306",
+    "hash": "fd4c3b15a5da90a7848189f52269841e4876e99a",
     "parent": "Worga\\src\\Controller\\Controller",
     "modifiers": 0,
     "is_trait": false,
@@ -78,7 +78,7 @@
         },
         "listClientsAction": {
             "name": "listClientsAction",
-            "line": 46,
+            "line": 57,
             "short_desc": "Action method to list all clients with parameters and pagination options for clients bootstrap table.",
             "long_desc": "",
             "hint": null,
@@ -94,7 +94,7 @@
         },
         "addClientAction": {
             "name": "addClientAction",
-            "line": 93,
+            "line": 118,
             "short_desc": "Action method to render the edit client view with the add client form",
             "long_desc": "",
             "hint": null,
@@ -110,7 +110,7 @@
         },
         "addClientValidAction": {
             "name": "addClientValidAction",
-            "line": 101,
+            "line": 138,
             "short_desc": "Action method to add a new client to the database",
             "long_desc": "",
             "hint": null,
@@ -126,7 +126,7 @@
         },
         "updateClientAction": {
             "name": "updateClientAction",
-            "line": 161,
+            "line": 210,
             "short_desc": "Action method to render the edit client view with the update client form",
             "long_desc": "",
             "hint": null,
@@ -142,7 +142,7 @@
         },
         "updateClientValidAction": {
             "name": "updateClientValidAction",
-            "line": 184,
+            "line": 245,
             "short_desc": "Action method to update a client in the database",
             "long_desc": "",
             "hint": null,
@@ -158,7 +158,7 @@
         },
         "deleteClientAction": {
             "name": "deleteClientAction",
-            "line": 237,
+            "line": 310,
             "short_desc": "Action method to delete a client from the database",
             "long_desc": "",
             "hint": null,

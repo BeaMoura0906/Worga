@@ -1,6 +1,6 @@
 {
     "name": "Worga\\src\\Controller\\FinTransController",
-    "line": 19,
+    "line": 21,
     "short_desc": "Class FinTransController\nIt manages operations related to financial transactions, including database interactions by using the managers and rendering views.",
     "long_desc": "",
     "hint": null,
@@ -8,7 +8,7 @@
     "namespace": "Worga\\src\\Controller",
     "file": "C:\\projets\\ufip2\\RMP\\Worga\/src\\Controller\\FinTransController.php",
     "relative_file": null,
-    "hash": "4675a8b3e70fd86dcb845f91e8f61fe59c38cd7b",
+    "hash": "9f9ca2e2fde49a41a52dbc278ea0a801adb4bf21",
     "parent": "Worga\\src\\Controller\\Controller",
     "modifiers": 0,
     "is_trait": false,
@@ -22,7 +22,8 @@
         "FinancialTransaction": "Worga\\src\\Model\\Entity\\FinancialTransaction",
         "Account": "Worga\\src\\Model\\Entity\\Account",
         "User": "Worga\\src\\Model\\Entity\\User",
-        "DateTime": "DateTime"
+        "DateTime": "DateTime",
+        "FPDF": "FPDF"
     },
     "errors": [],
     "interfaces": [],
@@ -31,7 +32,7 @@
     "methods": {
         "__construct": {
             "name": "__construct",
-            "line": 32,
+            "line": 34,
             "short_desc": "FinTransController constructor to initialize properties and call the parent constructor",
             "long_desc": "",
             "hint": null,
@@ -46,7 +47,7 @@
             "parameters": {
                 "params": {
                     "name": "params",
-                    "line": 32,
+                    "line": 34,
                     "short_desc": "Parameters for the controller",
                     "long_desc": null,
                     "hint": [
@@ -67,7 +68,7 @@
         },
         "defaultAction": {
             "name": "defaultAction",
-            "line": 45,
+            "line": 47,
             "short_desc": "Default action method to render the account view with the list of financial transactions",
             "long_desc": "",
             "hint": null,
@@ -83,9 +84,25 @@
         },
         "listFinTransAction": {
             "name": "listFinTransAction",
-            "line": 53,
-            "short_desc": null,
-            "long_desc": null,
+            "line": 69,
+            "short_desc": "Method action to list all financial transactions for an account with JSON response.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "see": [],
+            "modifiers": 1,
+            "is_by_ref": "",
+            "is_intersection_type": false,
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "exportToPdfAction": {
+            "name": "exportToPdfAction",
+            "line": 181,
+            "short_desc": "Method action to export the list of financial transactions in PDF format.",
+            "long_desc": "",
             "hint": null,
             "hint_desc": null,
             "tags": [],
@@ -99,7 +116,7 @@
         },
         "addFinTransValidAction": {
             "name": "addFinTransValidAction",
-            "line": 151,
+            "line": 301,
             "short_desc": "Method action to add a new financial transaction.",
             "long_desc": "",
             "hint": null,
@@ -115,7 +132,7 @@
         },
         "getFinTransAction": {
             "name": "getFinTransAction",
-            "line": 226,
+            "line": 400,
             "short_desc": "Get the financial transaction to be displayed on modal view with JSON response.",
             "long_desc": "",
             "hint": null,
@@ -131,7 +148,7 @@
         },
         "editFinTransValidAction": {
             "name": "editFinTransValidAction",
-            "line": 270,
+            "line": 455,
             "short_desc": "Method action to edit a financial transaction.",
             "long_desc": "",
             "hint": null,
@@ -147,7 +164,7 @@
         },
         "deleteFinTransAction": {
             "name": "deleteFinTransAction",
-            "line": 343,
+            "line": 552,
             "short_desc": "Method action to delete a financial transaction.",
             "long_desc": "",
             "hint": null,
