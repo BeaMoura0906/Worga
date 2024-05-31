@@ -98,9 +98,9 @@ class FinTransController extends Controller
 
         $listFinTransWithoutParams = $this->finTransManager->getAllFinTransByAccountId($this->vars['accountId']);
         $totals = $this->calculateTotals($listFinTransWithoutParams);
-        $totals['totalToBeDebited'] = '- ' . number_format($totals['totalToBeDebited'], 2, ',', ' ') . ' €';
-        $totals['totalDebit'] = '- ' . number_format($totals['totalDebit'], 2, ',', ' ') . ' €';
-        $totals['totalCredit'] = '+ ' . number_format($totals['totalCredit'], 2, ',', ' ') . ' €';
+        $totals['totalToBeDebited'] = $totals['totalToBeDebited'] === '' ? '' : '- ' . number_format($totals['totalToBeDebited'], 2, ',', ' ') . ' €';
+        $totals['totalDebit'] = $totals['totalDebit'] === '' ? '' : '- ' . number_format($totals['totalDebit'], 2, ',', ' ') . ' €';
+        $totals['totalCredit'] = $totals['totalCredit'] === '' ? '' : '+ ' . number_format($totals['totalCredit'], 2, ',', ' ') . ' €';
 
         $dataBs = [];
 
@@ -278,9 +278,12 @@ class FinTransController extends Controller
             // Table Footer
             $pdf->SetFont('DejaVu-Bold', '', 10);
             $pdf->Cell($widths[0] + $widths[1] + $widths[2], 10, 'Total', 1);
-            $pdf->Cell($widths[3], 10, toWin1252('- ' . number_format($totals['totalToBeDebited'], 2, ',', ' ') . ' EUR'), 1, 0, 'R');
-            $pdf->Cell($widths[4], 10, toWin1252('- ' . number_format($totals['totalDebit'], 2, ',', ' ') . ' EUR'), 1, 0, 'R');
-            $pdf->Cell($widths[5], 10, toWin1252('+ ' . number_format($totals['totalCredit'], 2, ',', ' ') . ' EUR'), 1, 0, 'R');
+            $totalToBeDebitedFormatted = $totals['totalToBeDebited'] === '' ? '' : toWin1252('- ' . number_format($totals['totalToBeDebited'], 2, ',', ' ') . ' EUR');
+            $totalCreditFormatted = $totals['totalCredit'] === '' ? '' : toWin1252('+ ' . number_format($totals['totalCredit'], 2, ',', ' ') . ' EUR');
+            $totalDebitFormatted = $totals['totalDebit'] === '' ? '' : toWin1252('- ' . number_format($totals['totalDebit'], 2, ',', ' ') . ' EUR');
+            $pdf->Cell($widths[3], 10, $totalToBeDebitedFormatted, 1, 0, 'R');
+            $pdf->Cell($widths[4], 10, $totalDebitFormatted, 1, 0, 'R');
+            $pdf->Cell($widths[5], 10, $totalCreditFormatted, 1, 0, 'R');
             $pdf->Ln();
 
             // PDF Output
