@@ -11,6 +11,66 @@ use Worga\src\Model\Entity\Client;
  */
 class AccountManager extends Manager
 {
+    public function getAllAccounts() : ?array 
+    {
+        $sql = "SELECT * FROM accounts";
+        $req = $this->dbManager->db->prepare($sql);
+        $req->execute();
+        if( $data = $req->fetchAll(\PDO::FETCH_ASSOC) ) {
+            $listAccounts = [];
+            foreach( $data as $accountData ) {
+                $listAccounts[] = new Account($accountData);
+            }
+            return $listAccounts;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Retrieves all accounts fromt the database with params.
+     * 
+     * @param array @params The parameters to filter the accounts by.
+     * @return array|null An array of Account objects, or null if there are no account in the database.
+     */
+    public function getAllAccountsWithParams(array $params): ?array
+    {
+        $order = !empty( $params['order'] ) ? $params['order'] : 'ASC';
+        $sort = !empty( $params['sort'] ) ? $this->convertCamelCaseToSnakeCase($params['sort']) : 'id';
+        $strLike = false;
+        if( !empty( $params['search'] ) && !empty( $params['searchable'] ) ) {
+            foreach( $params['searchable'] as $searchItem ) {
+                $searchItem = $this->convertCamelCaseToSnakeCase( $searchItem );
+                $search = $params['search'];
+                $strLike .= $searchItem . " LIKE '%$search%' OR ";
+            }
+            $strLike = trim( $strLike, ' OR ' );
+        }
+        $sql = "SELECT * FROM accounts";
+        if( $strLike ) {
+            $sql .= " WHERE $strLike";
+        }
+        $offset = !empty( $params['offset']) ? $params['offset'] : 0;
+        $limit = !empty( $params['limit'] ) ? $params['limit'] : 1000;
+        $sql .= " ORDER BY $sort $order";
+        $sql .= " LIMIT $offset, $limit";
+
+        $req = $this->dbManager->db->prepare( $sql );
+		if( $req->execute() ) {
+            $data = $req->fetchAll( \PDO::FETCH_ASSOC );
+            $listAccounts = [];
+
+            foreach( $data as $accountData ) {
+                $account = new Account($accountData);
+                $listAccounts[] = $account;
+            }
+
+            return $listAccounts;
+        } else {
+            return null;
+        }
+    }
+
     /**
      * Retrieves an account from the database by its ID.
      * 

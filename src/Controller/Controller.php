@@ -127,7 +127,7 @@ abstract class Controller
      */
     protected function checkIfIsAdminOrEditor()
     {
-        if( isset( $_SESSION['userId'] ) && $_SESSION['userRole'] == 'admin' || $_SESSION['userRole'] == 'editor' ) { return true; } else { return false; }
+        if( isset( $_SESSION['userId'] ) && isset($_SESSION['userRole']) && $_SESSION['userRole'] == 'admin' || $_SESSION['userRole'] == 'editor' ) { return true; } else { return false; }
     }
 
     /**

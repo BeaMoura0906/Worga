@@ -1,9 +1,107 @@
 {% extends "Base.twig" %}
 
 {% block main %}
-    <div class="row justify-content-center">
-        <div class="col-12 image-container">
-            <img src="{{ pathRoot }}public/assets/images/worga-index-bg-picture.png" class="index-img" alt="">
-        </div>
+    {% if listAccounts is defined %}
+    <div class="container mt-5">
+    <h2 class="text-center mb-5">Tableau de bord</h2>
+        <table
+            class="table"
+            id="accounts-table"
+            data-toggle="table"
+            data-height="auto"
+            data-url="{{ pathRoot  ~ 'index/listAccounts' }}"
+            data-ajax="ajaxRequest"
+            data-side-pagination="server"
+            data-sortable="true"
+            data-pagination="true"
+            data-page-size="10"
+            data-show-footer="true"
+            data-footer-style="footerStyle"
+            data-header-style="headerStyle">
+            <thead>
+                <tr>
+                    <th data-field="id"
+                        data-searchable="false"
+                        data-sortable="false"
+                    >#</th>
+                    <th data-field="client"
+                        data-searchable="false"
+                        data-footer-formatter="totalFooterFormatter"
+                    >Client</th>
+                    <th data-field="restToCash"
+                        data-searchable="false"
+                        data-sortable="false"
+                        data-formatter="restToCashFormatter"
+                        data-footer-formatter="totalRestToCashFormatter"
+                    >Reste à encaisser</th>
+                </tr>
+            </thead>
+        </table>
     </div>
+
+        <script>
+            function ajaxRequest(params) 
+            {
+                const url = $('#accounts-table').data('url')
+
+                $.get(url + '/?' + $.param(params.data))
+                    .then(function (res) {
+                        const parsedResponse = JSON.parse(res) 
+                        window.totalRestToCash = parsedResponse.totals.totalRestToCash;
+
+                        params.success(parsedResponse)
+                    })
+                    .fail(function (xhr, status, error) {
+                        params.error(xhr.responseText)
+                    })
+            }
+
+            function restToCashFormatter(data)
+            {
+                if(data) { return data } 
+                return ' '
+            }
+
+
+            function totalRestToCashFormatter(data) 
+            {
+                return window.totalRestToCash
+            }
+
+            function totalFooterFormatter()
+            {
+                return 'Total à encaisser'
+            }
+
+            function footerStyle(column)
+            {
+                return {
+                    'id' : {
+                        classes: 'bg-white border-white'
+                    },
+                    'client' : {
+                        classes: 'text-end bg-secondary-subtle'
+                    },
+                    'restToCash' : {
+                        classes: 'bg-light'
+                    }
+                }[column.field]
+            }
+
+            function headerStyle(column) {
+                return { 
+                    classes: 'bg-primary-subtle text-dark'
+                }
+            }
+
+        </script>
+    {% else %}
+
+        <div class="row justify-content-center">
+            <div class="col-12 image-container">
+                <img src="{{ pathRoot }}public/assets/images/worga-index-bg-picture.png" class="index-img" alt="">
+            </div>
+        </div>
+    {% endif %}
+    
 {% endblock %}
